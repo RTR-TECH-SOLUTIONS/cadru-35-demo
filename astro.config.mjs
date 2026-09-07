@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://rtr-tech-solutions.github.io',
   base: '/cadru-35-demo',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()]
   }
