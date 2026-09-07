@@ -72,8 +72,8 @@ export const portfolio: Shot[] = [
   },
   {
     src: pMontaj,
-    alt: "Cameră de montaj noaptea, două monitoare cu linia de timp",
-    caption: "Post-producție · corecție de culoare",
+    alt: "Mâini reglând un recorder audio de teren, cu căști alături pe birou",
+    caption: "Post-producție · sunet",
     category: "video",
   },
   {

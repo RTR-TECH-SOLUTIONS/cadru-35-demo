@@ -4,14 +4,15 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Mark from "../components/Mark.astro";
 import Ornament from "../components/Ornament.astro";
+import Perfs from "../components/Perfs.astro";
 import SectionHead from "../components/SectionHead.astro";
-import Gallery from "../components/Gallery.astro";
+import ContactSheet from "../components/ContactSheet.astro";
 import LogoBar from "../components/LogoBar.astro";
 import Marquee from "../components/Marquee.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { services } from "../data/site";
 
-import heroStudio from "../assets/img/hero-studio.jpg";
+import pFashion from "../assets/img/p-fashion.jpg";
 import heroNunta from "../assets/img/hero-nunta.jpg";
 import heroVideo from "../assets/img/hero-video.jpg";
 import studioLumini from "../assets/img/studio-lumini.jpg";
@@ -20,7 +21,6 @@ import svcEveniment from "../assets/img/svc-eveniment.jpg";
 import svcVideo from "../assets/img/svc-video.jpg";
 import echipament from "../assets/img/echipament.jpg";
 import pNuntaCamp from "../assets/img/p-nunta-camp.jpg";
-import spatiuStudio from "../assets/img/spatiu-studio-1.jpg";
 
 const serviceImages = {
   "foto-studio": svcStudio,
@@ -31,17 +31,23 @@ const serviceImages = {
 const serviceCards = [
   {
     ...services[0],
-    title: "1. Foto studio – Lumina sub control, de fiecare dată",
-    body: "Ai nevoie de portrete, de produs sau de un lookbook? Studioul de 80 mp are ciclorama albă, cinci culori de hârtie și lumini Profoto. Vii cu ideea, pleci cu fișierele prelucrate.",
+    no: "01",
+    title: "Foto studio",
+    lead: "Lumina sub control, de fiecare dată",
+    body: "Portret, produs sau lookbook. Studioul de 80 mp are ciclorama albă, cinci culori de hârtie și lumini Profoto. Vii cu ideea, pleci cu fișierele prelucrate.",
   },
   {
     ...services[1],
-    title: "2. Foto eveniment – Ce se întâmplă, nu ce regizăm noi",
+    no: "02",
+    title: "Foto eveniment",
+    lead: "Ce se întâmplă, nu ce regizăm noi",
     body: "Nuntă, botez, cununie, eveniment de firmă. Fotografiem documentar, cu puține poziții cerute. La nunțile de peste 120 de invitați venim cu doi fotografi.",
   },
   {
     ...services[2],
-    title: "3. Video eveniment – Trei filme, nu un fișier",
+    no: "03",
+    title: "Video eveniment",
+    lead: "Trei filme, nu un fișier",
     body: "Teaser de 60 de secunde pentru social, highlight de cinci minute pentru familie și filmul integral, cu ceremonia și discursurile. Sunetul luat separat, cu lavaliere.",
   },
 ];
@@ -61,133 +67,118 @@ const beneficii = [
 >
   <!-- ============================== HERO ============================== -->
   <section class="on-dark relative overflow-hidden bg-ink text-white">
-    <div class="wrap grid gap-12 pb-24 pt-[150px] lg:grid-cols-2 lg:gap-0 lg:pb-[175px] lg:pt-[225px]">
+    <div
+      class="wrap grid gap-12 pb-24 pt-[140px] lg:grid-cols-[1fr_1.02fr] lg:gap-14 lg:pb-[90px] lg:pt-[200px]"
+    >
       <!-- coloana de text -->
       <div class="wrap-inner max-w-[640px]">
-        <h1 class="h-hero" data-reveal>
+        <p class="rebate mb-7" data-reveal>București · din 2016</p>
+        <h1 class="h-hero" data-reveal style="--reveal-delay:60ms">
           Fiecare eveniment are 35 de cadre care <Mark text="contează" />.
         </h1>
-        <p class="lead mt-8" data-reveal style="--reveal-delay:90ms">
+        <p class="lead mt-8" data-reveal style="--reveal-delay:120ms">
           Studio foto de 80 mp în București și echipă de foto-video la
           evenimentul tău. Îți dăm cadrele pe care le pui pe perete, nu 2000 de
           fișiere pe care nu le mai deschide nimeni.
         </p>
-        <div class="mt-8" data-reveal style="--reveal-delay:150ms">
+        <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--reveal-delay:170ms">
           <a href={url("/contact")} class="btn btn-accent">Cere o ofertă</a>
+          <a href={url("/portofoliu")} class="btn btn-light">Vezi portofoliul</a>
         </div>
 
-        <div class="relative mt-16" data-reveal style="--reveal-delay:220ms">
-          <Ornament
-            type="arc"
-            class="pointer-events-none absolute -right-10 -top-10 hidden h-14 w-28 text-white/40 xl:block"
-          />
+        <div class="mt-14 border-t border-[var(--rule-dark)] pt-8" data-reveal style="--reveal-delay:230ms">
           <p class="h-slab">Livrare în 21 de zile</p>
-          <p class="lead mt-3 max-w-[420px] text-[18px]">
-            Termenul pe care îl scriem în contract.
-            <span class="ml-2 whitespace-nowrap tracking-[2px] text-[#ffc735]"
-              >★★★★★</span
-            >
+          <p class="body-18 mt-3 max-w-[440px]">
+            Termenul e trecut în contract, nu spus la telefon.
           </p>
         </div>
       </div>
 
-      <!-- colajul de imagini -->
-      <div class="relative lg:px-5">
+      <!-- colajul: trei cadre drepte, cu numerele de pe rolă -->
+      <div class="relative">
         <Ornament
-          type="ticks"
-          class="pointer-events-none absolute -left-4 -top-8 z-10 h-14 w-20 text-white/45 lg:-left-8 lg:h-16 lg:w-24"
+          type="crop"
+          class="pointer-events-none absolute -right-4 -top-7 z-10 hidden h-11 w-11 text-white/40 lg:block"
         />
-        <Ornament
-          type="spark"
-          class="pointer-events-none absolute -top-6 right-2 z-10 hidden h-16 w-16 text-white/40 lg:block"
-        />
-        <div class="grid grid-cols-[236fr_364fr] gap-5">
-          <div class="flex flex-col gap-[65px]">
-            <div class="arch-down">
+        <div class="grid grid-cols-[240fr_360fr] gap-4">
+          <div class="flex flex-col gap-8 lg:pt-16">
+            <figure class="frame">
               <Image
-                src={heroStudio}
-                alt="Fotograf reglând un softbox într-un studio cu fundal de hârtie gri"
+                src={pFashion}
+                alt="Ședință de studio: femeie în palton lung, pe fundal de hârtie deschis"
                 widths={[240, 480, 720]}
                 sizes="(min-width:1024px) 17vw, 36vw"
-                class="aspect-[236/315] w-full object-cover"
+                class="aspect-[3/4] w-full object-cover"
                 loading="eager"
               />
-            </div>
-            <div class="oval">
+            </figure>
+            <figure class="frame">
               <Image
                 src={heroVideo}
                 alt="Videograf filmând cu camera pe gimbal la un eveniment de seară"
                 widths={[240, 480, 720]}
                 sizes="(min-width:1024px) 17vw, 36vw"
-                class="aspect-[236/315] w-full object-cover"
+                class="aspect-[3/4] w-full object-cover"
                 loading="eager"
               />
-            </div>
+            </figure>
           </div>
-          <div class="arch-up self-start">
+          <figure class="frame self-start">
             <Image
               src={heroNunta}
               alt="Miri dansând seara sub ghirlande de becuri calde"
               widths={[380, 760, 1100]}
               sizes="(min-width:1024px) 26vw, 56vw"
-              class="aspect-[364/632] w-full object-cover"
+              class="aspect-[3/4.6] w-full object-cover"
               loading="eager"
             />
-          </div>
+          </figure>
         </div>
+        <p class="rebate mt-3 flex justify-between opacity-70" aria-hidden="true">
+          <span>34A</span><span>35</span><span>35A</span>
+        </p>
       </div>
     </div>
+
+    <Perfs class="text-white/45" />
   </section>
 
   <LogoBar />
 
   <!-- ========================= DE CE CADRU 35 ========================= -->
   <section class="section relative overflow-hidden pb-0">
-    <!-- imagini care ies din cadru, stânga și dreapta -->
-    <div class="arch-left pointer-events-none absolute -left-7 top-[50px] hidden w-[230px] xl:block">
+    <div class="pointer-events-none absolute -left-8 top-[60px] hidden w-[220px] xl:block">
       <Image
         src={studioLumini}
         alt=""
         aria-hidden="true"
         widths={[240, 480]}
-        sizes="230px"
-        class="aspect-[230/345] w-full object-cover"
+        sizes="220px"
+        class="aspect-[3/4] w-full object-cover"
         loading="lazy"
       />
     </div>
-    <div class="oval pointer-events-none absolute right-[10px] top-[50px] hidden w-[175px] xl:block">
+    <div class="pointer-events-none absolute -right-6 top-[100px] hidden w-[190px] xl:block">
       <Image
         src={pNuntaCamp}
         alt=""
         aria-hidden="true"
         widths={[200, 400]}
-        sizes="175px"
-        class="aspect-[175/219] w-full object-cover"
+        sizes="190px"
+        class="aspect-[4/5] w-full object-cover"
         loading="lazy"
       />
     </div>
-    <Ornament
-      type="loop"
-      class="pointer-events-none absolute -left-24 top-[335px] hidden h-32 w-40 text-black/15 xl:block"
-    />
 
     <div class="wrap relative text-center">
-      <div class="mx-auto mb-8 w-[143px]" data-reveal>
-        <svg viewBox="0 0 48 48" fill="none" class="h-[143px] w-[143px]" aria-hidden="true">
-          <circle cx="24" cy="24" r="21" stroke="var(--color-accent)" stroke-width="1.4"></circle>
-          <path
-            d="M24 3.5 33 19M45 24 27 24M38.5 38.5 29 23M24 44.5 15 29M3.5 24 21 24M9.5 9.5 19 25"
-            stroke="var(--color-accent)"
-            stroke-width="1.1"
-            stroke-linecap="round"
-            opacity="0.85"></path>
-          <circle cx="24" cy="24" r="5.5" fill="var(--color-accent)"></circle>
-        </svg>
-      </div>
-      <h2 class="h-section mx-auto max-w-[922px]" data-reveal>
-        De ce „Cadru <Mark text="35" />”?
+      <Ornament
+        type="sprocket"
+        class="mx-auto mb-10 h-8 w-[250px] text-accent/60"
+      />
+      <h2 class="h-section mx-auto max-w-[880px]" data-reveal>
+        De ce „Cadru 35”?
       </h2>
-      <p class="lead mx-auto mt-6 max-w-[772px]" data-reveal style="--reveal-delay:80ms">
+      <p class="lead mx-auto mt-7 max-w-[720px]" data-reveal style="--reveal-delay:80ms">
         O rolă de film de 35 mm are 36 de cadre. În practică, unul se pierde
         mereu la încărcare, așa că rămân 35. De acolo ne vine numele și felul în
         care lucrăm: nu numărăm pozele, ne uităm la cadrele care chiar spun ceva.
@@ -197,28 +188,24 @@ const beneficii = [
 
   <!-- ============================ BENEFICII =========================== -->
   <section class="section relative overflow-hidden pb-0">
-    <Ornament
-      type="ticks"
-      class="pointer-events-none absolute left-[40%] top-2 hidden h-20 w-20 text-black/20 lg:block"
-    />
     <div class="grid items-center gap-10 lg:grid-cols-[763fr_677fr] lg:gap-0">
-      <!-- imaginea iese din cadru spre stânga, ca în referință -->
-      <div class="lg:-ml-[150px] lg:w-[813px]">
+      <!-- imaginea iese din cadru spre stânga -->
+      <div class="relative lg:-ml-[150px] lg:w-[813px]">
         <Image
           src={echipament}
           alt="Aparate foto, obiective și exponometru așezate pe un birou închis la culoare"
           widths={[520, 860, 1200]}
           sizes="(min-width:1024px) 56vw, 100vw"
-          class="aspect-[813/542] w-full object-cover"
+          class="aspect-[3/2] w-full object-cover"
           loading="lazy"
           data-reveal
         />
       </div>
 
-      <div class="wrap-inner px-6 lg:max-w-[657px] lg:px-0">
+      <div class="wrap-inner px-6 lg:max-w-[640px] lg:px-0">
         <p class="eyebrow" data-reveal>Cum lucrăm</p>
         <h2 class="h-section mt-5" data-reveal style="--reveal-delay:60ms">
-          La baza fiecărui eveniment stă o listă de <Mark text="cadre" />
+          La baza fiecărui eveniment stă o listă de cadre
         </h2>
         <p class="body-18 mt-6" data-reveal style="--reveal-delay:100ms">
           Înainte de filmare stabilim împreună lista: momentele obligatorii,
@@ -226,24 +213,17 @@ const beneficii = [
           montaj că lipsește dansul cu părinții sau discursul nașului.
         </p>
 
-        <ul class="mt-8 space-y-1">
+        <ul class="mt-9 divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
           {
             beneficii.map((item, i) => (
               <li
-                class="flex items-start gap-3 text-[21px] leading-[32.4px]"
+                class="flex items-baseline gap-4 py-3.5 text-[17px] leading-[28px]"
                 data-reveal
                 style={`--reveal-delay:${140 + i * 60}ms`}
               >
-                <svg
-                  viewBox="0 0 20 20"
-                  class="mt-[9px] h-4 w-4 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.6"
-                  aria-hidden="true"
-                >
-                  <path d="M3 10.5 8 15l9-10" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                <span class="rebate w-8 shrink-0 tabular-nums" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span>{item}</span>
               </li>
             ))
@@ -254,123 +234,101 @@ const beneficii = [
   </section>
 
   <!-- ============================= SERVICII =========================== -->
-  <section class="section relative overflow-hidden bg-paper-alt">
-    <Ornament
-      type="wave"
-      class="pointer-events-none absolute -right-16 top-6 hidden h-24 w-48 text-black/15 xl:block"
-    />
+  <section class="section-lg relative overflow-hidden bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Servicii"
         title="Trei feluri în care lucrăm"
         text="Studioul rezolvă tot ce se fotografiază pe fundal curat, cu lumina sub control. Echipa merge pe teren pentru tot ce se întâmplă o singură dată și nu se repetă."
+        align="left"
+        class="max-w-[720px]"
       />
 
-      <div class="mt-16 grid gap-5 md:grid-cols-3">
+      <div class="mt-16 grid gap-x-8 gap-y-14 md:grid-cols-3">
         {
           serviceCards.map((service, i) => (
-            <article
-              class="text-center"
-              data-reveal
-              style={`--reveal-delay:${i * 100}ms`}
-            >
+            <article data-reveal style={`--reveal-delay:${i * 100}ms`}>
               <a href={url(service.href)} class="group block">
-                <div class="oval mx-auto w-[320px] max-w-full">
+                <figure class="frame relative">
                   <Image
                     src={serviceImages[service.slug as keyof typeof serviceImages]}
                     alt={service.title}
                     widths={[340, 640, 900]}
-                    sizes="320px"
-                    class="aspect-square w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                    sizes="(min-width:768px) 30vw, 92vw"
+                    class="aspect-square w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                     loading="lazy"
                   />
-                </div>
-                <h3 class="mx-auto mt-14 max-w-[360px] text-[20px] font-medium leading-[24px] tracking-[-0.027em] transition-colors duration-200 group-hover:text-accent">
+                  <span class="rebate absolute left-3 top-3 bg-ink/75 px-2 py-1 !text-white">
+                    {service.no}
+                  </span>
+                </figure>
+                <h3 class="mt-6 font-display text-[27px] leading-[1.15] transition-colors duration-200 group-hover:text-accent">
                   {service.title}
                 </h3>
+                <p class="mt-1.5 text-[15px] font-semibold uppercase tracking-[0.1em] text-accent">
+                  {service.lead}
+                </p>
               </a>
-              <p class="body-18 mx-auto mt-5 max-w-[360px]">{service.body}</p>
+              <p class="body-18 mt-4">{service.body}</p>
             </article>
           ))
         }
       </div>
 
-      <div class="mt-14 text-center" data-reveal>
-        <a href={url("/servicii")} class="btn btn-accent">Listă servicii</a>
+      <div class="mt-16" data-reveal>
+        <a href={url("/servicii")} class="btn btn-ink">Toate serviciile</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================ PORTOFOLIU ========================== -->
-  <section class="section">
-    <div class="wrap">
-      <SectionHead
-        eyebrow="Portofoliu"
-        title="Cadre din ultimele luni"
-        text="Studio, evenimente și video, amestecate. Apasă pe filtre dacă vrei doar o categorie."
-        class="mb-14"
-      />
-      <Gallery limit={8} />
-      <div class="mt-12 text-center" data-reveal>
-        <a href={url("/portofoliu")} class="btn btn-accent">Vezi tot portofoliul</a>
+  <!-- =========================== CONTACT SHEET ======================== -->
+  <section class="on-dark relative overflow-hidden bg-ink text-white">
+    <div class="wrap py-20 lg:py-24">
+      <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-[640px]">
+          <p class="eyebrow" data-reveal>Rola 12 · septembrie</p>
+          <h2 class="h-section mt-5" data-reveal style="--reveal-delay:60ms">
+            Cum arată o rolă întreagă
+          </h2>
+          <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
+            Nu doar cadrele alese. Așa arată o zi de lucru pe un contact sheet,
+            cu tot cu ratările dintre ele. Cele însemnate cu creion sunt cele
+            care ajung în galeria ta.
+          </p>
+        </div>
+        <a href={url("/portofoliu")} class="btn btn-light shrink-0" data-reveal>
+          Portofoliul complet
+        </a>
       </div>
+
+      <ContactSheet />
     </div>
   </section>
 
-  <!-- ============================== MOTTO ============================= -->
-  <section class="section relative overflow-hidden">
-    <div class="wrap grid items-start gap-12 lg:grid-cols-2">
-      <div class="wrap-inner max-w-[640px]">
-        <p class="eyebrow" data-reveal>Motto</p>
-        <h2 class="h-section mt-5 max-w-[520px]" data-reveal style="--reveal-delay:60ms">
-          Motto-ul <Mark text="nostru" />
+  <!-- ============================== DESPRE ============================ -->
+  <section class="section-lg">
+    <div class="wrap grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div>
+        <p class="eyebrow" data-reveal>Cum gândim</p>
+        <h2 class="h-section mt-5" data-reveal style="--reveal-delay:60ms">
+          Selecția, nu <Mark text="numărul" />
         </h2>
-        <p class="body-18 mt-8" data-reveal style="--reveal-delay:100ms">
-          <strong class="font-semibold text-black">„35 de cadre”</strong> spune tot.
+      </div>
+      <div class="max-w-[640px]">
+        <p class="lead" data-reveal style="--reveal-delay:100ms">
           Pe film aveai 35 de cadre și atât. Nu trăgeai 400 de poze ca să alegi
           mai târziu, gândeai cadrul înainte să apeși.
         </p>
-        <p class="body-18 mt-5" data-reveal style="--reveal-delay:140ms">
-          Lucrăm digital, evident, dar mentalitatea a rămas: la nuntă predăm în
+        <p class="body-18 mt-6" data-reveal style="--reveal-delay:140ms">
+          Lucrăm digital, evident, dar mentalitatea a rămas. La o nuntă predăm în
           jur de 600 de fotografii alese, nu 3000 de duplicate. E și motivul
-          pentru care nu vindem „pachetul cu cele mai multe poze”. Vindem
-          selecția pe care o poți privi cap-coadă, într-o seară, fără să derulezi.
+          pentru care nu vindem „pachetul cu cele mai multe poze”: vindem
+          selecția pe care o poți privi cap-coadă, într-o seară, fără să
+          derulezi.
         </p>
-        <div class="mt-10" data-reveal style="--reveal-delay:180ms">
+        <div class="mt-9" data-reveal style="--reveal-delay:180ms">
           <a href={url("/despre-noi")} class="btn btn-ink">Despre noi</a>
         </div>
-      </div>
-
-      <!-- două imagini suprapuse, ca în referință -->
-      <div class="relative lg:min-h-[795px]" data-reveal style="--reveal-delay:120ms">
-        <Ornament
-          type="ticks"
-          class="pointer-events-none absolute left-2 top-4 z-10 hidden h-20 w-24 text-black/25 lg:block"
-        />
-        <div class="lg:absolute lg:right-[100px] lg:top-[60px] lg:w-[400px]">
-          <Image
-            src={svcEveniment}
-            alt="Detaliu de nuntă: mâinile miresei cu buchetul"
-            widths={[420, 800]}
-            sizes="(min-width:1024px) 400px, 92vw"
-            class="aspect-[400/715] w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div class="mt-5 lg:absolute lg:left-[10px] lg:top-[375px] lg:mt-0 lg:w-[320px]">
-          <Image
-            src={spatiuStudio}
-            alt="Interiorul studioului: ciclorama albă și echipament pe stative"
-            widths={[340, 660]}
-            sizes="(min-width:1024px) 320px, 92vw"
-            class="aspect-[320/480] w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <Ornament
-          type="loop"
-          class="pointer-events-none absolute bottom-0 left-0 hidden h-16 w-20 text-black/20 lg:block"
-        />
       </div>
     </div>
   </section>

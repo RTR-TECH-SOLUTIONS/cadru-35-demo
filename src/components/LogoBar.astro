@@ -1,8 +1,9 @@
 ---
 /**
- * Banda roz de sub hero. În referință sunt logo-urile clienților; aici punem
- * serviciile, ca să nu inventăm branduri care ne-ar recomanda.
- * TODO(real): înlocuiește cu logo-urile clienților reali, cu acordul lor.
+ * Banda de sub hero. În referință sunt logo-urile clienților; aici e eticheta
+ * rolei: formatul, apoi ce se trage pe ea. Nu inventăm branduri care ne-ar
+ * recomanda.
+ * TODO(real): dacă apar clienți dispuși, aici intră logo-urile lor.
  */
 const items = [
   "Foto studio",
@@ -14,13 +15,22 @@ const items = [
 ];
 ---
 
-<section class="bg-accent">
-  <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-4">
+<section class="bg-accent text-white">
+  <div class="wrap flex flex-wrap items-center gap-x-7 gap-y-2 py-3.5">
+    <span
+      class="rebate shrink-0 border border-white/45 px-2 py-1 !text-white"
+      aria-hidden="true">35 mm</span
+    >
     {
-      items.map((item) => (
-        <span class="text-[15px] font-medium uppercase tracking-[3px] text-white/90">
-          {item}
-        </span>
+      items.map((item, i) => (
+        <>
+          {i > 0 && (
+            <span class="hidden h-3 w-px bg-white/35 sm:block" aria-hidden="true" />
+          )}
+          <span class="text-[13px] font-semibold uppercase tracking-[0.16em]">
+            {item}
+          </span>
+        </>
       ))
     }
   </div>

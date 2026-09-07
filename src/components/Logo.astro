@@ -1,25 +1,17 @@
 ---
+/**
+ * Doar numele, fără marcă grafică. Clientul își aduce logo-ul lui.
+ * TODO(real): dacă vine cu un logo, se pune aici în locul textului.
+ */
 interface Props {
   tone?: "light" | "dark";
   class?: string;
 }
 const { tone = "light", class: className = "" } = Astro.props;
-const text = tone === "light" ? "#ffffff" : "#000000";
+const text = tone === "light" ? "#ffffff" : "var(--color-ink)";
 ---
 
-<span class={`flex items-center gap-3 ${className}`}>
-  <svg class="h-11 w-11 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-    <circle cx="24" cy="24" r="21" stroke="var(--color-accent)" stroke-width="2"></circle>
-    <path
-      d="M24 3.5 33 19M45 24 27 24M38.5 38.5 29 23M24 44.5 15 29M3.5 24 21 24M9.5 9.5 19 25"
-      stroke="var(--color-accent)"
-      stroke-width="1.6"
-      stroke-linecap="round"
-      opacity="0.85"></path>
-    <circle cx="24" cy="24" r="5.5" fill="var(--color-accent)"></circle>
-  </svg>
-  <span class="leading-none" style={`color:${text}; font-family: var(--font-display)`}>
-    <span class="block text-[19px] tracking-[0.28em]">CADRU</span>
-    <span class="mt-[5px] block text-[13px] tracking-[0.26em]">35&nbsp;&nbsp;STUDIO</span>
-  </span>
+<span class={`leading-none ${className}`} style={`color:${text}`}>
+  <span class="block font-display text-[22px] font-semibold tracking-[0.01em]">Cadru 35</span>
+  <span class="rebate mt-1.5 block !text-current opacity-55">Studio foto · video</span>
 </span>

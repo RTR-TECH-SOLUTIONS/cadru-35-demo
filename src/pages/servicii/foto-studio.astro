@@ -1,5 +1,4 @@
 ---
-import Mark from "../../components/Mark.astro";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/PageHero.astro";
@@ -133,7 +132,7 @@ const faq = [
               data-reveal
               style={`--reveal-delay:${i * 80}ms`}
             >
-              <h3 class="text-[20px] font-medium leading-[28px] tracking-[-0.027em]">{t.title}</h3>
+              <h3 class="font-display text-[23px] font-semibold leading-[1.2]">{t.title}</h3>
               <p class="mt-4 body-18">
                 {t.text}
               </p>
@@ -150,7 +149,7 @@ const faq = [
       <div>
         <p class="eyebrow" data-reveal>Studioul</p>
         <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
-          Ce găsești când intri pe <Mark text="ușă" />
+          Ce găsești când intri pe ușă
         </h2>
         <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
           Nu e un spațiu improvizat într-un apartament. E o hală reamenajată, cu
@@ -165,7 +164,7 @@ const faq = [
                 data-reveal
                 style={`--reveal-delay:${140 + i * 45}ms`}
               >
-                <dt class="w-40 shrink-0 text-[0.82rem] uppercase tracking-[0.14em] text-white/45">
+                <dt class="w-40 shrink-0 text-[0.82rem] uppercase tracking-[0.14em] text-white/60">
                   {term}
                 </dt>
                 <dd class="flex-1 text-[0.98rem] text-white/85">{desc}</dd>

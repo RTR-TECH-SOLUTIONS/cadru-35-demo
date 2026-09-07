@@ -19,8 +19,8 @@ import spatiu2 from "../assets/img/spatiu-studio-2.jpg";
     style="padding-top: var(--header-h)"
   >
     <Ornament
-      type="loop"
-      class="pointer-events-none absolute -right-4 bottom-0 h-24 w-32 text-white/20 md:h-32 md:w-44"
+      type="crosshair"
+      class="pointer-events-none absolute right-8 bottom-8 h-14 w-14 text-white/25 md:h-16 md:w-16"
     />
     <div class="wrap-tight py-16 text-center md:py-20">
       <p class="eyebrow" data-reveal>Contact</p>
@@ -38,7 +38,7 @@ import spatiu2 from "../assets/img/spatiu-studio-2.jpg";
   <section class="section">
     <div class="wrap grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
       <div data-reveal>
-        <h2 class="text-[20px] font-medium leading-[28px] tracking-[-0.027em]">Scrie-ne câteva rânduri</h2>
+        <h2 class="font-display text-[23px] font-semibold leading-[1.2]">Scrie-ne câteva rânduri</h2>
         <p class="mt-3 body-18">
           Completează și îți deschidem conversația pe WhatsApp cu mesajul deja
           scris. Poți să îl modifici înainte să îl trimiți.
@@ -72,7 +72,7 @@ import spatiu2 from "../assets/img/spatiu-studio-2.jpg";
           <dl class="mt-5 space-y-2.5 text-[0.95rem]">
             {
               site.schedule.map(([zi, ore]) => (
-                <div class="flex justify-between gap-4 border-b border-black/12 pb-2.5">
+                <div class="flex justify-between gap-4 border-b border-[var(--rule)] pb-2.5">
                   <dt class="text-[var(--text-body)]">{zi}</dt>
                   <dd>{ore}</dd>
                 </div>

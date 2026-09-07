@@ -28,7 +28,7 @@ if (limit) shots = shots.slice(0, limit);
         {categories.map((c) => (
           <button
             type="button"
-            class="filter-btn rounded-full border border-black/12 px-5 py-2.5 text-[0.88rem] transition-colors duration-200 hover:border-ink aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-white"
+            class="filter-btn rounded-[2px] border border-[var(--rule)] px-5 py-2.5 text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors duration-200 hover:border-ink aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-white"
             data-filter={c.key}
             aria-pressed={c.key === "toate" ? "true" : "false"}
           >
@@ -45,7 +45,7 @@ if (limit) shots = shots.slice(0, limit);
         <li data-category={shot.category} data-reveal style={`--reveal-delay:${(i % 4) * 70}ms`}>
           <button
             type="button"
-            class="group relative block w-full overflow-hidden rounded-lg bg-ink"
+            class="group relative block w-full overflow-hidden bg-ink"
             data-lightbox
             data-src={shot.src.src}
             data-caption={shot.caption}
@@ -115,7 +115,7 @@ if (limit) shots = shots.slice(0, limit);
   </button>
 
   <figure class="max-h-full w-full max-w-5xl text-center">
-    <img id="lb-img" src="" alt="" class="mx-auto max-h-[78vh] w-auto rounded-lg object-contain" />
+    <img id="lb-img" src="" alt="" class="mx-auto max-h-[78vh] w-auto object-contain" />
     <figcaption id="lb-caption" class="mt-4 text-[0.9rem] text-white/70"></figcaption>
   </figure>
 </div>

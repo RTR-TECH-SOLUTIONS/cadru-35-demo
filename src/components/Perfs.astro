@@ -1,0 +1,12 @@
+---
+/**
+ * Bandă de perforații de film, folosită ca separator între secțiuni.
+ * Culoarea vine din `currentColor`, deci se pune pe orice fundal.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`perfs ${className}`} aria-hidden="true"></div>

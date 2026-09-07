@@ -1,36 +1,35 @@
 ---
 import { url } from "../lib/url";
-import Mark from "./Mark.astro";
 import Ornament from "./Ornament.astro";
 
 interface Props {
   title?: string;
-  markLast?: string;
   text?: string;
   cta?: string;
   href?: string;
 }
 const {
-  title = "Un cadru bun se pregătește din",
-  markLast = "timp",
+  title = "Un cadru bun se pregătește din timp",
   text = "Spune-ne data și tipul evenimentului. Îți răspundem cu disponibilitatea și un preț ferm în aceeași zi.",
   cta = "Contactează-ne",
   href = "/contact",
 } = Astro.props;
 ---
 
-<section class="section relative overflow-hidden">
+<section class="section-lg relative overflow-hidden bg-paper-alt">
   <Ornament
-    type="spark"
-    class="pointer-events-none absolute left-[6%] top-1/2 hidden h-16 w-16 -translate-y-1/2 text-accent xl:block"
+    type="grid"
+    class="pointer-events-none absolute -left-6 top-10 hidden h-20 w-32 text-ink/15 xl:block"
   />
   <Ornament
-    type="loop"
-    class="pointer-events-none absolute right-[5%] top-8 hidden h-24 w-32 text-black/15 xl:block"
+    type="crosshair"
+    class="pointer-events-none absolute right-[7%] bottom-10 hidden h-14 w-14 text-accent/45 xl:block"
   />
-  <div class="wrap py-16 text-center" data-reveal>
-    <h2 class="h-section">{title} <Mark text={markLast} /></h2>
-    <p class="lead mx-auto mt-7 max-w-[900px] text-[24px]">{text}</p>
-    <a href={url(href)} class="btn btn-ink mt-10">{cta}</a>
+  <div class="wrap text-center" data-reveal>
+    <h2 class="h-section mx-auto max-w-[900px]">
+      {title}
+    </h2>
+    <p class="lead mx-auto mt-7 max-w-[720px]">{text}</p>
+    <a href={url(href)} class="btn btn-accent mt-10">{cta}</a>
   </div>
 </section>

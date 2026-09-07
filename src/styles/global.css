@@ -2,33 +2,44 @@
 
 /* ---------------------------------------------------------------
    Cadru 35 — sistem de design
-   Valorile de mai jos sunt măsurate direct din referința aprobată
-   (viewport 1440): container 1320, H1 Lora 72/86.4, H2 58/69.6,
-   body Poppins 18-22/32.4, secțiuni 50px, hero 225/175.
+
+   Structura (ritmul secțiunilor, containerul, ierarhia) e ancorată
+   în referința aprobată. Identitatea vizuală e proprie:
+   accent rust de cameră obscură, serifă Fraunces, grotesc Archivo,
+   iar decorul vorbește limbajul peliculei de 35 mm, nu linii
+   desenate de mână.
    --------------------------------------------------------------- */
 @theme {
-  --color-ink: #191919;
-  --color-paper: #ffffff;
-  --color-paper-alt: #fafafa;
-  --color-accent: #ff6bcb;
+  --color-ink: #1a1816;
+  --color-ink-soft: #2a2724;
+  --color-paper: #fcfbf9;
+  --color-paper-alt: #f4f2ee;
 
-  --font-display: "Lora Variable", "Lora", Georgia, "Times New Roman", serif;
-  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* rust de rebate / lumină de cameră obscură.
+     5.18:1 pe paper, 4.79:1 pe paper-alt, alb pe el 5.35:1 — tot AA. */
+  --color-accent: #bc420d;
+  /* varianta pentru fundal închis: 6.62:1 pe ink */
+  --color-accent-hi: #e8853c;
+
+  --font-display: "Fraunces Variable", "Fraunces", Georgia, serif;
+  --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, sans-serif;
 
   --radius-pill: 100px;
 }
 
 :root {
-  --header-h: 111px;
+  --header-h: 104px;
   --container: 1320px;
   --gutter: 60px;
-  --text-body: rgba(0, 0, 0, 0.7);
-  --text-body-dark: rgba(255, 255, 255, 0.69);
+  --text-body: #4a443e;
+  --text-body-dark: #c9c2b8;
+  --rule: rgba(26, 24, 22, 0.14);
+  --rule-dark: rgba(255, 255, 255, 0.16);
 }
 
 @media (max-width: 1024px) {
   :root {
-    --header-h: 72px;
+    --header-h: 70px;
     --gutter: 24px;
   }
 }
@@ -41,10 +52,10 @@ html {
 
 body {
   background: var(--color-paper);
-  color: #000;
+  color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 18px;
-  line-height: 32.4px;
+  font-size: 17px;
+  line-height: 30px;
   overflow-x: clip;
 }
 
@@ -59,49 +70,56 @@ body {
   border-radius: 4px;
 }
 
-/* --- Tipografie ------------------------------------------------ */
-.h-hero {
+.on-dark :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline-color: var(--color-accent-hi);
+}
+
+/* --- Tipografie -------------------------------------------------
+   Fraunces are axa opsz; font-optical-sizing: auto o leagă de
+   font-size, deci titlurile mari capătă serife mai fine singure. */
+.h-hero,
+.h-section,
+.h-sub,
+.serif {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 400;
-  font-size: 72px;
-  line-height: 1.2;
-  letter-spacing: -0.027em;
+  letter-spacing: -0.022em;
+}
+
+.h-hero {
+  font-size: 70px;
+  line-height: 1.06;
 }
 
 .h-section {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 58px;
-  line-height: 1.2;
-  letter-spacing: -0.027em;
+  font-size: 54px;
+  line-height: 1.1;
 }
 
 .h-sub {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 42px;
-  line-height: 1.2;
-  letter-spacing: -0.027em;
+  font-size: 38px;
+  line-height: 1.14;
 }
 
-/* blocul mare sans din hero („Michelin inspired” în referință) */
+/* blocul mare sans, sub hero */
 .h-slab {
   font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 57px;
-  line-height: 1.2;
-  letter-spacing: -0.027em;
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.028em;
 }
 
 .lead {
-  font-size: 22px;
-  line-height: 32.4px;
+  font-size: 20px;
+  line-height: 32px;
   color: var(--text-body);
 }
 
 .body-18 {
-  font-size: 18px;
-  line-height: 32.4px;
+  font-size: 17px;
+  line-height: 30px;
   color: var(--text-body);
 }
 
@@ -112,99 +130,135 @@ body {
 
 @media (max-width: 1200px) {
   .h-hero {
-    font-size: 58px;
+    font-size: 56px;
   }
   .h-section {
-    font-size: 46px;
+    font-size: 43px;
   }
   .h-slab {
-    font-size: 44px;
+    font-size: 40px;
   }
   .h-sub {
-    font-size: 34px;
+    font-size: 31px;
   }
 }
 
 @media (max-width: 768px) {
   .h-hero {
-    font-size: 42px;
+    font-size: 40px;
   }
   .h-section {
-    font-size: 34px;
+    font-size: 32px;
   }
   .h-slab {
-    font-size: 34px;
+    font-size: 31px;
   }
   .h-sub {
-    font-size: 27px;
+    font-size: 25px;
   }
   .lead {
-    font-size: 19px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 29px;
   }
   body {
-    font-size: 17px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 28px;
   }
 }
 
-/* --- Etichete de secțiune (BENEFICII, SERVICII, MOTTO) --------- */
+/* --- Eticheta de secțiune --------------------------------------
+   Numerotare de rebate: „· 02 / SERVICII”, ca pe marginea filmului. */
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 18px;
-  letter-spacing: 3px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
 }
 
-/* --- Subliniere desenată de mână, sub ultimul cuvânt ----------- */
+.on-dark .eyebrow {
+  color: var(--color-accent-hi);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.75;
+}
+
+/* --- Accent pe un cuvânt ---------------------------------------
+   Colțare de vizor în jurul cuvântului, ca marcajele de crop de pe
+   un proof tipărit. Fără subliniere: aia era a lor. */
 .mark {
   position: relative;
   display: inline-block;
   white-space: nowrap;
-}
-
-.mark > svg {
-  position: absolute;
-  left: -2%;
-  bottom: 0.02em;
-  width: 104%;
-  height: 0.3em;
   color: var(--color-accent);
-  pointer-events: none;
+  padding-inline: 0.14em;
 }
 
-/* --- Butoane --------------------------------------------------- */
+.on-dark .mark {
+  color: var(--color-accent-hi);
+}
+
+.mark::after {
+  content: "";
+  position: absolute;
+  inset: -0.05em -0.05em 0.02em;
+  pointer-events: none;
+  --l: linear-gradient(currentColor, currentColor);
+  --t: 0.075em;
+  --a: 0.3em;
+  background:
+    var(--l) left top / var(--a) var(--t) no-repeat,
+    var(--l) left top / var(--t) var(--a) no-repeat,
+    var(--l) right top / var(--a) var(--t) no-repeat,
+    var(--l) right top / var(--t) var(--a) no-repeat,
+    var(--l) left bottom / var(--a) var(--t) no-repeat,
+    var(--l) left bottom / var(--t) var(--a) no-repeat,
+    var(--l) right bottom / var(--a) var(--t) no-repeat,
+    var(--l) right bottom / var(--t) var(--a) no-repeat;
+}
+
+/* --- Butoane ----------------------------------------------------
+   Colț de 2px, nu pastilă: mai aproape de o etichetă de arhivă. */
 @layer components {
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 19px 25px;
-    border-radius: var(--radius-pill);
-    border: 2px solid transparent;
+    gap: 0.7rem;
+    padding: 17px 26px;
+    border-radius: 2px;
+    border: 1px solid transparent;
     font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     line-height: 1;
     text-decoration: none;
     transition:
-      background-color 200ms ease-out,
-      color 200ms ease-out,
-      border-color 200ms ease-out;
+      background-color 180ms ease-out,
+      color 180ms ease-out,
+      border-color 180ms ease-out;
   }
 
   .btn-accent {
+    background: var(--color-accent);
     border-color: var(--color-accent);
-    color: var(--color-accent);
-    background: transparent;
+    color: #fff;
   }
 
   .btn-accent:hover {
-    background: var(--color-accent);
-    color: #fff;
+    background: #9c360a;
+    border-color: #9c360a;
   }
 
   .btn-dark {
@@ -219,28 +273,29 @@ body {
   }
 
   .btn-ink {
-    border-color: #000;
-    color: #000;
+    border-color: var(--color-ink);
+    color: var(--color-ink);
     background: transparent;
   }
 
   .btn-ink:hover {
-    background: #000;
+    background: var(--color-ink);
     color: #fff;
   }
 
   .btn-light {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.45);
     color: #fff;
   }
 
   .btn-light:hover {
     background: #fff;
     color: var(--color-ink);
+    border-color: #fff;
   }
 }
 
-/* --- Layout ---------------------------------------------------- */
+/* --- Layout ----------------------------------------------------- */
 .wrap {
   width: 100%;
   max-width: calc(var(--container) + 2 * var(--gutter));
@@ -248,25 +303,8 @@ body {
   padding-inline: var(--gutter);
 }
 
-/* padding-ul interior de 10px al coloanelor din referință */
 .wrap-inner {
   padding-inline: 10px;
-}
-
-.section {
-  padding-block: 50px;
-}
-
-.section-lg {
-  padding-block: 90px;
-}
-
-
-/* --- Utilitare suplimentare ------------------------------------ */
-.serif {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
 }
 
 .wrap-tight {
@@ -276,34 +314,80 @@ body {
   padding-inline: var(--gutter);
 }
 
-/* --- Măști pe imagini ------------------------------------------ */
-.arch-up {
-  border-radius: 500px 500px 0 0;
+.section {
+  padding-block: 58px;
+}
+
+.section-lg {
+  padding-block: 96px;
+}
+
+/* --- Măști pe imagini -------------------------------------------
+   Colțuri drepte peste tot: un cadru de film nu e rotunjit.
+   Singura formă rotundă rămâne cercul, folosit rar. */
+.frame {
+  overflow: hidden;
+  background: var(--color-paper-alt);
+}
+
+.circle {
+  border-radius: 50%;
   overflow: hidden;
 }
 
-.arch-down {
-  border-radius: 0 0 500px 500px;
+/* --- Limbajul peliculei ----------------------------------------- */
+
+/* bandă de perforații, ca marginea unui film 35 mm */
+.perfs {
+  --perf-h: 15px;
+  height: var(--perf-h);
+  background-image: radial-gradient(
+    closest-side,
+    transparent 0 62%,
+    currentColor 64% 100%
+  );
+  background-size: 26px var(--perf-h);
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.55;
+}
+
+/* numărul de cadru de pe rebate */
+.rebate {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.on-dark .rebate {
+  color: var(--color-accent-hi);
+}
+
+/* un cadru de contact sheet */
+.sheet-frame {
+  position: relative;
+  background: #000;
   overflow: hidden;
 }
 
-.arch-left {
-  border-radius: 500px 0 0 500px;
-  overflow: hidden;
+.sheet-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.oval {
-  border-radius: 500px;
-  overflow: hidden;
-}
-
-/* --- Reveal la scroll ------------------------------------------ */
+/* --- Reveal la scroll ------------------------------------------- */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(16px);
   transition:
-    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -312,11 +396,11 @@ body {
   transform: none;
 }
 
-/* --- Bandă cu logo-uri, derulare continuă ---------------------- */
+/* --- Bandă cu derulare continuă --------------------------------- */
 .marquee {
   display: flex;
   width: max-content;
-  animation: marquee 38s linear infinite;
+  animation: marquee 44s linear infinite;
 }
 
 @keyframes marquee {

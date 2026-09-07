@@ -3,7 +3,7 @@ import Mark from "./Mark.astro";
 interface Props {
   eyebrow?: string;
   title: string;
-  /** ultimul cuvânt primește sublinierea desenată de mână */
+  /** ultimul cuvânt primește colțarele de vizor; se folosește rar */
   markLast?: boolean;
   text?: string;
   align?: "left" | "center";
@@ -12,7 +12,7 @@ interface Props {
 const {
   eyebrow,
   title,
-  markLast = true,
+  markLast = false,
   text,
   align = "center",
   class: className = "",

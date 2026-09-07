@@ -30,16 +30,13 @@ const isActive = (href: string) =>
                 href={url(item.href)}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 class:list={[
-                  "inline-flex items-center gap-2 py-2 text-[16px] font-medium transition-colors duration-200",
-                  isActive(item.href) ? "text-accent" : "text-white hover:text-accent",
+                  "inline-flex items-center py-2 text-[16px] font-medium transition-colors duration-200",
+                  isActive(item.href)
+                    ? "text-[var(--color-accent-hi)]"
+                    : "text-white hover:text-[var(--color-accent-hi)]",
                 ]}
               >
                 {item.label}
-                {item.hot && (
-                  <span class="rounded-[4px] bg-white/12 px-2 py-[2px] text-[11px] font-semibold tracking-[0.08em] text-accent">
-                    NOU
-                  </span>
-                )}
               </a>
             </li>
           ))
@@ -89,7 +86,7 @@ const isActive = (href: string) =>
               href={url(item.href)}
               class:list={[
                 "block py-4 text-[30px]",
-                isActive(item.href) ? "text-accent" : "text-white",
+                isActive(item.href) ? "text-[var(--color-accent-hi)]" : "text-white",
               ]}
               style="font-family: var(--font-display); line-height:1.25"
             >

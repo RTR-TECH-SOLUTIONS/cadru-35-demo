@@ -20,7 +20,7 @@ export const site = {
 export const nav = [
   { label: "Acasă", href: "/" },
   { label: "Despre noi", href: "/despre-noi" },
-  { label: "Servicii", href: "/servicii", hot: true },
+  { label: "Servicii", href: "/servicii" },
   { label: "Portofoliu", href: "/portofoliu" },
   { label: "Contact", href: "/contact" },
 ];

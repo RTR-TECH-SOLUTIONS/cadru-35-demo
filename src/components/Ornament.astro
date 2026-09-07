@@ -1,78 +1,73 @@
 ---
-/** Ornamente desenate de mână, ca în referință. Pur decorative. */
+/**
+ * Decor din limbajul peliculei de 35 mm. Pur ornamental, aria-hidden.
+ *  - sprocket: colț de film cu perforații
+ *  - crosshair: cruce de reper din vizor
+ *  - crop: colțar de crop de pe un proof
+ *  - grid: grilă de contact sheet
+ *  - meter: scală de expunere
+ */
 interface Props {
-  type: "loop" | "ticks" | "arc" | "spark" | "wave";
+  type: "sprocket" | "crosshair" | "crop" | "grid" | "meter";
   class?: string;
   color?: string;
 }
 const { type, class: className = "", color = "currentColor" } = Astro.props;
-const sw = 2.2;
 ---
 
 {
-  type === "loop" && (
-    <svg class={className} viewBox="0 0 120 90" fill="none" aria-hidden="true">
+  type === "sprocket" && (
+    <svg class={className} viewBox="0 0 260 34" fill="none" aria-hidden="true">
+      <path d="M0 3h260M0 31h260" stroke={color} stroke-width="1.2" opacity="0.45" />
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+        <rect x={8 + i * 31} y="11" width="15" height="11" rx="2" fill={color} />
+      ))}
+    </svg>
+  )
+}
+{
+  type === "crosshair" && (
+    <svg class={className} viewBox="0 0 60 60" fill="none" aria-hidden="true">
+      <path d="M30 2v16M30 42v16M2 30h16M42 30h16" stroke={color} stroke-width="1.6" />
+      <circle cx="30" cy="30" r="9.5" stroke={color} stroke-width="1.6" />
+    </svg>
+  )
+}
+{
+  type === "crop" && (
+    <svg class={className} viewBox="0 0 70 70" fill="none" aria-hidden="true">
       <path
-        d="M2 88c14-26 27-44 41-52 12-7 24-4 25 7 1 9-8 15-15 12-8-3-8-15 2-24C68 20 92 10 118 4"
+        d="M2 22V2h20M48 2h20v20M68 48v20H48M22 68H2V48"
         stroke={color}
-        stroke-width={sw}
-        stroke-linecap="round"
+        stroke-width="2"
       />
     </svg>
   )
 }
 {
-  type === "ticks" && (
-    <svg class={className} viewBox="0 0 90 60" fill="none" aria-hidden="true">
-      <path
-        d="M4 56 18 6M28 52 38 14M52 50 58 20M74 46 86 18"
-        stroke={color}
-        stroke-width={2.6}
-        stroke-linecap="round"
-      />
+  type === "grid" && (
+    <svg class={className} viewBox="0 0 120 80" fill="none" aria-hidden="true">
+      {[0, 1, 2, 3].map((c) =>
+        [0, 1, 2].map((r) => (
+          <rect
+            x={2 + c * 29.5}
+            y={2 + r * 25.5}
+            width="26"
+            height="22"
+            stroke={color}
+            stroke-width="1.4"
+            opacity={(c + r) % 2 === 0 ? 1 : 0.45}
+          />
+        )),
+      )}
     </svg>
   )
 }
 {
-  type === "arc" && (
-    <svg class={className} viewBox="0 0 140 60" fill="none" aria-hidden="true">
-      <path
-        d="M4 54C22 18 56 2 96 6c16 2 30 8 40 18"
-        stroke={color}
-        stroke-width={sw}
-        stroke-linecap="round"
-      />
-      <path
-        d="M128 12 136 24l-14 3"
-        stroke={color}
-        stroke-width={sw}
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  )
-}
-{
-  type === "spark" && (
-    <svg class={className} viewBox="0 0 80 80" fill="none" aria-hidden="true">
-      <path
-        d="M40 6v18M40 56v18M6 40h18M56 40h18M16 16l13 13M51 51l13 13M64 16 51 29M29 51 16 64"
-        stroke={color}
-        stroke-width={sw}
-        stroke-linecap="round"
-      />
-    </svg>
-  )
-}
-{
-  type === "wave" && (
-    <svg class={className} viewBox="0 0 160 50" fill="none" aria-hidden="true">
-      <path
-        d="M3 34c18-26 36-26 54 0s36 26 54 0 36-26 46-8"
-        stroke={color}
-        stroke-width={sw}
-        stroke-linecap="round"
-      />
+  type === "meter" && (
+    <svg class={className} viewBox="0 0 140 26" fill="none" aria-hidden="true">
+      <path d="M2 25V2M20 25v-9M38 25v-9M56 25v-9M74 25V2M92 25v-9M110 25v-9M128 25v-9M138 25V2"
+        stroke={color} stroke-width="1.6" stroke-linecap="square" />
     </svg>
   )
 }

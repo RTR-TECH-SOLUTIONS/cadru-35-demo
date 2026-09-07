@@ -18,10 +18,10 @@ const { packs } = Astro.props;
     packs.map((pack, i) => (
       <article
         class:list={[
-          "flex flex-col rounded-xl border p-8",
+          "flex flex-col border p-8",
           pack.featured
             ? "border-ink bg-ink text-white on-dark"
-            : "border-black/12 bg-paper",
+            : "border-[var(--rule)] bg-paper",
         ]}
         data-reveal
         style={`--reveal-delay:${i * 80}ms`}

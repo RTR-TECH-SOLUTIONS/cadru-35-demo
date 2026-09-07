@@ -1,5 +1,4 @@
 ---
-import Mark from "../../components/Mark.astro";
 import { url } from "../../lib/url";
 import { Image, getImage } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
@@ -136,6 +135,7 @@ const faq = [
       aria-hidden="true"
       data-hero-video
     >
+      <source src={url("/video/hero.webm")} type="video/webm" />
       <source src={url("/video/hero.mp4")} type="video/mp4" />
     </video>
     <div
@@ -147,7 +147,7 @@ const faq = [
       <div class="max-w-2xl">
         <p class="eyebrow" data-reveal>Serviciul 03</p>
         <h1 class="h-hero mt-5" data-reveal style="--reveal-delay:60ms">
-          Video de <Mark text="eveniment" />
+          Video de eveniment
         </h1>
         <p class="lead mt-7" data-reveal style="--reveal-delay:110ms">
           Trei livrabile, nu unul: teaserul pe care îl pui pe Instagram a doua
@@ -205,8 +205,8 @@ const faq = [
     <div class="wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
       <div class="relative" data-reveal>
         <Ornament
-          type="loop"
-          class="pointer-events-none absolute -left-4 -top-10 h-16 w-24 text-white/30"
+          type="crosshair"
+          class="pointer-events-none absolute -right-4 -top-4 h-12 w-12 text-white/30 md:h-14 md:w-14"
         />
         <Image
           src={pMontaj}
@@ -220,7 +220,7 @@ const faq = [
       <div>
         <p class="eyebrow" data-reveal>Din culise</p>
         <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
-          Sunetul e jumătate din <Mark text="film" />
+          Sunetul e jumătate din film
         </h2>
         <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
           Cele mai multe filme de nuntă cad la sunet, nu la imagine. De aceea

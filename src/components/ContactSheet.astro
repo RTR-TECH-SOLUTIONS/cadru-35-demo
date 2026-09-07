@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import { roll } from "../data/contactsheet";
+import Perfs from "./Perfs.astro";
+
+interface Props {
+  /** câte cadre se arată; implicit rola întreagă */
+  limit?: number;
+  class?: string;
+}
+const { limit, class: className = "" } = Astro.props;
+const frames = limit ? roll.slice(0, limit) : roll;
+---
+
+<div class={`sheet ${className}`}>
+  <Perfs class="text-white/70" />
+
+  <ol class="grid grid-cols-2 gap-x-3 gap-y-6 py-7 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-4">
+    {
+      frames.map((f, i) => (
+        <li
+          class="relative"
+          data-reveal
+          style={`--reveal-delay:${(i % 4) * 70}ms`}
+        >
+          <div class="sheet-frame aspect-[3/2]">
+            <Image
+              src={f.src}
+              alt={f.alt}
+              widths={[240, 400, 640]}
+              sizes="(min-width:1024px) 22vw, (min-width:640px) 30vw, 44vw"
+              loading="lazy"
+            />
+          </div>
+          {f.pick && (
+            <span
+              class="pointer-events-none absolute -inset-[7px] rotate-[-0.7deg] border-2 border-[var(--color-accent-hi)] opacity-90"
+              aria-hidden="true"
+            />
+          )}
+          <span class="rebate mt-2 block">
+            {f.no}
+            {f.pick && <span class="ml-1.5" aria-hidden="true">▸</span>}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <Perfs class="text-white/70" />
+</div>

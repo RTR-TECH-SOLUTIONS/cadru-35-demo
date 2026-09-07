@@ -33,30 +33,70 @@ helperul devine identitate.
 
 - **Astro 7** static (zero JS by default; scripturile de mai jos sunt vanilla, mici)
 - **Tailwind 4** + tokens CSS proprii în `src/styles/global.css`
-- Fonturi self-hosted: **Lora** (titluri) + **Poppins** (body) — aceeași pereche ca în
-  referință
+- Fonturi self-hosted: **Fraunces** (titluri, axa `opsz` activă) + **Archivo** (body)
 - Imagini optimizate la build de `astro:assets` (WebP, dimensiuni multiple)
 
 ## Sistemul de design
 
-Valorile nu sunt alese din burtă, sunt măsurate din referință la 1440px și puse ca atare
-în `src/styles/global.css`:
+Structura secțiunilor (container, ritm, ierarhie) e ancorată în referința pe care a
+aprobat-o clientul. Identitatea vizuală e proprie: alt accent, altă serifă, alt limbaj
+decorativ. Tokenii stau în `src/styles/global.css`.
 
 | | Valoare |
 |---|---|
-| Container | 1320px + 60px gutter |
-| H1 | Lora 400, 72px, lh 1.2, ls -0.027em |
-| H2 | Lora 400, 58px, lh 1.2 |
-| Lead / body | Poppins 22px / 18px, lh 32.4px, `rgba(0,0,0,.7)` |
-| Etichete de secțiune | Poppins 15px, ls 3px, uppercase, roz |
-| Butoane | pill, padding 19/25, border 2px |
-| Fundaluri | alb `#fff`, secundar `#fafafa`, închis `#191919` |
-| Accent | `#ff6bcb` |
-| Secțiuni | 50px sus/jos; hero 225/175 |
+| Container | 1320px + 60px gutter (24px sub 1024) |
+| H1 | Fraunces 400, 70px, lh 1.06, ls -0.022em |
+| H2 | Fraunces 400, 54px, lh 1.1 |
+| Lead / body | Archivo 20px / 17px, lh 32 / 30 |
+| Etichete de secțiune | Archivo 12px 600, ls .18em, uppercase, cu liniuță în față |
+| Butoane | colț 2px, padding 17/26, uppercase 14px ls .08em |
+| Fundaluri | `#fcfbf9`, secundar `#f4f2ee`, închis `#1a1816` |
+| Accent | `#bc420d` (rust de rebate) |
+| Accent pe închis | `#e8853c` |
+| Secțiuni | 58px sus/jos; `section-lg` 96px |
 
-Sublinierea roz de sub ultimul cuvânt e un SVG desenat de mână (`Mark.astro`), nu un
-`border-bottom` — la fel ca în referință. Măștile de imagine (`arch-up`, `arch-down`,
-`arch-left`, `oval`) reproduc exact colajul din hero.
+### Contrastul, verificat
+
+Accentul e ales ca să treacă **AA peste tot**, nu doar ca să arate bine:
+
+| Combinație | Raport |
+|---|---|
+| `#bc420d` pe `#fcfbf9` | 5.18:1 |
+| `#bc420d` pe `#f4f2ee` | 4.79:1 |
+| alb pe `#bc420d` | 5.35:1 |
+| `#e8853c` pe `#1a1816` | 6.62:1 |
+
+Pe fundal închis (header, footer, hero) se folosește **doar** `--color-accent-hi`;
+accentul de bază pică AA acolo (3.31:1).
+
+Verificarea rulează pe toate cele 8 pagini, cu culorile compuse pe canvas ca să prindă și
+notațiile `oklab` pe care Tailwind le emite pentru `text-white/60` și similare.
+
+### Limbajul vizual
+
+Decorul vorbește limba meseriei, nu limba de landing:
+
+- **`Perfs.astro`** — bandă de perforații de film 35 mm, ca separator între secțiuni
+- **`.rebate`** — numerotarea de pe marginea filmului (`30`, `30A`, `31`…), folosită pe
+  cadre, pe listele numerotate și ca etichetă pe imagini
+- **`ContactSheet.astro`** — o rolă întreagă de 12 cadre, cu perforații sus și jos, iar
+  cadrele alese însemnate cu chenar rust, ca selecțiile marcate cu creion de un editor
+- **`Ornament.astro`** — `sprocket`, `crosshair`, `crop`, `grid`, `meter`
+- **`Mark.astro`** — colțare de vizor în jurul unui cuvânt (CSS pur, scalează cu
+  `font-size`). Se folosește de **5 ori pe tot site-ul**, doar unde cuvântul duce ideea
+
+Toate imaginile au colțuri drepte (`.frame`). Un cadru de film nu e rotunjit.
+
+### Gradul de culoare
+
+Toate fotografiile color trec prin **același grad**, aplicat o singură dată cu un script
+Python (curbă de film: umbre ridicate și ușor reci, lumini spre chihlimbar, saturație la
+86%, grain fin, seed fix). De aia setul arată ca o singură zi de lucru, nu ca 40 de poze
+adunate de peste tot.
+
+Cele trei imagini de la Servicii sunt **alb-negru**, pe aceeași curbă, cu filtru galben ca
+la film. Contrastul lor separă secțiunea fără să introducă o culoare care se bate cu
+accentul.
 
 ## Structura
 
@@ -64,6 +104,7 @@ Sublinierea roz de sub ultimul cuvânt e un SVG desenat de mână (`Mark.astro`)
 src/
   data/site.ts        brand, contact, nav, servicii, cifre, testimoniale
   data/portfolio.ts   galeria (imagine + alt + caption + categorie)
+  data/contactsheet.ts rola de 12 cadre, cu numerele de rebate
   components/         Header, Footer, Gallery, ContactForm, PriceCards, Faq, Steps, ...
   pages/
     index.astro                    Acasă
@@ -74,7 +115,8 @@ src/
     servicii/video-eveniment.astro hero cu video, livrabile, proces, pachete, FAQ
     portofoliu.astro               galerie filtrabilă + lightbox
     contact.astro                  formular + date + program
-public/video/hero.mp4              clipul de fundal de pe pagina de video
+public/video/hero.mp4              clipul de fundal (341 KB)
+public/video/hero.webm             același clip, VP9 (330 KB)
 ```
 
 ## Ce funcționează în demo
@@ -112,13 +154,16 @@ structura paginii. Trebuie confirmate cu clientul înainte de orice publicare.
    research de keyworduri RO pe nișă + oraș („fotograf nuntă București", „închiriere studio
    foto București"), maparea unui keyword principal per pagină, JSON-LD `LocalBusiness`,
    `sitemap.xml`, `robots.txt`, Google Business Profile.
-2. **Performanță** — `public/video/hero.mp4` are 1,7 MB necomprimat, pentru că `ffmpeg` de pe
-   mașina asta e stricat (lipsește `libx265`). De comprimat înainte de lansare:
+2. **Performanță** — video-ul e deja comprimat: 1,81 MB → **341 KB** (H.264) plus **330 KB**
+   (VP9), ambele fără pistă audio, cu `faststart`, iar `.webm` e prima sursă în
+   `video-eveniment.astro`. Rămâne de măsurat Lighthouse pe domeniul real.
+
+   Notă pentru mașina asta: `ffmpeg` din Homebrew e rupt, Homebrew a urcat `x265` la 4.3
+   (`libx265.217`) fără să reconstruiască `ffmpeg`, care cere `libx265.216`. Fixul curat e
+   `brew reinstall ffmpeg`. Fără el, merge și așa:
    ```bash
-   ffmpeg -i hero.mp4 -an -c:v libx264 -crf 30 -preset slow -movflags +faststart hero-opt.mp4
-   ffmpeg -i hero.mp4 -an -c:v libvpx-vp9 -crf 38 -b:v 0 hero.webm
+   export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/Cellar/x265/4.2/lib:/opt/homebrew/lib
    ```
-   Apoi adaugă și sursa `.webm` în `video-eveniment.astro`, înaintea celei `.mp4`.
 3. **Pachet legal** — banner cookie/GDPR + Termeni + Politica de confidențialitate +
    Politica de cookies, plus creditul „made by RTR" în footer.
 4. **Editare de către client** (dacă o cere) — Keystatic peste conținutul din `src/data/`,
@@ -126,15 +171,23 @@ structura paginii. Trebuie confirmate cu clientul înainte de orice publicare.
 
 ## Imaginile
 
-Cele 28 de fotografii sunt generate (Higgsfield, model `soul_2`) special pentru demo:
-studio, nuntă, botez, corporate, aniversare, echipament, montaj. Sunt brandless și fără
-oameni recognoscibili, exact ca să poată fi înlocuite una câte una cu materialul clientului.
+Cele **41 de fotografii** sunt generate (Higgsfield, model `soul_2`) special pentru demo:
+studio, nuntă, botez, corporate, aniversare, echipament, plus rola de 12 cadre de pe
+contact sheet. Sunt brandless și fără oameni recognoscibili, exact ca să poată fi înlocuite
+una câte una cu materialul clientului.
 
-**Ce nu am copiat, deliberat:** logo-ul, fotografiile și textele referinței sunt ale lor.
-Aici sunt logo-ul nostru, imagini generate și copy scris de la zero. Banda roz de sub hero
-are la ei logo-urile clienților; la noi are serviciile, ca să nu inventăm branduri care ne
-recomandă.
+Toate trec prin `grade.py`, gradul unitar descris mai sus. Dacă adaugi o imagine nouă,
+treci-o și pe ea prin același script, altfel iese din familie imediat.
 
-Trei imagini au fost regenerate pentru că aveau text inventat vizibil (ecran de monitor,
-ecran de proiecție, cartonaș de masă) — semnul cel mai clar de imagine generată. Dacă mai
-adaugi imagini generate, verifică-le pe toate la mărime mare pentru text.
+**Ce am păstrat din referință și ce nu.** Structura și ritmul secțiunilor: da, ăla i-a
+plăcut clientului. Restul, nu: accentul, serifa, grotescul, decorul, măștile de imagine și
+banda de sub hero sunt toate altele. Logo-ul, fotografiile și textele referinței sunt ale
+lor și rămân ale lor.
+
+Banda de sub hero are la ei logo-urile clienților; la noi are serviciile, ca să nu
+inventăm branduri care ne recomandă.
+
+**Textul inventat în imagini** e semnul cel mai clar de imagine generată. Șase imagini au
+fost regenerate din cauza asta (monitor, ecran de proiecție, cartonaș de masă, exponometru
+cu scală scrisă, capac de obiectiv, bandă de film peste cadru). Dacă mai adaugi imagini
+generate, deschide-le la mărime mare și caută litere.
