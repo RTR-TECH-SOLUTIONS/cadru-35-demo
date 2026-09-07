@@ -27,7 +27,11 @@ const items = [
           {i > 0 && (
             <span class="hidden h-3 w-px bg-ink/30 sm:block" aria-hidden="true" />
           )}
-          <span class="text-[13px] font-semibold uppercase tracking-[0.16em]">
+          <span
+            class="text-[13px] font-semibold uppercase tracking-[0.16em]"
+            data-reveal="in"
+            style={`--reveal-delay:${100 + i * 100}ms`}
+          >
             {item}
           </span>
         </>

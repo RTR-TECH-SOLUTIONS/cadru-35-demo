@@ -33,6 +33,14 @@ const pathname = stripBase(Astro.url.pathname);
     <meta name="theme-color" content="#1a1816" />
     {/* Preview pentru client: nu se indexează. TODO(real): scoate la lansare. */}
     <meta name="robots" content="noindex, nofollow" />
+    {/* Titlurile sparte pe caractere sunt ascunse până le împarte scriptul.
+        Fără JavaScript ar rămâne invizibile, deci le readucem aici. */}
+    <noscript>
+      <style>
+        [data-split] { visibility: visible !important; }
+        [data-reveal] { opacity: 1 !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <a
@@ -48,12 +56,58 @@ const pathname = stripBase(Astro.url.pathname);
     <WhatsappFab phone={site.whatsapp} />
 
     <script>
-      // Reveal la scroll
-      const revealTargets = document.querySelectorAll("[data-reveal]");
-      if (
-        revealTargets.length &&
-        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* --- Titlurile sparte pe caractere -------------------------
+         Se împart doar nodurile de text, deci elementele din interior
+         (bucata cu colțare de vizor, de exemplu) rămân intacte.
+         Cuvântul se ține într-un inline-block cu nowrap, ca literele
+         să nu se rupă la capăt de rând. */
+      function splitChars(root: HTMLElement) {
+        let i = 0;
+        const walk = (node: Node) => {
+          for (const child of [...node.childNodes]) {
+            if (child.nodeType === Node.TEXT_NODE) {
+              const text = child.textContent ?? "";
+              if (!text.trim()) continue;
+              const frag = document.createDocumentFragment();
+              for (const word of text.split(/(\s+)/)) {
+                if (!word) continue;
+                if (/^\s+$/.test(word)) {
+                  frag.appendChild(document.createTextNode(" "));
+                  continue;
+                }
+                const w = document.createElement("span");
+                w.className = "split-w";
+                for (const ch of [...word]) {
+                  const c = document.createElement("span");
+                  c.className = "split-ch";
+                  c.style.setProperty("--i", String(i++));
+                  c.textContent = ch;
+                  w.appendChild(c);
+                }
+                frag.appendChild(w);
+              }
+              child.replaceWith(frag);
+            } else if (child.nodeType === Node.ELEMENT_NODE) {
+              walk(child);
+            }
+          }
+        };
+        walk(root);
+      }
+
+      document.querySelectorAll<HTMLElement>("[data-split]").forEach((el) => {
+        el.setAttribute("aria-label", (el.textContent ?? "").replace(/\s+/g, " ").trim());
+        if (!reduced) splitChars(el);
+        el.style.setProperty("--n", String(el.querySelectorAll(".split-ch").length));
+        el.querySelectorAll("span").forEach((s) => s.setAttribute("aria-hidden", "true"));
+        el.classList.add("is-split");
+      });
+
+      /* --- Intrarea la scroll ----------------------------------- */
+      const revealTargets = document.querySelectorAll("[data-reveal], [data-split]");
+      if (revealTargets.length && !reduced) {
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -68,6 +122,35 @@ const pathname = stripBase(Astro.url.pathname);
         revealTargets.forEach((el) => io.observe(el));
       } else {
         revealTargets.forEach((el) => el.classList.add("is-visible"));
+      }
+
+      /* --- Header smart sticky ----------------------------------
+         Ca în referință: dispare când derulezi în jos, revine imediat
+         ce derulezi în sus. */
+      const header = document.querySelector<HTMLElement>("[data-header]");
+      if (header) {
+        let last = window.scrollY;
+        let ticking = false;
+        const update = () => {
+          const y = window.scrollY;
+          header.classList.toggle("is-scrolled", y > 8);
+          const past = y > header.offsetHeight * 1.5;
+          if (past && y > last + 4) header.classList.add("is-hidden");
+          else if (y < last - 4 || !past) header.classList.remove("is-hidden");
+          last = y;
+          ticking = false;
+        };
+        addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(update);
+            }
+          },
+          { passive: true },
+        );
+        update();
       }
     </script>
   </body>

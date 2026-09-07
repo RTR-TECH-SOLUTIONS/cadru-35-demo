@@ -247,9 +247,9 @@ body {
     line-height: 1;
     text-decoration: none;
     transition:
-      background-color 180ms ease-out,
-      color 180ms ease-out,
-      border-color 180ms ease-out;
+      background-color 0.3s,
+      color 0.3s,
+      border-color 0.3s;
   }
 
   .btn-accent {
@@ -385,19 +385,155 @@ body {
   object-fit: cover;
 }
 
-/* --- Reveal la scroll ------------------------------------------- */
+/* --- Header smart sticky ---------------------------------------
+   Se retrage la scroll în jos și revine la scroll în sus, 0.4s,
+   ca în referință. */
+.site-header {
+  transition:
+    transform 0.4s,
+    box-shadow 0.4s;
+}
+
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* meniul mobil deschis ține header-ul pe ecran */
+.site-header:has([aria-expanded="true"]) {
+  transform: none;
+}
+
+/* --- Animații de intrare ---------------------------------------
+   Vocabularul și cadența sunt măsurate din referință: fadeInUp /
+   fadeIn / fadeInLeft / fadeInRight / fadeInDown, durata 1.9s,
+   easing `ease`, distanța 100% din înălțimea proprie a elementului,
+   iar elementele din aceeași secțiune intră decalat cu 100-300ms.
+   Se aplică pe widget (titlu, paragraf, imagine, buton), nu pe
+   secțiune întreagă — altfel distanța de 100% devine absurdă. */
+@keyframes rv-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rv-down {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rv-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rv-right {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rv-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 [data-reveal] {
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0ms);
 }
 
 [data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
+  animation-name: rv-up;
+  animation-duration: 1.9s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="in"].is-visible {
+  animation-name: rv-in;
+}
+[data-reveal="left"].is-visible {
+  animation-name: rv-left;
+}
+[data-reveal="right"].is-visible {
+  animation-name: rv-right;
+}
+[data-reveal="down"].is-visible {
+  animation-name: rv-down;
+}
+
+/* deplasările laterale pornesc din afara ecranului: secțiunile care
+   le conțin trebuie să taie, altfel apare bară orizontală */
+section {
+  overflow-x: clip;
+}
+
+/* --- Titlu spart pe caractere ----------------------------------
+   Semnătura hero-ului din referință: 15ms decalaj per caracter,
+   1s durată, 200ms întârziere de start. Numele accesibil rămâne
+   pe element (aria-label), bucățile sunt ascunse de screen reader. */
+[data-split] {
+  visibility: hidden;
+}
+
+[data-split].is-split {
+  visibility: visible;
+}
+
+.split-w {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split-ch {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+[data-split].is-split.is-visible .split-ch {
+  animation: rv-up 1s ease both;
+  animation-delay: calc(200ms + var(--i) * 15ms);
+}
+
+/* marcajul se desenează abia după ce s-a așezat ultimul caracter */
+[data-split].is-split .mark::after {
+  opacity: 0;
+}
+
+[data-split].is-split.is-visible .mark::after {
+  animation: rv-in 0.5s ease both;
+  animation-delay: calc(400ms + var(--n, 40) * 15ms);
 }
 
 /* --- Bandă cu derulare continuă --------------------------------- */
@@ -421,10 +557,16 @@ body {
     scroll-behavior: auto;
   }
 
-  [data-reveal] {
+  [data-reveal],
+  [data-reveal].is-visible,
+  .split-ch {
     opacity: 1;
     transform: none;
-    transition: none;
+    animation: none;
+  }
+
+  [data-split] {
+    visibility: visible;
   }
 
   .marquee {

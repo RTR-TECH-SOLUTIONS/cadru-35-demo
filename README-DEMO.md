@@ -94,6 +94,42 @@ tipografie, decor, măștile de imagine și structura secțiunii 6.
 
 Toate imaginile au colțuri drepte (`.frame`). Un cadru de film nu e rotunjit.
 
+### Animațiile
+
+Măsurate din referință (`data-settings` din Elementor + keyframe-urile temei), nu inventate:
+
+| Ce | Cum |
+|---|---|
+| H1 și H2 | text spart pe caractere, decalaj **15ms/caracter**, durată 1s, start la 200ms |
+| Intrare la scroll | `fadeInUp` implicit, plus `in` / `left` / `right` / `down` pe atribut |
+| Durată | **1.9s**, easing `ease` |
+| Distanță | `translate3d(0, 100%, 0)` — o înălțime proprie de element |
+| Decalaje | 100ms pe banda de servicii, 200ms pe subtitluri, 300ms între cardurile de servicii |
+| Header | smart sticky: se retrage la scroll în jos, revine la scroll în sus, 0.4s |
+| Butoane | tranziție 0.3s |
+
+Cum se folosește:
+
+```html
+<h2 data-split>Titlu care se scrie literă cu literă</h2>
+<p data-reveal style="--reveal-delay:200ms">Intră de jos, cu întârziere</p>
+<img data-reveal="left" />       <!-- intră din stânga -->
+```
+
+`data-reveal` fără valoare înseamnă `up`. Delay-ul se dă inline prin `--reveal-delay`.
+
+Animația se aplică pe **widget** (titlu, paragraf, imagine, buton), nu pe secțiune întreagă.
+Referința face la fel, și există un motiv: distanța e `100%` din înălțimea elementului, deci
+pe o secțiune de 1000px ar însemna un glisaj de 1000px.
+
+**Accesibilitate.** Titlul spart primește `aria-label` cu textul întreg, iar bucățile sunt
+`aria-hidden`, deci un screen reader citește propoziția, nu literele. Fără JavaScript,
+titlurile rămân vizibile (`<noscript>` readuce `visibility`). La `prefers-reduced-motion`
+nu se face nici splitul, nici animațiile: totul apare direct la locul lui.
+
+**Overflow.** `left` și `right` pornesc din afara ecranului, deci `section` are
+`overflow-x: clip`. Fără asta ar apărea bară orizontală în timpul animației.
+
 ### Gradul de culoare
 
 Toate fotografiile color trec prin **același grad**, aplicat o singură dată cu un script

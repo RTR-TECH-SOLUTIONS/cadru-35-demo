@@ -23,17 +23,18 @@ const last = markLast ? words.pop() : null;
 const head = words.join(" ");
 ---
 
-<div
-  class:list={[align === "center" ? "text-center" : "", className]}
-  data-reveal
->
-  {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
-  <h2 class="h-section">
+<div class:list={[align === "center" ? "text-center" : "", className]}>
+  {eyebrow && <p class="eyebrow mb-5" data-reveal>{eyebrow}</p>}
+  <h2 class="h-section" data-split>
     {head}{last && <> <Mark text={last} /></>}
   </h2>
   {
     text && (
-      <p class:list={["lead mt-6", align === "center" && "mx-auto max-w-[780px]"]}>
+      <p
+        class:list={["lead mt-6", align === "center" && "mx-auto max-w-[780px]"]}
+        data-reveal
+        style="--reveal-delay:200ms"
+      >
         {text}
       </p>
     )

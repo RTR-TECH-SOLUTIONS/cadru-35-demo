@@ -25,11 +25,13 @@ const {
     type="crosshair"
     class="pointer-events-none absolute right-[7%] bottom-10 hidden h-14 w-14 text-accent/70 xl:block"
   />
-  <div class="wrap text-center" data-reveal>
-    <h2 class="h-section mx-auto max-w-[900px]">
-      {title}
-    </h2>
-    <p class="lead mx-auto mt-7 max-w-[720px]">{text}</p>
-    <a href={url(href)} class="btn btn-accent mt-10">{cta}</a>
+  <div class="wrap text-center">
+    <h2 class="h-section mx-auto max-w-[900px]" data-split>{title}</h2>
+    <p class="lead mx-auto mt-7 max-w-[720px]" data-reveal style="--reveal-delay:200ms">
+      {text}
+    </p>
+    <a href={url(href)} class="btn btn-accent mt-10" data-reveal style="--reveal-delay:400ms">
+      {cta}
+    </a>
   </div>
 </section>

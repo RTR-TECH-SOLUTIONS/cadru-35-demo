@@ -73,7 +73,7 @@ const beneficii = [
       <!-- coloana de text -->
       <div class="wrap-inner max-w-[640px]">
         <p class="rebate mb-7" data-reveal>București · din 2016</p>
-        <h1 class="h-hero" data-reveal style="--reveal-delay:60ms">
+        <h1 class="h-hero" data-split>
           Fiecare eveniment are 35 de cadre care <Mark text="contează" />.
         </h1>
         <p class="lead mt-8" data-reveal style="--reveal-delay:120ms">
@@ -95,7 +95,7 @@ const beneficii = [
       </div>
 
       <!-- colajul: trei cadre drepte, cu numerele de pe rolă -->
-      <div class="relative">
+      <div class="relative" data-reveal style="--reveal-delay:300ms">
         <Ornament
           type="crop"
           class="pointer-events-none absolute -right-4 -top-7 z-10 hidden h-11 w-11 text-white/40 lg:block"
@@ -175,7 +175,7 @@ const beneficii = [
         type="sprocket"
         class="mx-auto mb-10 h-8 w-[250px] text-accent/75"
       />
-      <h2 class="h-section mx-auto max-w-[880px]" data-reveal>
+      <h2 class="h-section mx-auto max-w-[880px]" data-split>
         De ce „Cadru 35”?
       </h2>
       <p class="lead mx-auto mt-7 max-w-[720px]" data-reveal style="--reveal-delay:80ms">
@@ -198,7 +198,7 @@ const beneficii = [
           sizes="(min-width:1024px) 56vw, 100vw"
           class="aspect-[3/2] w-full object-cover"
           loading="lazy"
-          data-reveal
+          data-reveal="left"
         />
       </div>
 
@@ -247,7 +247,7 @@ const beneficii = [
       <div class="mt-16 grid gap-x-8 gap-y-14 md:grid-cols-3">
         {
           serviceCards.map((service, i) => (
-            <article data-reveal style={`--reveal-delay:${i * 100}ms`}>
+            <article data-reveal style={`--reveal-delay:${100 + i * 300}ms`}>
               <a href={url(service.href)} class="group block">
                 <figure class="frame relative">
                   <Image
