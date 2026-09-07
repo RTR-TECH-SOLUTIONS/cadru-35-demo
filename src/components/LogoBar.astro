@@ -15,17 +15,17 @@ const items = [
 ];
 ---
 
-<section class="bg-accent text-white">
+<section class="bg-accent text-ink">
   <div class="wrap flex flex-wrap items-center gap-x-7 gap-y-2 py-3.5">
     <span
-      class="rebate shrink-0 border border-white/45 px-2 py-1 !text-white"
+      class="rebate shrink-0 border border-ink/35 px-2 py-1 !text-ink"
       aria-hidden="true">35 mm</span
     >
     {
       items.map((item, i) => (
         <>
           {i > 0 && (
-            <span class="hidden h-3 w-px bg-white/35 sm:block" aria-hidden="true" />
+            <span class="hidden h-3 w-px bg-ink/30 sm:block" aria-hidden="true" />
           )}
           <span class="text-[13px] font-semibold uppercase tracking-[0.16em]">
             {item}

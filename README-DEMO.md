@@ -50,24 +50,28 @@ decorativ. Tokenii stau în `src/styles/global.css`.
 | Lead / body | Archivo 20px / 17px, lh 32 / 30 |
 | Etichete de secțiune | Archivo 12px 600, ls .18em, uppercase, cu liniuță în față |
 | Butoane | colț 2px, padding 17/26, uppercase 14px ls .08em |
-| Fundaluri | `#fcfbf9`, secundar `#f4f2ee`, închis `#1a1816` |
-| Accent | `#bc420d` (rust de rebate) |
-| Accent pe închis | `#e8853c` |
+| Fundaluri | `#ffffff`, secundar `#fafafa`, închis `#191919` |
+| Accent | `#ff6bcb` — rozul din referință |
+| Accent pentru text pe deschis | `#c4348f` |
 | Secțiuni | 58px sus/jos; `section-lg` 96px |
 
 ### Contrastul, verificat
 
-Accentul e ales ca să treacă **AA peste tot**, nu doar ca să arate bine:
+Rozul e cel din referință, dar acolo e folosit și unde pică AA. Aici e împărțit în două
+roluri, ca să treacă peste tot:
 
-| Combinație | Raport |
-|---|---|
-| `#bc420d` pe `#fcfbf9` | 5.18:1 |
-| `#bc420d` pe `#f4f2ee` | 4.79:1 |
-| alb pe `#bc420d` | 5.35:1 |
-| `#e8853c` pe `#1a1816` | 6.62:1 |
+| Combinație | Raport | |
+|---|---|---|
+| `#ff6bcb` pe `#191919` | 6.88:1 | text și borduri pe fundal închis |
+| `#191919` pe `#ff6bcb` | 6.88:1 | text pe umplere roz (bandă, butoane) |
+| `#c4348f` pe `#ffffff` | 4.96:1 | text mic pe fundal deschis |
+| `#c4348f` pe `#fafafa` | 4.75:1 | idem, pe secțiunile alternate |
+| ~~`#ff6bcb` pe alb~~ | ~~2.56:1~~ | **pică**, nu se folosește pentru text |
+| ~~alb pe `#ff6bcb`~~ | ~~2.56:1~~ | **pică**, de aia banda roz are text închis |
 
-Pe fundal închis (header, footer, hero) se folosește **doar** `--color-accent-hi`;
-accentul de bază pică AA acolo (3.31:1).
+Regula: **rozul plin nu apare niciodată ca text pe fundal deschis.** Acolo intră
+`--color-accent-ink`. Ca umplere, bordură sau ornament pur decorativ (`aria-hidden`), rozul
+plin se folosește liber.
 
 Verificarea rulează pe toate cele 8 pagini, cu culorile compuse pe canvas ca să prindă și
 notațiile `oklab` pe care Tailwind le emite pentru `text-white/60` și similare.
@@ -85,6 +89,9 @@ Decorul vorbește limba meseriei, nu limba de landing:
 - **`Mark.astro`** — colțare de vizor în jurul unui cuvânt (CSS pur, scalează cu
   `font-size`). Se folosește de **5 ori pe tot site-ul**, doar unde cuvântul duce ideea
 
+Paleta e a lor pentru că asta i-a plăcut clientului. Diferența față de referință stă în
+tipografie, decor, măștile de imagine și structura secțiunii 6.
+
 Toate imaginile au colțuri drepte (`.frame`). Un cadru de film nu e rotunjit.
 
 ### Gradul de culoare
@@ -95,8 +102,7 @@ Python (curbă de film: umbre ridicate și ușor reci, lumini spre chihlimbar, s
 adunate de peste tot.
 
 Cele trei imagini de la Servicii sunt **alb-negru**, pe aceeași curbă, cu filtru galben ca
-la film. Contrastul lor separă secțiunea fără să introducă o culoare care se bate cu
-accentul.
+la film. Alb-negru plus roz e cea mai curată pereche pe care o putea primi secțiunea aia.
 
 ## Structura
 
@@ -179,10 +185,10 @@ una câte una cu materialul clientului.
 Toate trec prin `grade.py`, gradul unitar descris mai sus. Dacă adaugi o imagine nouă,
 treci-o și pe ea prin același script, altfel iese din familie imediat.
 
-**Ce am păstrat din referință și ce nu.** Structura și ritmul secțiunilor: da, ăla i-a
-plăcut clientului. Restul, nu: accentul, serifa, grotescul, decorul, măștile de imagine și
-banda de sub hero sunt toate altele. Logo-ul, fotografiile și textele referinței sunt ale
-lor și rămân ale lor.
+**Ce am păstrat din referință și ce nu.** Structura, ritmul secțiunilor și paleta: da,
+alea i-au plăcut clientului, iar o culoare nu e a nimănui. Restul, nu: serifa, grotescul,
+decorul, măștile de imagine, forma butoanelor și secțiunea 6 sunt toate altele. Logo-ul,
+fotografiile și textele referinței sunt ale lor și rămân ale lor.
 
 Banda de sub hero are la ei logo-urile clienților; la noi are serviciile, ca să nu
 inventăm branduri care ne recomandă.

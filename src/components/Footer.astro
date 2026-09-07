@@ -20,14 +20,14 @@ const year = new Date().getFullYear();
       <h2 class="eyebrow">Contact</h2>
       <ul class="mt-6 space-y-3 text-[0.98rem] text-white/80">
         <li>
-          <a href={site.phoneHref} class="transition-colors hover:text-[var(--color-accent-hi)]"
+          <a href={site.phoneHref} class="transition-colors hover:text-[var(--color-accent)]"
             >{site.phone}</a
           >
         </li>
         <li>
           <a
             href={`mailto:${site.email}`}
-            class="transition-colors hover:text-[var(--color-accent-hi)]">{site.email}</a
+            class="transition-colors hover:text-[var(--color-accent)]">{site.email}</a
           >
         </li>
         <li class="text-white/60">{site.address}</li>
@@ -40,19 +40,19 @@ const year = new Date().getFullYear();
         {
           services.map((s) => (
             <li>
-              <a href={url(s.href)} class="transition-colors hover:text-[var(--color-accent-hi)]">
+              <a href={url(s.href)} class="transition-colors hover:text-[var(--color-accent)]">
                 {s.title}
               </a>
             </li>
           ))
         }
         <li>
-          <a href={url("/portofoliu")} class="transition-colors hover:text-[var(--color-accent-hi)]"
+          <a href={url("/portofoliu")} class="transition-colors hover:text-[var(--color-accent)]"
             >Portofoliu</a
           >
         </li>
         <li>
-          <a href={url("/despre-noi")} class="transition-colors hover:text-[var(--color-accent-hi)]"
+          <a href={url("/despre-noi")} class="transition-colors hover:text-[var(--color-accent)]"
             >Despre noi</a
           >
         </li>

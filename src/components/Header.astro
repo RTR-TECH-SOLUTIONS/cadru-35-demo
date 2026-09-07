@@ -32,8 +32,8 @@ const isActive = (href: string) =>
                 class:list={[
                   "inline-flex items-center py-2 text-[16px] font-medium transition-colors duration-200",
                   isActive(item.href)
-                    ? "text-[var(--color-accent-hi)]"
-                    : "text-white hover:text-[var(--color-accent-hi)]",
+                    ? "text-[var(--color-accent)]"
+                    : "text-white hover:text-[var(--color-accent)]",
                 ]}
               >
                 {item.label}
@@ -86,7 +86,7 @@ const isActive = (href: string) =>
               href={url(item.href)}
               class:list={[
                 "block py-4 text-[30px]",
-                isActive(item.href) ? "text-[var(--color-accent-hi)]" : "text-white",
+                isActive(item.href) ? "text-[var(--color-accent)]" : "text-white",
               ]}
               style="font-family: var(--font-display); line-height:1.25"
             >
