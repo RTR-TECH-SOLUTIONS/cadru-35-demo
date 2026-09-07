@@ -1,11 +1,12 @@
 ---
+import Mark from "../components/Mark.astro";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import SectionHead from "../components/SectionHead.astro";
 import Stats from "../components/Stats.astro";
 import Testimonials from "../components/Testimonials.astro";
 import CtaBand from "../components/CtaBand.astro";
-import Squiggle from "../components/Squiggle.astro";
+import Ornament from "../components/Ornament.astro";
 
 import echipa from "../assets/img/echipa.jpg";
 import film35 from "../assets/img/film-35mm.jpg";
@@ -63,10 +64,8 @@ const valori = [
     <div class="wrap grid items-center gap-12 py-16 lg:grid-cols-[1fr_0.85fr] lg:gap-16 lg:py-24">
       <div>
         <p class="eyebrow" data-reveal>Despre noi</p>
-        <h1 class="h-display mt-5" data-reveal style="--reveal-delay:60ms">
-          Trei oameni, un studio și multe <span class="underline-accent"
-            >sâmbete</span
-          > ocupate
+        <h1 class="h-hero mt-5" data-reveal style="--reveal-delay:60ms">
+          Trei oameni, un studio și multe <Mark text="sâmbete" /> ocupate
         </h1>
         <p class="lead mt-7 max-w-xl" data-reveal style="--reveal-delay:110ms">
           Am început în 2014, cu un aparat pe film și nunți de weekend prin
@@ -75,11 +74,11 @@ const valori = [
         </p>
       </div>
       <div class="relative" data-reveal style="--reveal-delay:120ms">
-        <Squiggle
+        <Ornament
           type="ticks"
           class="pointer-events-none absolute -left-3 -top-8 h-12 w-16 text-white/40 md:h-16 md:w-24"
         />
-        <div class="mask-arch">
+        <div class="arch-up">
           <Image
             src={echipa}
             alt="Doi fotografi verificând împreună ecranul unui aparat în studio"
@@ -99,7 +98,7 @@ const valori = [
   <section class="section">
     <div class="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
       <div data-reveal>
-        <div class="mask-circle mx-auto w-full max-w-[380px]">
+        <div class="oval mx-auto w-full max-w-[380px]">
           <Image
             src={film35}
             alt="Rolă de film de 35 mm și un aparat foto vechi pe hârtie crem"
@@ -113,7 +112,7 @@ const valori = [
       <div>
         <p class="eyebrow" data-reveal>Povestea numelui</p>
         <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
-          De ce „Cadru <span class="underline-accent">35</span>”
+          De ce „Cadru <Mark text="35" />”
         </h2>
         <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
           O rolă de film de 35 mm are 36 de cadre. În practică, primul se pierde
@@ -131,7 +130,7 @@ const valori = [
   </section>
 
   <!-- Echipa -->
-  <section class="section-tight bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Echipa"
@@ -143,20 +142,20 @@ const valori = [
         {
           oameni.map((p, i) => (
             <article
-              class="rounded-xl border border-line bg-cream p-8"
+              class="bg-paper-alt p-9"
               data-reveal
               style={`--reveal-delay:${i * 90}ms`}
             >
-              <h3 class="font-display text-[1.7rem] leading-none">{p.name}</h3>
+              <h3 class="serif text-[1.7rem] leading-none">{p.name}</h3>
               <p class="eyebrow mt-3">{p.role}</p>
-              <p class="mt-5 text-[0.96rem] leading-relaxed text-muted">
+              <p class="mt-5 body-18">
                 {p.text}
               </p>
             </article>
           ))
         }
       </div>
-      <p class="mt-8 text-center text-[0.86rem] text-muted">
+      <p class="mt-8 text-center text-[16px] text-[var(--text-body)]">
         {/* TODO(real): portrete reale ale echipei, făcute în studio */}
         Portretele echipei le adăugăm după ședința din studio.
       </p>
@@ -169,9 +168,7 @@ const valori = [
       <div class="mx-auto max-w-3xl text-center" data-reveal>
         <p class="eyebrow">Cum lucrăm</p>
         <h2 class="h-section mt-4">
-          Patru lucruri pe care le spunem din <span class="underline-accent"
-            >prima</span
-          >
+          Patru lucruri pe care le spunem din <Mark text="prima" />
         </h2>
       </div>
       <div class="mt-14 grid gap-x-14 gap-y-12 md:grid-cols-2">
@@ -182,7 +179,7 @@ const valori = [
               data-reveal
               style={`--reveal-delay:${i * 80}ms`}
             >
-              <p class="font-display text-[2rem] leading-none text-accent">
+              <p class="serif text-[2rem] leading-none text-accent">
                 {String(i + 1).padStart(2, "0")}
               </p>
               <h3 class="h-sub mt-4">{v.title}</h3>
@@ -202,7 +199,7 @@ const valori = [
         alt="Interiorul studioului cu ciclorama albă și echipament pe stative"
         widths={[420, 760, 1040]}
         sizes="(min-width:768px) 46vw, 92vw"
-        class="aspect-[4/3] w-full rounded-xl object-cover"
+        class="aspect-[4/3] w-full object-cover"
         loading="lazy"
       />
       <Image
@@ -210,7 +207,7 @@ const valori = [
         alt="Aparate foto, obiective și exponometru așezate pe un birou închis la culoare"
         widths={[420, 760, 1040]}
         sizes="(min-width:768px) 46vw, 92vw"
-        class="aspect-[4/3] w-full rounded-xl object-cover"
+        class="aspect-[4/3] w-full object-cover"
         loading="lazy"
       />
     </div>

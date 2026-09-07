@@ -3,7 +3,7 @@ import SectionHead from "./SectionHead.astro";
 import { testimonials } from "../data/site";
 ---
 
-<section class="section bg-cream-deep/40">
+<section class="section bg-paper-alt">
   <div class="wrap">
     <SectionHead
       eyebrow="Ce spun oamenii"
@@ -14,12 +14,12 @@ import { testimonials } from "../data/site";
       {
         testimonials.map((t, i) => (
           <blockquote
-            class="flex h-full flex-col justify-between rounded-xl border border-line bg-cream p-7"
+            class="flex h-full flex-col justify-between bg-paper-alt p-9"
             data-reveal
             style={`--reveal-delay:${i * 90}ms`}
           >
-            <p class="font-display text-[1.18rem] leading-[1.6]">„{t.quote}”</p>
-            <footer class="mt-7 text-[0.85rem] text-muted">
+            <p class="serif text-[1.18rem] leading-[1.6]">„{t.quote}”</p>
+            <footer class="mt-7 text-[16px] text-[var(--text-body)]">
               <span class="font-medium text-ink">{t.author}</span>
               <span class="mx-2 text-line">/</span>
               {t.context}

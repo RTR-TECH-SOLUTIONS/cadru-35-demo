@@ -1,0 +1,27 @@
+---
+/**
+ * Banda roz de sub hero. În referință sunt logo-urile clienților; aici punem
+ * serviciile, ca să nu inventăm branduri care ne-ar recomanda.
+ * TODO(real): înlocuiește cu logo-urile clienților reali, cu acordul lor.
+ */
+const items = [
+  "Foto studio",
+  "Nuntă",
+  "Botez",
+  "Video de eveniment",
+  "Corporate",
+  "Portret",
+];
+---
+
+<section class="bg-accent">
+  <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-4">
+    {
+      items.map((item) => (
+        <span class="text-[15px] font-medium uppercase tracking-[3px] text-white/90">
+          {item}
+        </span>
+      ))
+    }
+  </div>
+</section>

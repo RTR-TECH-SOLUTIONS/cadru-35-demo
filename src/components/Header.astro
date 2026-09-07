@@ -5,7 +5,6 @@ import { nav } from "../data/site";
 
 interface Props {
   pathname: string;
-  darkTop?: boolean;
 }
 const { pathname } = Astro.props;
 
@@ -14,7 +13,7 @@ const isActive = (href: string) =>
 ---
 
 <header
-  class="fixed inset-x-0 top-0 z-50 bg-ink/95 backdrop-blur-sm"
+  class="fixed inset-x-0 top-0 z-50 bg-ink"
   style="height: var(--header-h)"
 >
   <div class="wrap flex h-full items-center justify-between gap-6">
@@ -23,7 +22,7 @@ const isActive = (href: string) =>
     </a>
 
     <nav aria-label="Navigare principală" class="hidden lg:block">
-      <ul class="flex items-center gap-8">
+      <ul class="flex items-center gap-9">
         {
           nav.map((item) => (
             <li>
@@ -31,15 +30,13 @@ const isActive = (href: string) =>
                 href={url(item.href)}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 class:list={[
-                  "relative inline-flex items-center gap-2 py-2 text-[0.94rem] transition-colors duration-200",
-                  isActive(item.href)
-                    ? "text-accent"
-                    : "text-white/85 hover:text-white",
+                  "inline-flex items-center gap-2 py-2 text-[16px] font-medium transition-colors duration-200",
+                  isActive(item.href) ? "text-accent" : "text-white hover:text-accent",
                 ]}
               >
                 {item.label}
                 {item.hot && (
-                  <span class="rounded-full bg-accent/15 px-2 py-[3px] text-[0.6rem] font-semibold tracking-[0.14em] text-accent">
+                  <span class="rounded-[4px] bg-white/12 px-2 py-[2px] text-[11px] font-semibold tracking-[0.08em] text-accent">
                     NOU
                   </span>
                 )}
@@ -50,7 +47,7 @@ const isActive = (href: string) =>
       </ul>
     </nav>
 
-    <a href={url("/contact")} class="btn btn-outline hidden shrink-0 lg:inline-flex">
+    <a href={url("/contact")} class="btn btn-accent hidden shrink-0 lg:inline-flex">
       Cere o ofertă
     </a>
 
@@ -78,7 +75,6 @@ const isActive = (href: string) =>
   </div>
 </header>
 
-<!-- Panou mobil -->
 <div
   id="nav-mobile"
   class="fixed inset-0 z-40 hidden bg-ink text-white lg:hidden"
@@ -92,9 +88,10 @@ const isActive = (href: string) =>
             <a
               href={url(item.href)}
               class:list={[
-                "block py-4 font-display text-[1.9rem]",
+                "block py-4 text-[30px]",
                 isActive(item.href) ? "text-accent" : "text-white",
               ]}
+              style="font-family: var(--font-display); line-height:1.25"
             >
               {item.label}
             </a>
@@ -102,7 +99,7 @@ const isActive = (href: string) =>
         ))
       }
     </ul>
-    <a href={url("/contact")} class="btn btn-outline mt-8 self-start">Cere o ofertă</a>
+    <a href={url("/contact")} class="btn btn-accent mt-8 self-start">Cere o ofertă</a>
   </nav>
 </div>
 

@@ -21,27 +21,27 @@ const { packs } = Astro.props;
           "flex flex-col rounded-xl border p-8",
           pack.featured
             ? "border-ink bg-ink text-white on-dark"
-            : "border-line bg-cream",
+            : "border-black/12 bg-paper",
         ]}
         data-reveal
         style={`--reveal-delay:${i * 80}ms`}
       >
-        <h3 class="font-display text-[1.6rem] leading-tight">{pack.name}</h3>
+        <h3 class="serif text-[1.6rem] leading-tight">{pack.name}</h3>
         <p
           class:list={[
             "mt-2 text-[0.85rem]",
-            pack.featured ? "text-white/55" : "text-muted",
+            pack.featured ? "text-white/55" : "text-[var(--text-body)]",
           ]}
         >
           {pack.meta}
         </p>
-        <p class="mt-6 font-display text-[2.1rem] leading-none text-accent">
+        <p class="mt-6 serif text-[2.1rem] leading-none text-accent">
           {pack.price}
         </p>
         <ul
           class:list={[
-            "mt-7 mb-8 space-y-3 text-[0.94rem]",
-            pack.featured ? "text-white/80" : "text-muted",
+            "mt-7 mb-8 space-y-3 text-[17px]",
+            pack.featured ? "text-white/80" : "text-[var(--text-body)]",
           ]}
         >
           {pack.includes.map((line) => (
@@ -64,7 +64,7 @@ const { packs } = Astro.props;
           href={url("/contact")}
           class:list={[
             "btn mt-auto self-start pt-[0.95rem]",
-            pack.featured ? "btn-outline" : "btn-ghost-dark",
+            pack.featured ? "btn-accent" : "btn-ink",
           ]}
         >
           Verifică disponibilitatea

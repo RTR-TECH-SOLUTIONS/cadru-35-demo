@@ -1,0 +1,27 @@
+---
+/** Bandă orizontală care se derulează continuu, ca în referință. */
+const claims = [
+  "600 de fotografii alese, nu 3000 de duplicate",
+  "Livrare în 21 de zile, scris în contract",
+  "Doi fotografi la nunțile mari",
+  "Studio propriu de 80 mp în București",
+  "Sunet înregistrat separat, cu lavaliere",
+  "Backup dublu al cardurilor, în aceeași seară",
+];
+const loop = [...claims, ...claims];
+---
+
+<section class="overflow-hidden border-y border-black/10 py-6">
+  <div class="marquee">
+    {
+      loop.map((c) => (
+        <span class="flex shrink-0 items-center gap-6 whitespace-nowrap pr-10 text-[18px] text-[var(--text-body)]">
+          {c}
+          <span class="text-accent" aria-hidden="true">
+            ✳
+          </span>
+        </span>
+      ))
+    }
+  </div>
+</section>

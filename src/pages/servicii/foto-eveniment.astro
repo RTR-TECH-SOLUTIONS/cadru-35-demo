@@ -140,12 +140,12 @@ const faq = [
         {
           tipuri.map((t, i) => (
             <article
-              class="rounded-xl border border-line bg-cream p-8"
+              class="bg-paper-alt p-9"
               data-reveal
               style={`--reveal-delay:${i * 70}ms`}
             >
-              <h3 class="h-sub">{t.title}</h3>
-              <p class="mt-4 text-[0.96rem] leading-relaxed text-muted">
+              <h3 class="text-[20px] font-medium leading-[28px] tracking-[-0.027em]">{t.title}</h3>
+              <p class="mt-4 body-18">
                 {t.text}
               </p>
             </article>
@@ -156,7 +156,7 @@ const faq = [
   </section>
 
   <!-- Cum lucrăm -->
-  <section class="section-tight bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Cum lucrăm"
@@ -180,8 +180,8 @@ const faq = [
     />
     <div class="absolute inset-0 bg-ink/45"></div>
     <div class="absolute inset-0 flex items-center">
-      <div class="wrap-narrow text-center">
-        <p class="font-display text-[1.5rem] leading-snug text-white md:text-[2.1rem]">
+      <div class="wrap-tight text-center">
+        <p class="serif text-[1.5rem] leading-snug text-white md:text-[2.1rem]">
           „Cea mai bună fotografie de la nuntă e aproape mereu una pe care nimeni
           nu a cerut-o.”
         </p>
@@ -198,7 +198,7 @@ const faq = [
   </section>
 
   <!-- Pachete -->
-  <section class="section bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Pachete"

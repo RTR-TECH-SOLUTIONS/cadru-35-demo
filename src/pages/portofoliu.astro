@@ -1,8 +1,9 @@
 ---
+import Mark from "../components/Mark.astro";
 import Layout from "../layouts/Layout.astro";
 import Gallery from "../components/Gallery.astro";
 import CtaBand from "../components/CtaBand.astro";
-import Squiggle from "../components/Squiggle.astro";
+import Ornament from "../components/Ornament.astro";
 ---
 
 <Layout
@@ -13,14 +14,14 @@ import Squiggle from "../components/Squiggle.astro";
     class="on-dark relative overflow-hidden bg-ink text-white"
     style="padding-top: var(--header-h)"
   >
-    <Squiggle
+    <Ornament
       type="ticks"
       class="pointer-events-none absolute right-8 top-24 h-16 w-24 text-white/25 md:h-20 md:w-32"
     />
-    <div class="wrap-narrow py-16 text-center md:py-24">
+    <div class="wrap-tight py-16 text-center md:py-24">
       <p class="eyebrow" data-reveal>Portofoliu</p>
-      <h1 class="h-display mt-5" data-reveal style="--reveal-delay:60ms">
-        Cadre, nu <span class="underline-accent">arhive</span>
+      <h1 class="h-hero mt-5" data-reveal style="--reveal-delay:60ms">
+        Cadre, nu <Mark text="arhive" />
       </h1>
       <p class="lead mx-auto mt-7 max-w-2xl" data-reveal style="--reveal-delay:110ms">
         O selecție din ce am livrat în ultimele luni: ședințe în studio, nunți,

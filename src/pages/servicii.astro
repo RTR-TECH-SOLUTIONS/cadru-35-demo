@@ -6,7 +6,7 @@ import PageHero from "../components/PageHero.astro";
 import SectionHead from "../components/SectionHead.astro";
 import PriceCards from "../components/PriceCards.astro";
 import CtaBand from "../components/CtaBand.astro";
-import Squiggle from "../components/Squiggle.astro";
+import Ornament from "../components/Ornament.astro";
 
 import hdStudio from "../assets/img/hd-foto-studio.jpg";
 import svcStudio from "../assets/img/svc-studio.jpg";
@@ -125,7 +125,7 @@ const pachete = [
           >
             <div class="relative" data-reveal>
               {i === 0 && (
-                <Squiggle
+                <Ornament
                   type="ticks"
                   class="pointer-events-none absolute -left-3 -top-7 h-12 w-16 text-ink/25 md:h-16 md:w-24"
                 />
@@ -135,7 +135,7 @@ const pachete = [
                 alt={s.alt}
                 widths={[420, 760, 1040]}
                 sizes="(min-width:1024px) 46vw, 92vw"
-                class="aspect-[4/5] w-full rounded-xl object-cover lg:aspect-[4/4.4]"
+                class="aspect-[4/5] w-full object-cover lg:aspect-[4/4.4]"
                 loading={i === 0 ? "eager" : "lazy"}
               />
             </div>
@@ -154,7 +154,7 @@ const pachete = [
               <ul class="mt-8 space-y-3.5">
                 {s.bullets.map((b, j) => (
                   <li
-                    class="flex gap-3.5 text-[0.99rem]"
+                    class="flex gap-3.5 text-[18px]"
                     data-reveal
                     style={`--reveal-delay:${140 + j * 50}ms`}
                   >
@@ -177,7 +177,7 @@ const pachete = [
                 ))}
               </ul>
 
-              <a href={url(s.href)} class="btn btn-ghost-dark mt-9" data-reveal>
+              <a href={url(s.href)} class="btn btn-ink mt-9" data-reveal>
                 Detalii și tarife
                 <svg
                   viewBox="0 0 20 20"
@@ -202,7 +202,7 @@ const pachete = [
   </section>
 
   <!-- Pachete -->
-  <section class="section bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Pachete"
@@ -211,7 +211,7 @@ const pachete = [
         class="mb-14"
       />
       <PriceCards packs={pachete} />
-      <p class="mt-10 text-center text-[0.9rem] text-muted">
+      <p class="mt-10 text-center text-[16px] text-[var(--text-body)]">
         Prețurile includ TVA. Deplasarea în afara Bucureștiului se tarifează
         separat, 2 lei/km.
       </p>

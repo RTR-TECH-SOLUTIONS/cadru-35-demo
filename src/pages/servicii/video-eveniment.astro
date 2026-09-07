@@ -1,4 +1,5 @@
 ---
+import Mark from "../../components/Mark.astro";
 import { url } from "../../lib/url";
 import { Image, getImage } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
@@ -8,7 +9,7 @@ import PriceCards from "../../components/PriceCards.astro";
 import Faq from "../../components/Faq.astro";
 import Gallery from "../../components/Gallery.astro";
 import CtaBand from "../../components/CtaBand.astro";
-import Squiggle from "../../components/Squiggle.astro";
+import Ornament from "../../components/Ornament.astro";
 
 import hdVideo from "../../assets/img/hd-video-eveniment.jpg";
 import pMontaj from "../../assets/img/p-montaj.jpg";
@@ -145,8 +146,8 @@ const faq = [
     <div class="wrap py-20 md:py-28 lg:py-36">
       <div class="max-w-2xl">
         <p class="eyebrow" data-reveal>Serviciul 03</p>
-        <h1 class="h-display mt-5" data-reveal style="--reveal-delay:60ms">
-          Video de <span class="underline-accent">eveniment</span>
+        <h1 class="h-hero mt-5" data-reveal style="--reveal-delay:60ms">
+          Video de <Mark text="eveniment" />
         </h1>
         <p class="lead mt-7" data-reveal style="--reveal-delay:110ms">
           Trei livrabile, nu unul: teaserul pe care îl pui pe Instagram a doua
@@ -158,7 +159,7 @@ const faq = [
           data-reveal
           style="--reveal-delay:160ms"
         >
-          <a href={url("/contact")} class="btn btn-outline">Cere o ofertă</a>
+          <a href={url("/contact")} class="btn btn-accent">Cere o ofertă</a>
           <a
             href="#livrabile"
             class="btn border-white/25 text-white hover:border-white hover:bg-white hover:text-ink"
@@ -179,17 +180,17 @@ const faq = [
         text="Fiecare are alt rol. Teaserul e pentru ceilalți, filmul integral e pentru voi peste zece ani."
         class="mb-14"
       />
-      <div class="grid gap-px overflow-hidden rounded-xl bg-line md:grid-cols-2">
+      <div class="grid gap-px bg-black/12 md:grid-cols-2">
         {
           livrabile.map((l, i) => (
             <article
-              class="bg-cream p-8 md:p-10"
+              class="bg-paper p-8 md:p-10"
               data-reveal
               style={`--reveal-delay:${i * 80}ms`}
             >
               <p class="eyebrow">{l.meta}</p>
               <h3 class="h-sub mt-4">{l.title}</h3>
-              <p class="mt-4 text-[0.98rem] leading-relaxed text-muted">
+              <p class="mt-4 body-18">
                 {l.text}
               </p>
             </article>
@@ -203,7 +204,7 @@ const faq = [
   <section class="on-dark bg-ink text-white">
     <div class="wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
       <div class="relative" data-reveal>
-        <Squiggle
+        <Ornament
           type="loop"
           class="pointer-events-none absolute -left-4 -top-10 h-16 w-24 text-white/30"
         />
@@ -212,14 +213,14 @@ const faq = [
           alt="Cameră de montaj noaptea, două monitoare cu linia de timp"
           widths={[420, 760, 1040]}
           sizes="(min-width:1024px) 46vw, 92vw"
-          class="aspect-[16/10] w-full rounded-xl object-cover"
+          class="aspect-[16/10] w-full object-cover"
           loading="lazy"
         />
       </div>
       <div>
         <p class="eyebrow" data-reveal>Din culise</p>
         <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
-          Sunetul e jumătate din <span class="underline-accent">film</span>
+          Sunetul e jumătate din <Mark text="film" />
         </h2>
         <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
           Cele mai multe filme de nuntă cad la sunet, nu la imagine. De aceea
@@ -234,7 +235,7 @@ const faq = [
   </section>
 
   <!-- Pași -->
-  <section class="section-tight bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Cum lucrăm"
@@ -250,7 +251,7 @@ const faq = [
     <div class="wrap">
       <SectionHead eyebrow="Cadre" title="Din filmările noastre" class="mb-12" />
       <Gallery filters={false} only="video" />
-      <p class="mt-8 text-center text-[0.9rem] text-muted">
+      <p class="mt-8 text-center text-[16px] text-[var(--text-body)]">
         {/* TODO(real): înlocuiește cu filmele reale ale clientului (Vimeo/YouTube embed) */}
         Filmele complete le trimitem la cerere, ca link privat.
       </p>
@@ -258,7 +259,7 @@ const faq = [
   </section>
 
   <!-- Pachete -->
-  <section class="section bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Pachete"

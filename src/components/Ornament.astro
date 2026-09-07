@@ -1,12 +1,12 @@
 ---
-/** Accente desenate de mână, ca în referință (decorative) */
+/** Ornamente desenate de mână, ca în referință. Pur decorative. */
 interface Props {
-  type?: "loop" | "ticks" | "arc";
+  type: "loop" | "ticks" | "arc" | "spark" | "wave";
   class?: string;
   color?: string;
 }
-const { type = "loop", class: className = "", color = "currentColor" } =
-  Astro.props;
+const { type, class: className = "", color = "currentColor" } = Astro.props;
+const sw = 2.2;
 ---
 
 {
@@ -15,7 +15,7 @@ const { type = "loop", class: className = "", color = "currentColor" } =
       <path
         d="M2 88c14-26 27-44 41-52 12-7 24-4 25 7 1 9-8 15-15 12-8-3-8-15 2-24C68 20 92 10 118 4"
         stroke={color}
-        stroke-width="2"
+        stroke-width={sw}
         stroke-linecap="round"
       />
     </svg>
@@ -27,7 +27,7 @@ const { type = "loop", class: className = "", color = "currentColor" } =
       <path
         d="M4 56 18 6M28 52 38 14M52 50 58 20M74 46 86 18"
         stroke={color}
-        stroke-width="2.4"
+        stroke-width={2.6}
         stroke-linecap="round"
       />
     </svg>
@@ -39,15 +39,39 @@ const { type = "loop", class: className = "", color = "currentColor" } =
       <path
         d="M4 54C22 18 56 2 96 6c16 2 30 8 40 18"
         stroke={color}
-        stroke-width="2"
+        stroke-width={sw}
         stroke-linecap="round"
       />
       <path
         d="M128 12 136 24l-14 3"
         stroke={color}
-        stroke-width="2"
+        stroke-width={sw}
         stroke-linecap="round"
         stroke-linejoin="round"
+      />
+    </svg>
+  )
+}
+{
+  type === "spark" && (
+    <svg class={className} viewBox="0 0 80 80" fill="none" aria-hidden="true">
+      <path
+        d="M40 6v18M40 56v18M6 40h18M56 40h18M16 16l13 13M51 51l13 13M64 16 51 29M29 51 16 64"
+        stroke={color}
+        stroke-width={sw}
+        stroke-linecap="round"
+      />
+    </svg>
+  )
+}
+{
+  type === "wave" && (
+    <svg class={className} viewBox="0 0 160 50" fill="none" aria-hidden="true">
+      <path
+        d="M3 34c18-26 36-26 54 0s36 26 54 0 36-26 46-8"
+        stroke={color}
+        stroke-width={sw}
+        stroke-linecap="round"
       />
     </svg>
   )

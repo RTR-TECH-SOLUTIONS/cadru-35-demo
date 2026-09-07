@@ -13,18 +13,18 @@ const { items } = Astro.props;
   {
     items.map((item, i) => (
       <details
-        class="group border-b border-line py-2"
+        class="group border-b border-black/12 py-2"
         data-reveal
         style={`--reveal-delay:${i * 60}ms`}
       >
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-display text-[1.2rem] leading-snug transition-colors duration-200 hover:text-accent md:text-[1.35rem]">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 serif text-[1.2rem] leading-snug transition-colors duration-200 hover:text-accent md:text-[1.35rem]">
           {item.q}
           <span class="relative inline-flex h-6 w-6 shrink-0 items-center justify-center">
             <span class="absolute h-[1.5px] w-4 bg-current" />
             <span class="absolute h-4 w-[1.5px] bg-current transition-transform duration-200 group-open:rotate-90 group-open:opacity-0" />
           </span>
         </summary>
-        <p class="pb-6 pr-10 text-[0.98rem] leading-relaxed text-muted">{item.a}</p>
+        <p class="pb-6 pr-10 body-18">{item.a}</p>
       </details>
     ))
   }

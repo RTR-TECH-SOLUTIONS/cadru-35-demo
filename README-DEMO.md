@@ -33,9 +33,30 @@ helperul devine identitate.
 
 - **Astro 7** static (zero JS by default; scripturile de mai jos sunt vanilla, mici)
 - **Tailwind 4** + tokens CSS proprii în `src/styles/global.css`
-- Fonturi self-hosted: **Bodoni Moda** (titluri) + **Poppins** (body) — aceeași pereche
-  ca în referință
+- Fonturi self-hosted: **Lora** (titluri) + **Poppins** (body) — aceeași pereche ca în
+  referință
 - Imagini optimizate la build de `astro:assets` (WebP, dimensiuni multiple)
+
+## Sistemul de design
+
+Valorile nu sunt alese din burtă, sunt măsurate din referință la 1440px și puse ca atare
+în `src/styles/global.css`:
+
+| | Valoare |
+|---|---|
+| Container | 1320px + 60px gutter |
+| H1 | Lora 400, 72px, lh 1.2, ls -0.027em |
+| H2 | Lora 400, 58px, lh 1.2 |
+| Lead / body | Poppins 22px / 18px, lh 32.4px, `rgba(0,0,0,.7)` |
+| Etichete de secțiune | Poppins 15px, ls 3px, uppercase, roz |
+| Butoane | pill, padding 19/25, border 2px |
+| Fundaluri | alb `#fff`, secundar `#fafafa`, închis `#191919` |
+| Accent | `#ff6bcb` |
+| Secțiuni | 50px sus/jos; hero 225/175 |
+
+Sublinierea roz de sub ultimul cuvânt e un SVG desenat de mână (`Mark.astro`), nu un
+`border-bottom` — la fel ca în referință. Măștile de imagine (`arch-up`, `arch-down`,
+`arch-left`, `oval`) reproduc exact colajul din hero.
 
 ## Structura
 
@@ -108,6 +129,11 @@ structura paginii. Trebuie confirmate cu clientul înainte de orice publicare.
 Cele 28 de fotografii sunt generate (Higgsfield, model `soul_2`) special pentru demo:
 studio, nuntă, botez, corporate, aniversare, echipament, montaj. Sunt brandless și fără
 oameni recognoscibili, exact ca să poată fi înlocuite una câte una cu materialul clientului.
+
+**Ce nu am copiat, deliberat:** logo-ul, fotografiile și textele referinței sunt ale lor.
+Aici sunt logo-ul nostru, imagini generate și copy scris de la zero. Banda roz de sub hero
+are la ei logo-urile clienților; la noi are serviciile, ca să nu inventăm branduri care ne
+recomandă.
 
 Trei imagini au fost regenerate pentru că aveau text inventat vizibil (ecran de monitor,
 ecran de proiecție, cartonaș de masă) — semnul cel mai clar de imagine generată. Dacă mai

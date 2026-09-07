@@ -1,4 +1,5 @@
 ---
+import Mark from "../../components/Mark.astro";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/PageHero.astro";
@@ -124,16 +125,16 @@ const faq = [
         text="Cele mai multe zile din studio arată așa. Dacă ai ceva în afara listei, întreabă — de obicei se poate."
         class="mb-14"
       />
-      <div class="grid gap-px overflow-hidden rounded-xl bg-line md:grid-cols-2">
+      <div class="grid gap-px bg-black/12 md:grid-cols-2">
         {
           tipuri.map((t, i) => (
             <article
-              class="bg-cream p-8 md:p-10"
+              class="bg-paper p-8 md:p-10"
               data-reveal
               style={`--reveal-delay:${i * 80}ms`}
             >
-              <h3 class="h-sub">{t.title}</h3>
-              <p class="mt-4 text-[0.98rem] leading-relaxed text-muted">
+              <h3 class="text-[20px] font-medium leading-[28px] tracking-[-0.027em]">{t.title}</h3>
+              <p class="mt-4 body-18">
                 {t.text}
               </p>
             </article>
@@ -149,7 +150,7 @@ const faq = [
       <div>
         <p class="eyebrow" data-reveal>Studioul</p>
         <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
-          Ce găsești când intri pe <span class="underline-accent">ușă</span>
+          Ce găsești când intri pe <Mark text="ușă" />
         </h2>
         <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
           Nu e un spațiu improvizat într-un apartament. E o hală reamenajată, cu
@@ -180,7 +181,7 @@ const faq = [
           alt="Interiorul studioului: ciclorama albă, tavan înalt, echipament pe stative"
           widths={[420, 760, 1040]}
           sizes="(min-width:1024px) 46vw, 92vw"
-          class="aspect-[4/3] w-full rounded-xl object-cover"
+          class="aspect-[4/3] w-full object-cover"
           loading="lazy"
         />
         <Image
@@ -188,7 +189,7 @@ const faq = [
           alt="Colț de studio cu role de hârtie colorată, scaun și reflector"
           widths={[420, 760, 1040]}
           sizes="(min-width:1024px) 46vw, 92vw"
-          class="aspect-[16/9] w-full rounded-xl object-cover"
+          class="aspect-[16/9] w-full object-cover"
           loading="lazy"
         />
       </div>
@@ -208,7 +209,7 @@ const faq = [
   </section>
 
   <!-- Tarife -->
-  <section class="section bg-cream-deep/40">
+  <section class="section bg-paper-alt">
     <div class="wrap">
       <SectionHead
         eyebrow="Tarife"

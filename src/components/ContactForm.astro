@@ -28,7 +28,7 @@ import { site } from "../data/site";
 
   <div class="grid gap-5 md:grid-cols-2">
     <div class="field">
-      <label for="email" class="label">Email <span class="text-muted">(opțional)</span></label>
+      <label for="email" class="label">Email <span class="text-[var(--text-body)]">(opțional)</span></label>
       <input id="email" name="email" type="email" autocomplete="email" class="input" />
       <p class="error" data-error-for="email"></p>
     </div>
@@ -52,12 +52,12 @@ import { site } from "../data/site";
 
   <div class="grid gap-5 md:grid-cols-2">
     <div class="field">
-      <label for="data" class="label">Data evenimentului <span class="text-muted">(opțional)</span></label>
+      <label for="data" class="label">Data evenimentului <span class="text-[var(--text-body)]">(opțional)</span></label>
       <input id="data" name="data" type="date" class="input" />
     </div>
 
     <div class="field">
-      <label for="locatie" class="label">Localitate / locație <span class="text-muted">(opțional)</span></label>
+      <label for="locatie" class="label">Localitate / locație <span class="text-[var(--text-body)]">(opțional)</span></label>
       <input id="locatie" name="locatie" type="text" class="input" />
     </div>
   </div>
@@ -68,13 +68,13 @@ import { site } from "../data/site";
   </div>
 
   <div class="flex flex-wrap items-center gap-4 pt-2">
-    <button type="submit" class="btn btn-solid">
+    <button type="submit" class="btn btn-dark">
       Trimite pe WhatsApp
       <svg viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
         <path d="M3 10h13M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path>
       </svg>
     </button>
-    <p class="text-[0.85rem] text-muted">Îți răspundem în aceeași zi lucrătoare.</p>
+    <p class="text-[16px] text-[var(--text-body)]">Îți răspundem în aceeași zi lucrătoare.</p>
   </div>
 
   <p

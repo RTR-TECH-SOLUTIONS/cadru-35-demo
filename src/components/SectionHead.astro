@@ -1,38 +1,41 @@
 ---
+import Mark from "./Mark.astro";
 interface Props {
   eyebrow?: string;
   title: string;
-  /** ultimul cuvânt primește sublinierea roz, ca în referință */
-  underlineLast?: boolean;
+  /** ultimul cuvânt primește sublinierea desenată de mână */
+  markLast?: boolean;
   text?: string;
   align?: "left" | "center";
-  tone?: "light" | "dark";
   class?: string;
 }
 const {
   eyebrow,
   title,
-  underlineLast = true,
+  markLast = true,
   text,
   align = "center",
   class: className = "",
 } = Astro.props;
 
 const words = title.split(" ");
-const last = underlineLast ? words.pop() : null;
+const last = markLast ? words.pop() : null;
 const head = words.join(" ");
 ---
 
 <div
-  class:list={[
-    align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl",
-    className,
-  ]}
+  class:list={[align === "center" ? "text-center" : "", className]}
   data-reveal
 >
-  {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+  {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
   <h2 class="h-section">
-    {head}{last && <> <span class="underline-accent">{last}</span></>}
+    {head}{last && <> <Mark text={last} /></>}
   </h2>
-  {text && <p class="lead mt-6">{text}</p>}
+  {
+    text && (
+      <p class:list={["lead mt-6", align === "center" && "mx-auto max-w-[780px]"]}>
+        {text}
+      </p>
+    )
+  }
 </div>
