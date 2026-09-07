@@ -1,5 +1,11 @@
 # Cadru 35 — demo de prezentare (studio foto + foto/video de eveniment)
 
+**Live:** https://rtr-tech-solutions.github.io/cadru-35-demo/
+**Repo:** https://github.com/RTR-TECH-SOLUTIONS/cadru-35-demo
+
+Se publică singur: orice push pe `main` declanșează workflow-ul din
+`.github/workflows/deploy.yml`, care rulează `npm run build` și urcă `dist/` pe Pages.
+
 Demo pentru clientul care a cerut „ceva asemănător cu socialcarbonara.ro", plus pagini
 separate pentru **foto studio**, **foto de eveniment** și **video de eveniment**.
 
@@ -15,7 +21,13 @@ npm run build     # generează dist/ (static)
 npm run preview   # servește dist/ local, ca să vezi exact ce se urcă
 ```
 
-Deploy: `dist/` se urcă direct pe Hostinger (static, fără server).
+Deploy: automat pe GitHub Pages la fiecare push pe `main`. Pentru Hostinger, `dist/` se
+urcă direct (static, fără server).
+
+**Base path:** pe GitHub Pages site-ul stă la `/cadru-35-demo/`, deci `astro.config.mjs` are
+`base: '/cadru-35-demo'`. Toate link-urile interne trec prin helperul din `src/lib/url.ts`.
+La mutarea pe domeniul clientului, scoți `site` și `base` din config și nu mai atingi nimic —
+helperul devine identitate.
 
 ## Stack
 
