@@ -1,0 +1,59 @@
+---
+import { url } from "../lib/url";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Squiggle from "./Squiggle.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  image: ImageMetadata;
+  alt: string;
+}
+
+const { eyebrow, title, text, image, alt } = Astro.props;
+const words = title.split(" ");
+const last = words.pop();
+const head = words.join(" ");
+---
+
+<section class="on-dark relative bg-ink text-white" style="padding-top: var(--header-h)">
+  <div class="wrap grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+    <div data-reveal>
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="h-display mt-5 text-white">
+        {head} <span class="underline-accent">{last}</span>
+      </h1>
+      <p class="lead mt-7 max-w-xl">{text}</p>
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a href={url("/contact")} class="btn btn-outline">
+          Cere o ofertă
+          <svg viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M3 10h13M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+        <a href={url("/portofoliu")} class="btn border-white/25 text-white hover:border-white hover:bg-white hover:text-ink">
+          Vezi portofoliul
+        </a>
+      </div>
+    </div>
+
+    <div class="relative" data-reveal style="--reveal-delay:120ms">
+      <Squiggle
+        type="ticks"
+        class="pointer-events-none absolute -left-4 -top-8 h-12 w-16 text-white/40 md:h-16 md:w-24"
+      />
+      <div class="mask-arch">
+        <Image
+          src={image}
+          alt={alt}
+          widths={[520, 780, 1100]}
+          sizes="(min-width:1024px) 44vw, 92vw"
+          class="aspect-[4/3] w-full object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</section>

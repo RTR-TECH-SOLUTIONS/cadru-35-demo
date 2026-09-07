@@ -1,0 +1,363 @@
+---
+import { url } from "../lib/url";
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import SectionHead from "../components/SectionHead.astro";
+import Squiggle from "../components/Squiggle.astro";
+import Gallery from "../components/Gallery.astro";
+import Stats from "../components/Stats.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { services } from "../data/site";
+
+import heroStudio from "../assets/img/hero-studio.jpg";
+import heroNunta from "../assets/img/hero-nunta.jpg";
+import heroVideo from "../assets/img/hero-video.jpg";
+import film35 from "../assets/img/film-35mm.jpg";
+import studioLumini from "../assets/img/studio-lumini.jpg";
+import svcStudio from "../assets/img/svc-studio.jpg";
+import svcEveniment from "../assets/img/svc-eveniment.jpg";
+import svcVideo from "../assets/img/svc-video.jpg";
+import echipament from "../assets/img/echipament.jpg";
+
+const serviceImages = {
+  "foto-studio": svcStudio,
+  "foto-eveniment": svcEveniment,
+  "video-eveniment": svcVideo,
+};
+
+const beneficii = [
+  "Ședință de pregătire înainte de eveniment, cu lista momentelor",
+  "Doi fotografi la nunțile de peste 120 de invitați",
+  "Backup dublu al cardurilor, în aceeași seară",
+  "Galerie online privată, cu link de descărcare pentru invitați",
+  "Livrare în 21 de zile lucrătoare, trecută în contract",
+];
+---
+
+<Layout
+  title="Cadru 35 — studio foto și foto-video de eveniment în București"
+  description="Studio foto de 80 mp în București și echipă de foto-video pentru nunți, botezuri și evenimente de firmă. Livrare în 21 de zile, trecută în contract."
+  darkTop
+>
+  <!-- ============================ HERO ============================ -->
+  <section
+    class="on-dark relative overflow-hidden bg-ink text-white"
+    style="padding-top: var(--header-h)"
+  >
+    <div
+      class="wrap grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:pb-24"
+    >
+      <div>
+        <h1 class="h-display" data-reveal>
+          Fiecare eveniment are 35 de cadre care <span class="underline-accent"
+            >contează</span
+          >.
+        </h1>
+        <p class="lead mt-8 max-w-xl" data-reveal style="--reveal-delay:90ms">
+          Studio foto de 80 mp în București și echipă de foto-video la
+          evenimentul tău. Îți dăm cadrele pe care le pui pe perete, nu 2000 de
+          fișiere pe care nu le mai deschide nimeni.
+        </p>
+
+        <div
+          class="mt-9 flex flex-wrap items-center gap-4"
+          data-reveal
+          style="--reveal-delay:150ms"
+        >
+          <a href={url("/contact")} class="btn btn-outline">
+            Cere o ofertă
+            <svg
+              viewBox="0 0 20 20"
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 10h13M11 5l5 5-5 5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </a>
+          <a
+            href={url("/portofoliu")}
+            class="btn border-white/25 text-white hover:border-white hover:bg-white hover:text-ink"
+          >
+            Vezi portofoliul
+          </a>
+        </div>
+
+        <div
+          class="relative mt-14 max-w-md"
+          data-reveal
+          style="--reveal-delay:220ms"
+        >
+          <Squiggle
+            type="arc"
+            class="pointer-events-none absolute -right-24 -top-6 hidden h-16 w-32 text-white/35 xl:block"
+          />
+          <p class="font-display text-[2rem] leading-none md:text-[2.4rem]">
+            Livrare în 21 de zile
+          </p>
+          <p class="mt-3 flex flex-wrap items-center gap-3 text-[0.92rem] text-white/60">
+            Termenul pe care îl scriem în contract.
+            <span class="text-[0.95rem] tracking-[0.14em] text-[#ffc735]"
+              >★★★★★</span
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Colaj de imagini -->
+      <div class="relative" data-reveal style="--reveal-delay:120ms">
+        <Squiggle
+          type="ticks"
+          class="pointer-events-none absolute -left-2 -top-6 z-10 h-12 w-16 text-white/45 md:-left-6 md:h-16 md:w-24"
+        />
+        <div class="grid grid-cols-2 gap-3 md:gap-4">
+          <div class="mask-arch">
+            <Image
+              src={heroStudio}
+              alt="Fotograf reglând un softbox într-un studio cu fundal de hârtie gri"
+              widths={[320, 560, 760]}
+              sizes="(min-width:1024px) 22vw, 44vw"
+              class="aspect-[3/4] w-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <div class="row-span-2 mask-arch">
+            <Image
+              src={heroNunta}
+              alt="Miri dansând seara sub ghirlande de becuri calde"
+              widths={[380, 700, 980]}
+              sizes="(min-width:1024px) 24vw, 46vw"
+              class="h-full w-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <div class="mask-circle">
+            <Image
+              src={heroVideo}
+              alt="Videograf filmând cu camera pe gimbal la un eveniment de seară"
+              widths={[280, 520, 700]}
+              sizes="(min-width:1024px) 22vw, 44vw"
+              class="aspect-square w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Stats />
+
+  <!-- ====================== DE CE CADRU 35 ======================== -->
+  <section class="section relative overflow-hidden">
+    <div class="wrap-narrow relative text-center">
+      <div class="mx-auto mb-10 w-32 md:w-40" data-reveal>
+        <div class="mask-circle">
+          <Image
+            src={film35}
+            alt="Rolă de film de 35 mm și un aparat foto vechi pe hârtie crem"
+            widths={[220, 400]}
+            sizes="160px"
+            class="aspect-square w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <h2 class="h-section" data-reveal>
+        De ce „Cadru <span class="underline-accent">35</span>”?
+      </h2>
+      <p class="lead mt-7" data-reveal style="--reveal-delay:80ms">
+        O rolă de film de 35 mm are 36 de cadre. În practică, unul se pierde
+        mereu la încărcare, așa că rămân 35. De acolo ne vine numele și felul în
+        care lucrăm: nu numărăm pozele, ne uităm la cadrele care chiar spun
+        ceva. Din 2014, în studio și pe teren.
+      </p>
+    </div>
+    <Squiggle
+      type="loop"
+      class="pointer-events-none absolute -bottom-4 right-4 hidden h-24 w-32 text-ink/15 lg:block"
+    />
+  </section>
+
+  <!-- ========================= BENEFICII ========================== -->
+  <section class="section-tight bg-cream-deep/40">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="relative order-2 lg:order-1" data-reveal>
+        <Image
+          src={studioLumini}
+          alt="Studio gol cu două softbox-uri aprinse și ciclorama albă"
+          widths={[420, 760, 1040]}
+          sizes="(min-width:1024px) 46vw, 92vw"
+          class="aspect-[4/5] w-full rounded-xl object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="order-1 lg:order-2">
+        <p class="eyebrow" data-reveal>Cum lucrăm</p>
+        <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
+          La baza fiecărui eveniment stă o listă de <span
+            class="underline-accent">cadre</span
+          >
+        </h2>
+        <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
+          Înainte de filmare stabilim împreună lista: momentele obligatorii,
+          oamenii care nu trebuie rataţi, ordinea zilei. Așa nu descoperim la
+          montaj că lipsește dansul cu părinții sau discursul nașului.
+        </p>
+
+        <ul class="mt-8 space-y-4">
+          {
+            beneficii.map((item, i) => (
+              <li
+                class="flex gap-3.5 text-[1rem]"
+                data-reveal
+                style={`--reveal-delay:${140 + i * 60}ms`}
+              >
+                <svg
+                  viewBox="0 0 20 20"
+                  class="mt-[7px] h-3.5 w-3.5 shrink-0 text-ink"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 10.5 8 15l9-10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== SERVICII ========================== -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Servicii"
+        title="Trei feluri în care lucrăm"
+        text="Studioul din București pentru tot ce se fotografiază pe fundal curat, iar echipa merge pe teren pentru tot ce se întâmplă o singură dată."
+      />
+
+      <div class="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+        {
+          services.map((service, i) => (
+            <article
+              class="text-center"
+              data-reveal
+              style={`--reveal-delay:${i * 100}ms`}
+            >
+              <a href={url(service.href)} class="group block">
+                <div class="mask-circle mx-auto w-full max-w-[300px]">
+                  <Image
+                    src={serviceImages[service.slug as keyof typeof serviceImages]}
+                    alt={service.title}
+                    widths={[300, 560, 760]}
+                    sizes="(min-width:768px) 28vw, 80vw"
+                    class="aspect-square w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 class="mt-7 font-display text-[1.5rem] leading-tight transition-colors duration-200 group-hover:text-accent">
+                  <span class="text-accent">{service.index}.</span> {service.title}
+                </h3>
+              </a>
+              <p class="mx-auto mt-4 max-w-[34ch] text-[0.96rem] leading-relaxed text-muted">
+                {service.short}
+              </p>
+              <a
+                href={url(service.href)}
+                class="mt-5 inline-flex items-center gap-2 text-[0.9rem] font-medium text-accent underline-offset-4 hover:underline"
+              >
+                Vezi detalii
+                <svg
+                  viewBox="0 0 20 20"
+                  class="h-3.5 w-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 10h13M11 5l5 5-5 5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 text-center" data-reveal>
+        <a href={url("/servicii")} class="btn btn-outline">Toate serviciile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= PORTOFOLIU ========================= -->
+  <section class="section bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Portofoliu"
+        title="Cadre din ultimele luni"
+        text="Studio, evenimente și video, amestecate. Apasă pe filtre dacă vrei doar o categorie."
+        class="mb-12"
+      />
+      <Gallery limit={8} />
+      <div class="mt-12 text-center" data-reveal>
+        <a href={url("/portofoliu")} class="btn btn-outline">Vezi tot portofoliul</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== MOTTO ============================ -->
+  <section class="on-dark bg-ink text-white">
+    <div class="wrap grid items-center gap-12 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:py-28">
+      <div data-reveal>
+        <Image
+          src={echipament}
+          alt="Două aparate foto, obiective și un exponometru așezate pe un birou închis la culoare"
+          widths={[420, 760, 1040]}
+          sizes="(min-width:1024px) 44vw, 92vw"
+          class="aspect-[3/2] w-full rounded-xl object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <p class="eyebrow" data-reveal>Motto</p>
+        <h2 class="h-sub mt-5" data-reveal style="--reveal-delay:60ms">
+          „35 de cadre” nu e o cifră de marketing, e o disciplină.
+        </h2>
+        <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
+          Pe film aveai 35 de cadre și atât. Nu trăgeai 400 de poze ca să alegi
+          mai târziu, gândeai cadrul înainte să apeși. Lucrăm digital, evident,
+          dar mentalitatea a rămas: la nuntă predăm în jur de 600 de fotografii
+          alese, nu 3000 de duplicate.
+        </p>
+        <p class="lead mt-5" data-reveal style="--reveal-delay:140ms">
+          E și motivul pentru care nu vindem „pachetul cu cele mai multe poze”.
+          Vindem selecția pe care o poți privi cap-coadă, într-o seară, fără să
+          derulezi.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+  <CtaBand />
+</Layout>

@@ -1,0 +1,3 @@
+# Preview pentru client — nu se indexează.
+User-agent: *
+Disallow: /

@@ -1,0 +1,225 @@
+---
+import { url } from "../lib/url";
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import PriceCards from "../components/PriceCards.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Squiggle from "../components/Squiggle.astro";
+
+import hdStudio from "../assets/img/hd-foto-studio.jpg";
+import svcStudio from "../assets/img/svc-studio.jpg";
+import svcEveniment from "../assets/img/svc-eveniment.jpg";
+import svcVideo from "../assets/img/svc-video.jpg";
+
+const detalii = [
+  {
+    index: "01",
+    title: "Foto studio",
+    href: "/servicii/foto-studio",
+    image: svcStudio,
+    alt: "Portret de studio pe fundal gri neutru",
+    text: "Studio propriu de 80 mp, la 6 minute de metrou. Ciclorama albă, cinci culori de hârtie, lumini Profoto și masă de produs. Vii cu ideea sau cu brief-ul de la agenție, pleci cu fișierele prelucrate.",
+    bullets: [
+      "Portrete de business și personal branding",
+      "Produs, e-commerce și fotografie culinară",
+      "Fashion, lookbook, campanii mici",
+      "Maternitate, familie, newborn",
+      "Închiriere studio, cu sau fără asistent",
+    ],
+  },
+  {
+    index: "02",
+    title: "Foto eveniment",
+    href: "/servicii/foto-eveniment",
+    image: svcEveniment,
+    alt: "Detaliu de nuntă, mâinile miresei cu buchetul",
+    text: "Fotografiem documentar: ce se întâmplă, nu ce regizăm noi. Pentru nunți venim cu doi fotografi peste 120 de invitați, ca să nu ratăm nici pregătirile, nici sala.",
+    bullets: [
+      "Nuntă, de la pregătiri până la tort",
+      "Botez și cununie civilă",
+      "Aniversări și petreceri private",
+      "Evenimente de firmă, conferințe, team building",
+      "Galerie online privată, cu link pentru invitați",
+    ],
+  },
+  {
+    index: "03",
+    title: "Video eveniment",
+    href: "/servicii/video-eveniment",
+    image: svcVideo,
+    alt: "Cameră de film pe rig, cu monitorul arătând mireasa în cadru",
+    text: "Trei livrabile, nu unul: teaserul de 60 de secunde pentru social, highlight-ul de 5 minute pe care îl arăți familiei și filmul integral cu ceremonia și discursurile.",
+    bullets: [
+      "Teaser de 60 de secunde, livrat în 5 zile",
+      "Highlight de 4–6 minute, color-gradat",
+      "Film integral: ceremonie, discursuri, dans",
+      "Sunet luat separat, cu lavaliere pe miri și preot",
+      "Cadre din dronă, ca opțiune",
+    ],
+  },
+];
+
+const pachete = [
+  {
+    name: "Ședință în studio",
+    meta: "60 de minute · 1 persoană",
+    price: "750 lei",
+    includes: [
+      "60 de minute în studio, cu lumini pregătite",
+      "Două fundaluri la alegere",
+      "15 fotografii prelucrate, livrate în 7 zile",
+      "Toate cadrele brute, needitate",
+    ],
+  },
+  {
+    name: "Nuntă foto + video",
+    meta: "Pachetul cel mai cerut · zi întreagă",
+    price: "de la 9.400 lei",
+    featured: true,
+    includes: [
+      "Doi fotografi și doi videografi",
+      "Aproximativ 600 de fotografii alese",
+      "Teaser 60s, highlight 5 min, film integral",
+      "Ședință de pregătire cu lista de cadre",
+      "Livrare completă în 21 de zile lucrătoare",
+    ],
+  },
+  {
+    name: "Eveniment de firmă",
+    meta: "Până la 6 ore · foto sau foto-video",
+    price: "de la 2.200 lei",
+    includes: [
+      "Un fotograf, opțional și videograf",
+      "Selecție de lucru livrată în 48 de ore",
+      "Galerie privată pentru echipa de marketing",
+      "Drept de folosire comercială inclus",
+    ],
+  },
+];
+---
+
+<Layout
+  title="Servicii foto și video — Cadru 35, București"
+  description="Foto studio, foto de eveniment și video de eveniment în București. Pachete clare, livrare în 21 de zile, echipă de doi fotografi la nunțile mari."
+>
+  <PageHero
+    eyebrow="Servicii"
+    title="Trei feluri în care lucrăm cu tine"
+    text="Studioul rezolvă tot ce se fotografiază pe fundal curat, cu lumina sub control. Echipa merge pe teren pentru tot ce se întâmplă o singură dată și nu se repetă."
+    image={hdStudio}
+    alt="Studio foto cu fundal gri și două softbox-uri aprinse"
+  />
+
+  <!-- Servicii detaliate -->
+  <section class="section">
+    <div class="wrap flex flex-col gap-20 md:gap-28">
+      {
+        detalii.map((s, i) => (
+          <article
+            class:list={[
+              "grid items-center gap-10 lg:grid-cols-2 lg:gap-16",
+              i % 2 === 1 && "lg:[&>div:first-child]:order-2",
+            ]}
+          >
+            <div class="relative" data-reveal>
+              {i === 0 && (
+                <Squiggle
+                  type="ticks"
+                  class="pointer-events-none absolute -left-3 -top-7 h-12 w-16 text-ink/25 md:h-16 md:w-24"
+                />
+              )}
+              <Image
+                src={s.image}
+                alt={s.alt}
+                widths={[420, 760, 1040]}
+                sizes="(min-width:1024px) 46vw, 92vw"
+                class="aspect-[4/5] w-full rounded-xl object-cover lg:aspect-[4/4.4]"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </div>
+
+            <div>
+              <p class="eyebrow" data-reveal>
+                Serviciul {s.index}
+              </p>
+              <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
+                {s.title}
+              </h2>
+              <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
+                {s.text}
+              </p>
+
+              <ul class="mt-8 space-y-3.5">
+                {s.bullets.map((b, j) => (
+                  <li
+                    class="flex gap-3.5 text-[0.99rem]"
+                    data-reveal
+                    style={`--reveal-delay:${140 + j * 50}ms`}
+                  >
+                    <svg
+                      viewBox="0 0 20 20"
+                      class="mt-[7px] h-3.5 w-3.5 shrink-0 text-accent"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M3 10.5 8 15l9-10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a href={url(s.href)} class="btn btn-ghost-dark mt-9" data-reveal>
+                Detalii și tarife
+                <svg
+                  viewBox="0 0 20 20"
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 10h13M11 5l5 5-5 5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Pachete -->
+  <section class="section bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Pachete"
+        title="Trei pachete și un preț de pornire"
+        text="Prețurile de mai jos sunt punctele de plecare. Oferta finală depinde de dată, de numărul de ore și de câți oameni suntem pe teren."
+        class="mb-14"
+      />
+      <PriceCards packs={pachete} />
+      <p class="mt-10 text-center text-[0.9rem] text-muted">
+        Prețurile includ TVA. Deplasarea în afara Bucureștiului se tarifează
+        separat, 2 lei/km.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Nu știi ce pachet ți se potrivește?"
+    text="Scrie-ne data și ce fel de eveniment ai. Îți spunem exact de ce ai nevoie, chiar dacă asta înseamnă un pachet mai mic."
+  />
+</Layout>

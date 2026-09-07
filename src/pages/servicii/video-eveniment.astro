@@ -1,0 +1,294 @@
+---
+import { url } from "../../lib/url";
+import { Image, getImage } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import Steps from "../../components/Steps.astro";
+import PriceCards from "../../components/PriceCards.astro";
+import Faq from "../../components/Faq.astro";
+import Gallery from "../../components/Gallery.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Squiggle from "../../components/Squiggle.astro";
+
+import hdVideo from "../../assets/img/hd-video-eveniment.jpg";
+import pMontaj from "../../assets/img/p-montaj.jpg";
+
+const poster = await getImage({ src: hdVideo, width: 1280, format: "jpg" });
+
+const livrabile = [
+  {
+    title: "Teaser, 60 de secunde",
+    text: "Vertical și orizontal, gata de Instagram. Îl primești în cinci zile, cât lumea încă vorbește despre eveniment.",
+    meta: "livrat în 5 zile",
+  },
+  {
+    title: "Highlight, 4–6 minute",
+    text: "Filmul pe care îl arăți familiei: momentele mari, discursurile scurtate, muzica licențiată corect.",
+    meta: "livrat în 21 de zile",
+  },
+  {
+    title: "Film integral",
+    text: "Ceremonia cap-coadă, discursurile întregi, dansul. Fără montaj de efect, ca să rămână document.",
+    meta: "40–90 de minute",
+  },
+  {
+    title: "Cadre din dronă",
+    text: "Locația de sus, sosirea la biserică, cadrul de final. Opțional, doar unde avem voie legal să zburăm.",
+    meta: "opțional",
+  },
+];
+
+const pasi = [
+  {
+    title: "Ce vrei să rămână",
+    text: "Ne spui dacă îți dorești filmul mai emoțional sau mai documentar. De aici pornesc toate deciziile de montaj.",
+  },
+  {
+    title: "Sunetul, întâi",
+    text: "Punem lavaliere pe miri și pe preot și înregistrăm separat. Un film cu imagine bună și sunet prost e un film prost.",
+  },
+  {
+    title: "Filmare pe două camere",
+    text: "Una fixă pe ceremonie, una din mână pentru reacții. Așa avem mereu unde tăia, fără sărituri.",
+  },
+  {
+    title: "Montaj și culoare",
+    text: "Montăm, corectăm culoarea și îți trimitem o variantă de vizionare. Ai o rundă de modificări inclusă.",
+  },
+];
+
+const pachete = [
+  {
+    name: "Video esențial",
+    meta: "Până la 8 ore · un videograf",
+    price: "3.900 lei",
+    includes: [
+      "Teaser de 60 de secunde",
+      "Highlight de 4 minute",
+      "Sunet înregistrat separat la ceremonie",
+      "Livrare în 21 de zile lucrătoare",
+    ],
+  },
+  {
+    name: "Video complet",
+    meta: "Zi întreagă · doi videografi",
+    price: "de la 6.200 lei",
+    featured: true,
+    includes: [
+      "Doi videografi, de la pregătiri până la dans",
+      "Teaser 60s, highlight 5–6 min, film integral",
+      "Lavaliere pe miri și pe preot",
+      "O rundă de modificări la montaj",
+      "Livrare în 21 de zile lucrătoare",
+    ],
+  },
+  {
+    name: "Foto + video",
+    meta: "Pachetul combinat · echipă de patru",
+    price: "de la 9.400 lei",
+    includes: [
+      "Doi fotografi și doi videografi",
+      "Aproximativ 600 de fotografii alese",
+      "Toate livrabilele video",
+      "O singură echipă, o singură discuție de pregătire",
+    ],
+  },
+];
+
+const faq = [
+  {
+    q: "Putem alege noi muzica din film?",
+    a: "Puteți propune, dar folosim doar piese cu licență comercială. Dacă vrei o piesă anume, verificăm dacă există licență pentru ea. Altfel îți dăm trei variante apropiate ca atmosferă.",
+  },
+  {
+    q: "Cât durează până primim filmul?",
+    a: "Teaserul în cinci zile lucrătoare, restul în 21. Dacă ai nevoie de highlight mai devreme pentru o petrecere de după, spune-ne de la început.",
+  },
+  {
+    q: "Filmați și cu dronă?",
+    a: "Da, unde zona permite legal zborul. În București, majoritatea centrului e restricționat, așa că verificăm locația înainte și îți spunem sincer dacă merită sau nu.",
+  },
+  {
+    q: "Ce se întâmplă dacă nu ne place montajul?",
+    a: "Ai inclusă o rundă de modificări: schimbăm ordinea, scoatem cadre, ajustăm lungimea. Nu refacem filmul de la zero pe altă direcție, de asta stabilim direcția înainte de filmare.",
+  },
+];
+---
+
+<Layout
+  title="Video de nuntă și evenimente București | Cadru 35"
+  description="Teaser de 60 de secunde, highlight de 5 minute și film integral. Videografie de eveniment în București, cu sunet înregistrat separat și livrare în 21 de zile."
+>
+  <!-- HERO cu video de fundal -->
+  <section
+    class="on-dark relative isolate overflow-hidden bg-ink text-white"
+    style="padding-top: var(--header-h)"
+  >
+    <video
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster={poster.src}
+      aria-hidden="true"
+      data-hero-video
+    >
+      <source src={url("/video/hero.mp4")} type="video/mp4" />
+    </video>
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-ink/35"
+    >
+    </div>
+
+    <div class="wrap py-20 md:py-28 lg:py-36">
+      <div class="max-w-2xl">
+        <p class="eyebrow" data-reveal>Serviciul 03</p>
+        <h1 class="h-display mt-5" data-reveal style="--reveal-delay:60ms">
+          Video de <span class="underline-accent">eveniment</span>
+        </h1>
+        <p class="lead mt-7" data-reveal style="--reveal-delay:110ms">
+          Trei livrabile, nu unul: teaserul pe care îl pui pe Instagram a doua
+          zi, highlight-ul pe care îl arăți familiei și filmul integral, care
+          rămâne document.
+        </p>
+        <div
+          class="mt-9 flex flex-wrap items-center gap-4"
+          data-reveal
+          style="--reveal-delay:160ms"
+        >
+          <a href={url("/contact")} class="btn btn-outline">Cere o ofertă</a>
+          <a
+            href="#livrabile"
+            class="btn border-white/25 text-white hover:border-white hover:bg-white hover:text-ink"
+          >
+            Ce primești
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Livrabile -->
+  <section class="section" id="livrabile">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Ce primești"
+        title="Patru livrabile, nu un singur fișier"
+        text="Fiecare are alt rol. Teaserul e pentru ceilalți, filmul integral e pentru voi peste zece ani."
+        class="mb-14"
+      />
+      <div class="grid gap-px overflow-hidden rounded-xl bg-line md:grid-cols-2">
+        {
+          livrabile.map((l, i) => (
+            <article
+              class="bg-cream p-8 md:p-10"
+              data-reveal
+              style={`--reveal-delay:${i * 80}ms`}
+            >
+              <p class="eyebrow">{l.meta}</p>
+              <h3 class="h-sub mt-4">{l.title}</h3>
+              <p class="mt-4 text-[0.98rem] leading-relaxed text-muted">
+                {l.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Cum filmăm -->
+  <section class="on-dark bg-ink text-white">
+    <div class="wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
+      <div class="relative" data-reveal>
+        <Squiggle
+          type="loop"
+          class="pointer-events-none absolute -left-4 -top-10 h-16 w-24 text-white/30"
+        />
+        <Image
+          src={pMontaj}
+          alt="Cameră de montaj noaptea, două monitoare cu linia de timp"
+          widths={[420, 760, 1040]}
+          sizes="(min-width:1024px) 46vw, 92vw"
+          class="aspect-[16/10] w-full rounded-xl object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <p class="eyebrow" data-reveal>Din culise</p>
+        <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
+          Sunetul e jumătate din <span class="underline-accent">film</span>
+        </h2>
+        <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
+          Cele mai multe filme de nuntă cad la sunet, nu la imagine. De aceea
+          punem lavaliere pe miri și pe preot, avem un reportofon la pupitru
+          pentru discursuri și înregistrăm separat de cameră.
+        </p>
+        <p class="lead mt-5" data-reveal style="--reveal-delay:140ms">
+          Costă un pic mai mult ca timp de montaj. Se aude în tot filmul.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pași -->
+  <section class="section-tight bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Cum lucrăm"
+        title="De la prima discuție la montajul final"
+        class="mb-14"
+      />
+      <Steps steps={pasi} />
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead eyebrow="Cadre" title="Din filmările noastre" class="mb-12" />
+      <Gallery filters={false} only="video" />
+      <p class="mt-8 text-center text-[0.9rem] text-muted">
+        {/* TODO(real): înlocuiește cu filmele reale ale clientului (Vimeo/YouTube embed) */}
+        Filmele complete le trimitem la cerere, ca link privat.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pachete -->
+  <section class="section bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Pachete"
+        title="Tarife pentru video"
+        text="Prețurile includ TVA. Pachetul combinat foto + video e cel mai des ales, pentru că echipele se coordonează între ele."
+        class="mb-14"
+      />
+      <PriceCards packs={pachete} />
+    </div>
+  </section>
+
+  <!-- Întrebări -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead eyebrow="Întrebări frecvente" title="Ce ne întreabă lumea" class="mb-12" />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Hai să vorbim despre filmul tău"
+    text="Spune-ne data și dacă vrei doar video sau pachetul complet. Îți trimitem un exemplu de film apropiat ca stil."
+  />
+</Layout>
+
+<script>
+  // Nu rulăm video-ul dacă utilizatorul a cerut mai puțină mișcare
+  const video = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+  if (video && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    video.removeAttribute("autoplay");
+    video.pause();
+  }
+</script>

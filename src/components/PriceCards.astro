@@ -1,0 +1,75 @@
+---
+import { url } from "../lib/url";
+interface Pack {
+  name: string;
+  meta: string;
+  price: string;
+  includes: string[];
+  featured?: boolean;
+}
+interface Props {
+  packs: Pack[];
+}
+const { packs } = Astro.props;
+---
+
+<div class="grid gap-6 md:grid-cols-3">
+  {
+    packs.map((pack, i) => (
+      <article
+        class:list={[
+          "flex flex-col rounded-xl border p-8",
+          pack.featured
+            ? "border-ink bg-ink text-white on-dark"
+            : "border-line bg-cream",
+        ]}
+        data-reveal
+        style={`--reveal-delay:${i * 80}ms`}
+      >
+        <h3 class="font-display text-[1.6rem] leading-tight">{pack.name}</h3>
+        <p
+          class:list={[
+            "mt-2 text-[0.85rem]",
+            pack.featured ? "text-white/55" : "text-muted",
+          ]}
+        >
+          {pack.meta}
+        </p>
+        <p class="mt-6 font-display text-[2.1rem] leading-none text-accent">
+          {pack.price}
+        </p>
+        <ul
+          class:list={[
+            "mt-7 mb-8 space-y-3 text-[0.94rem]",
+            pack.featured ? "text-white/80" : "text-muted",
+          ]}
+        >
+          {pack.includes.map((line) => (
+            <li class="flex gap-3">
+              <svg
+                viewBox="0 0 20 20"
+                class="mt-[6px] h-3.5 w-3.5 shrink-0 text-accent"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                aria-hidden="true"
+              >
+                <path d="M3 10.5 8 15l9-10" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+        <a
+          href={url("/contact")}
+          class:list={[
+            "btn mt-auto self-start pt-[0.95rem]",
+            pack.featured ? "btn-outline" : "btn-ghost-dark",
+          ]}
+        >
+          Verifică disponibilitatea
+        </a>
+      </article>
+    ))
+  }
+</div>

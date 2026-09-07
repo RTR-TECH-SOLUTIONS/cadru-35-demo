@@ -1,0 +1,240 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import PriceCards from "../../components/PriceCards.astro";
+import Faq from "../../components/Faq.astro";
+import Gallery from "../../components/Gallery.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+import hdStudio from "../../assets/img/hd-foto-studio.jpg";
+import spatiu1 from "../../assets/img/spatiu-studio-1.jpg";
+import spatiu2 from "../../assets/img/spatiu-studio-2.jpg";
+
+const tipuri = [
+  {
+    title: "Business și personal branding",
+    text: "Portrete pentru site, LinkedIn și materiale de prezentare. Lucrăm pe fundal uniform sau în decor de birou, cu aceeași lumină pentru toată echipa, ca setul să arate unitar.",
+  },
+  {
+    title: "Produs și e-commerce",
+    text: "Fundal alb curat pentru marketplace, plus cadre de atmosferă pentru site și social. Masă de produs, plexiglas, umbre controlate, decupaj inclus la cerere.",
+  },
+  {
+    title: "Fashion și lookbook",
+    text: "Colecții mici, campanii de sezon, prezentări pentru showroom. Avem umerase, aburitor și un colț de schimb, ca ședința să nu se blocheze pe logistică.",
+  },
+  {
+    title: "Maternitate, familie, newborn",
+    text: "Ședințe liniștite, cu program flexibil. Pentru newborn încălzim studioul la 26 de grade și lucrăm în ritmul bebelușului, nu invers.",
+  },
+];
+
+const dotari = [
+  ["Suprafață", "80 mp utili, înălțime 4,2 m"],
+  ["Ciclorama", "albă, 6 × 4 m, colț rotunjit"],
+  ["Fundaluri hârtie", "alb, gri, negru, bej, verde chroma"],
+  ["Lumini", "3 × Profoto B10 Plus + softbox, octa, beauty dish"],
+  ["Lumină continuă", "2 × panou LED bicolor, pentru video"],
+  ["Produs", "masă de produs 1,2 m, plexiglas, mini-cort"],
+  ["Zonă pregătire", "oglindă, masă de machiaj, cabină de schimb"],
+  ["Altele", "wi-fi, boxă, cafea, parcare în curte"],
+];
+
+const pachete = [
+  {
+    name: "Închiriere studio",
+    meta: "Fără fotograf · minim 2 ore",
+    price: "180 lei / oră",
+    includes: [
+      "Acces la ciclorama și la toate fundalurile",
+      "Set complet de lumini și modificatoare",
+      "Zonă de pregătire și cabină de schimb",
+      "Asistent de platou, +90 lei/oră",
+    ],
+  },
+  {
+    name: "Ședință portret",
+    meta: "60 de minute · cel mai cerut",
+    price: "750 lei",
+    featured: true,
+    includes: [
+      "60 de minute cu fotograf și lumini pregătite",
+      "Două fundaluri la alegere",
+      "15 fotografii prelucrate, livrate în 7 zile",
+      "Toate cadrele brute, pentru arhiva ta",
+    ],
+  },
+  {
+    name: "Pachet produs",
+    meta: "Până la 10 produse",
+    price: "1.200 lei",
+    includes: [
+      "Trei cadre per produs: frontal, unghi, detaliu",
+      "Fundal alb curat, gata de marketplace",
+      "Decupaj și retuș de bază incluse",
+      "Livrare în 5 zile lucrătoare",
+    ],
+  },
+];
+
+const faq = [
+  {
+    q: "Pot să vin doar să închiriez studioul, fără fotograf?",
+    a: "Da. Închirierea pornește de la două ore și include luminile, fundalurile și zona de pregătire. Îți arătăm cum se folosesc blițurile la început, iar dacă vrei pe cineva lângă tine pe toată durata, poți adăuga asistent de platou.",
+  },
+  {
+    q: "Câte persoane pot fi în studio în același timp?",
+    a: "Confortabil lucrăm cu opt persoane, echipă inclusă. Pentru ședințe de echipă am avut și grupuri de 40 de oameni, dar atunci împărțim programul pe intervale de câte 15 minute.",
+  },
+  {
+    q: "Machiajul și coafura se fac la voi?",
+    a: "Avem zona de pregătire cu oglindă și lumină corectă, dar nu ținem hair & make-up în echipă. Îți recomandăm doi oameni cu care lucrăm des și cu care ne sincronizăm pe program.",
+  },
+  {
+    q: "În cât timp primesc fotografiile?",
+    a: "Șapte zile lucrătoare pentru ședințele de portret, cinci pentru produs. Dacă ai nevoie mai repede pentru o campanie, spune-ne de la început și ne organizăm.",
+  },
+  {
+    q: "Ce se întâmplă dacă anulez?",
+    a: "Poți muta ședința fără costuri cu minimum 48 de ore înainte. Sub 48 de ore reținem jumătate din avans, pentru că intervalul rămâne blocat.",
+  },
+];
+---
+
+<Layout
+  title="Foto studio București — ședințe și închiriere | Cadru 35"
+  description="Studio foto de 80 mp în București: ciclorama albă, cinci fundaluri de hârtie, lumini Profoto. Ședințe de portret, produs, fashion și maternitate sau închiriere de la 180 lei/oră."
+>
+  <PageHero
+    eyebrow="Serviciul 01"
+    title="Foto studio în București"
+    text="80 mp cu ciclorama albă, cinci culori de hârtie și lumini Profoto, la 6 minute de metrou. Vino cu ședința ta sau închiriază spațiul cu tot cu echipament."
+    image={hdStudio}
+    alt="Studio foto larg, cu fundal gri neutru luminat de două softbox-uri"
+  />
+
+  <!-- Ce fotografiem -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Ce fotografiem"
+        title="Patru tipuri de ședințe"
+        text="Cele mai multe zile din studio arată așa. Dacă ai ceva în afara listei, întreabă — de obicei se poate."
+        class="mb-14"
+      />
+      <div class="grid gap-px overflow-hidden rounded-xl bg-line md:grid-cols-2">
+        {
+          tipuri.map((t, i) => (
+            <article
+              class="bg-cream p-8 md:p-10"
+              data-reveal
+              style={`--reveal-delay:${i * 80}ms`}
+            >
+              <h3 class="h-sub">{t.title}</h3>
+              <p class="mt-4 text-[0.98rem] leading-relaxed text-muted">
+                {t.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Studioul -->
+  <section class="on-dark bg-ink text-white">
+    <div class="wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
+      <div>
+        <p class="eyebrow" data-reveal>Studioul</p>
+        <h2 class="h-section mt-4" data-reveal style="--reveal-delay:60ms">
+          Ce găsești când intri pe <span class="underline-accent">ușă</span>
+        </h2>
+        <p class="lead mt-6" data-reveal style="--reveal-delay:100ms">
+          Nu e un spațiu improvizat într-un apartament. E o hală reamenajată, cu
+          tavan înalt și lumină controlabilă la orice oră din zi.
+        </p>
+
+        <dl class="mt-9 divide-y divide-white/10">
+          {
+            dotari.map(([term, desc], i) => (
+              <div
+                class="flex flex-wrap items-baseline gap-x-6 gap-y-1 py-3.5"
+                data-reveal
+                style={`--reveal-delay:${140 + i * 45}ms`}
+              >
+                <dt class="w-40 shrink-0 text-[0.82rem] uppercase tracking-[0.14em] text-white/45">
+                  {term}
+                </dt>
+                <dd class="flex-1 text-[0.98rem] text-white/85">{desc}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div class="grid gap-4" data-reveal style="--reveal-delay:120ms">
+        <Image
+          src={spatiu1}
+          alt="Interiorul studioului: ciclorama albă, tavan înalt, echipament pe stative"
+          widths={[420, 760, 1040]}
+          sizes="(min-width:1024px) 46vw, 92vw"
+          class="aspect-[4/3] w-full rounded-xl object-cover"
+          loading="lazy"
+        />
+        <Image
+          src={spatiu2}
+          alt="Colț de studio cu role de hârtie colorată, scaun și reflector"
+          widths={[420, 760, 1040]}
+          sizes="(min-width:1024px) 46vw, 92vw"
+          class="aspect-[16/9] w-full rounded-xl object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Din studio"
+        title="Cadre făcute aici"
+        class="mb-12"
+      />
+      <Gallery filters={false} only="studio" />
+    </div>
+  </section>
+
+  <!-- Tarife -->
+  <section class="section bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Tarife"
+        title="Cât costă o zi în studio"
+        text="Prețurile includ TVA. Pentru proiecte pe mai multe zile sau seturi mari de produse, facem ofertă separată."
+        class="mb-14"
+      />
+      <PriceCards packs={pachete} />
+    </div>
+  </section>
+
+  <!-- Întrebări -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Întrebări frecvente"
+        title="Ce ne întreabă lumea des"
+        class="mb-12"
+      />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Rezervă o oră în studio"
+    text="Spune-ne ce vrei să fotografiezi și când. Îți confirmăm intervalul și pregătim luminile înainte să ajungi."
+    cta="Verifică disponibilitatea"
+  />
+</Layout>

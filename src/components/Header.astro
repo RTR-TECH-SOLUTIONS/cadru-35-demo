@@ -1,0 +1,124 @@
+---
+import { url } from "../lib/url";
+import Logo from "./Logo.astro";
+import { nav } from "../data/site";
+
+interface Props {
+  pathname: string;
+  darkTop?: boolean;
+}
+const { pathname } = Astro.props;
+
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 bg-ink/95 backdrop-blur-sm"
+  style="height: var(--header-h)"
+>
+  <div class="wrap flex h-full items-center justify-between gap-6">
+    <a href={url("/")} class="shrink-0" aria-label="Cadru 35 — acasă">
+      <Logo tone="light" />
+    </a>
+
+    <nav aria-label="Navigare principală" class="hidden lg:block">
+      <ul class="flex items-center gap-8">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={url(item.href)}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                class:list={[
+                  "relative inline-flex items-center gap-2 py-2 text-[0.94rem] transition-colors duration-200",
+                  isActive(item.href)
+                    ? "text-accent"
+                    : "text-white/85 hover:text-white",
+                ]}
+              >
+                {item.label}
+                {item.hot && (
+                  <span class="rounded-full bg-accent/15 px-2 py-[3px] text-[0.6rem] font-semibold tracking-[0.14em] text-accent">
+                    NOU
+                  </span>
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href={url("/contact")} class="btn btn-outline hidden shrink-0 lg:inline-flex">
+      Cere o ofertă
+    </a>
+
+    <button
+      type="button"
+      id="nav-toggle"
+      class="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-white lg:hidden"
+      aria-expanded="false"
+      aria-controls="nav-mobile"
+    >
+      <span class="sr-only">Deschide meniul</span>
+      <svg
+        class="h-6 w-6"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path d="M4 7h16M4 12h16M4 17h16" data-icon-open></path>
+        <path d="M6 6l12 12M18 6L6 18" class="hidden" data-icon-close></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Panou mobil -->
+<div
+  id="nav-mobile"
+  class="fixed inset-0 z-40 hidden bg-ink text-white lg:hidden"
+  style="padding-top: var(--header-h)"
+>
+  <nav aria-label="Navigare mobilă" class="wrap flex h-full flex-col pb-10 pt-8">
+    <ul class="flex flex-col gap-1">
+      {
+        nav.map((item) => (
+          <li class="border-b border-white/10">
+            <a
+              href={url(item.href)}
+              class:list={[
+                "block py-4 font-display text-[1.9rem]",
+                isActive(item.href) ? "text-accent" : "text-white",
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={url("/contact")} class="btn btn-outline mt-8 self-start">Cere o ofertă</a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const panel = document.getElementById("nav-mobile");
+  const iconOpen = document.querySelector("[data-icon-open]");
+  const iconClose = document.querySelector("[data-icon-close]");
+
+  if (toggle && panel) {
+    toggle.addEventListener("click", () => {
+      const open = panel.classList.toggle("hidden") === false;
+      toggle.setAttribute("aria-expanded", String(open));
+      iconOpen?.classList.toggle("hidden", open);
+      iconClose?.classList.toggle("hidden", !open);
+      document.body.style.overflow = open ? "hidden" : "";
+    });
+  }
+</script>

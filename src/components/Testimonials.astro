@@ -1,0 +1,32 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { testimonials } from "../data/site";
+---
+
+<section class="section bg-cream-deep/40">
+  <div class="wrap">
+    <SectionHead
+      eyebrow="Ce spun oamenii"
+      title="Trei păreri, fără filtru"
+      text="Fragmente din mesajele primite după livrare. Numele complete și pozele le adăugăm cu acordul lor."
+    />
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      {
+        testimonials.map((t, i) => (
+          <blockquote
+            class="flex h-full flex-col justify-between rounded-xl border border-line bg-cream p-7"
+            data-reveal
+            style={`--reveal-delay:${i * 90}ms`}
+          >
+            <p class="font-display text-[1.18rem] leading-[1.6]">„{t.quote}”</p>
+            <footer class="mt-7 text-[0.85rem] text-muted">
+              <span class="font-medium text-ink">{t.author}</span>
+              <span class="mx-2 text-line">/</span>
+              {t.context}
+            </footer>
+          </blockquote>
+        ))
+      }
+    </div>
+  </div>
+</section>

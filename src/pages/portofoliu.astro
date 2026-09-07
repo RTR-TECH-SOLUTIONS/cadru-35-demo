@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Gallery from "../components/Gallery.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Squiggle from "../components/Squiggle.astro";
+---
+
+<Layout
+  title="Portofoliu foto și video — Cadru 35, București"
+  description="Cadre din studio, de la nunți, botezuri, evenimente de firmă și din filmările noastre. Filtrează după categorie."
+>
+  <section
+    class="on-dark relative overflow-hidden bg-ink text-white"
+    style="padding-top: var(--header-h)"
+  >
+    <Squiggle
+      type="ticks"
+      class="pointer-events-none absolute right-8 top-24 h-16 w-24 text-white/25 md:h-20 md:w-32"
+    />
+    <div class="wrap-narrow py-16 text-center md:py-24">
+      <p class="eyebrow" data-reveal>Portofoliu</p>
+      <h1 class="h-display mt-5" data-reveal style="--reveal-delay:60ms">
+        Cadre, nu <span class="underline-accent">arhive</span>
+      </h1>
+      <p class="lead mx-auto mt-7 max-w-2xl" data-reveal style="--reveal-delay:110ms">
+        O selecție din ce am livrat în ultimele luni: ședințe în studio, nunți,
+        botezuri, evenimente de firmă și cadre din filmări. Apasă pe o imagine ca
+        să o vezi mare.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <Gallery />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Vrei să vezi un set complet?"
+    text="Îți trimitem galeria întreagă de la o nuntă sau de la o ședință de produs, ca să vezi ce primești, nu doar cadrele alese."
+    cta="Cere un exemplu"
+  />
+</Layout>

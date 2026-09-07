@@ -1,0 +1,207 @@
+---
+import { site } from "../data/site";
+---
+
+<form id="contact-form" class="grid gap-5" novalidate data-whatsapp={site.whatsapp}>
+  <div class="grid gap-5 md:grid-cols-2">
+    <div class="field">
+      <label for="nume" class="label">Nume și prenume</label>
+      <input id="nume" name="nume" type="text" required autocomplete="name" class="input" />
+      <p class="error" data-error-for="nume"></p>
+    </div>
+
+    <div class="field">
+      <label for="telefon" class="label">Telefon</label>
+      <input
+        id="telefon"
+        name="telefon"
+        type="tel"
+        required
+        autocomplete="tel"
+        inputmode="tel"
+        placeholder="07xx xxx xxx"
+        class="input"
+      />
+      <p class="error" data-error-for="telefon"></p>
+    </div>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <div class="field">
+      <label for="email" class="label">Email <span class="text-muted">(opțional)</span></label>
+      <input id="email" name="email" type="email" autocomplete="email" class="input" />
+      <p class="error" data-error-for="email"></p>
+    </div>
+
+    <div class="field">
+      <label for="tip" class="label">Ce te interesează</label>
+      <select id="tip" name="tip" class="input" required>
+        <option value="">Alege…</option>
+        <option>Ședință în studio</option>
+        <option>Închiriere studio</option>
+        <option>Foto nuntă</option>
+        <option>Foto botez</option>
+        <option>Video nuntă</option>
+        <option>Foto + video eveniment</option>
+        <option>Eveniment de firmă</option>
+        <option>Altceva</option>
+      </select>
+      <p class="error" data-error-for="tip"></p>
+    </div>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <div class="field">
+      <label for="data" class="label">Data evenimentului <span class="text-muted">(opțional)</span></label>
+      <input id="data" name="data" type="date" class="input" />
+    </div>
+
+    <div class="field">
+      <label for="locatie" class="label">Localitate / locație <span class="text-muted">(opțional)</span></label>
+      <input id="locatie" name="locatie" type="text" class="input" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="mesaj" class="label">Detalii</label>
+    <textarea id="mesaj" name="mesaj" rows="4" class="input resize-y" placeholder="Câți invitați, la ce oră începe, ce ți-ar plăcea să prindem neapărat."></textarea>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-4 pt-2">
+    <button type="submit" class="btn btn-solid">
+      Trimite pe WhatsApp
+      <svg viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M3 10h13M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <p class="text-[0.85rem] text-muted">Îți răspundem în aceeași zi lucrătoare.</p>
+  </div>
+
+  <p
+    id="form-status"
+    role="status"
+    class="hidden rounded-lg border border-accent/40 bg-accent/10 px-5 py-4 text-[0.95rem]"
+  >
+  </p>
+</form>
+
+<style>
+  .label {
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .input {
+    width: 100%;
+    border: 1px solid var(--color-line);
+    background: #fff;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font: inherit;
+    font-size: 0.97rem;
+    color: var(--color-ink);
+    transition:
+      border-color 180ms ease-out,
+      box-shadow 180ms ease-out;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+
+  .input[aria-invalid="true"] {
+    border-color: #c32732;
+  }
+
+  .error {
+    display: none;
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    color: #c32732;
+  }
+
+  .error.is-shown {
+    display: block;
+  }
+</style>
+
+<script>
+  // TODO(real): înlocuiește trimiterea pe WhatsApp cu Resend / Supabase + notificare pe email
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  function setError(name: string, message: string) {
+    const field = form?.querySelector<HTMLElement>(`[name="${name}"]`);
+    const holder = form?.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+    field?.setAttribute("aria-invalid", message ? "true" : "false");
+    if (holder) {
+      holder.textContent = message;
+      holder.classList.toggle("is-shown", Boolean(message));
+    }
+  }
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const get = (k: string) => String(data.get(k) ?? "").trim();
+
+    const nume = get("nume");
+    const telefon = get("telefon");
+    const email = get("email");
+    const tip = get("tip");
+
+    let valid = true;
+
+    setError("nume", "");
+    setError("telefon", "");
+    setError("email", "");
+    setError("tip", "");
+
+    if (nume.length < 3) {
+      setError("nume", "Scrie numele complet.");
+      valid = false;
+    }
+    if (telefon.replace(/\D/g, "").length < 9) {
+      setError("telefon", "Avem nevoie de un număr de telefon valid.");
+      valid = false;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setError("email", "Adresa de email nu pare corectă.");
+      valid = false;
+    }
+    if (!tip) {
+      setError("tip", "Alege tipul de serviciu.");
+      valid = false;
+    }
+
+    if (!valid) {
+      form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+      return;
+    }
+
+    const lines = [
+      `Bună ziua! Sunt ${nume}.`,
+      `Mă interesează: ${tip}.`,
+      get("data") ? `Data: ${get("data")}.` : "",
+      get("locatie") ? `Locație: ${get("locatie")}.` : "",
+      get("mesaj") ? `Detalii: ${get("mesaj")}` : "",
+      `Telefon: ${telefon}${email ? ` · Email: ${email}` : ""}`,
+    ].filter(Boolean);
+
+    const phone = form.dataset.whatsapp;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(lines.join("\n"))}`;
+
+    if (status) {
+      status.textContent =
+        "Gata. Ți-am deschis conversația pe WhatsApp cu mesajul completat — trimite-l și îți răspundem în aceeași zi.";
+      status.classList.remove("hidden");
+    }
+
+    window.open(url, "_blank", "noopener");
+    form.reset();
+  });
+</script>

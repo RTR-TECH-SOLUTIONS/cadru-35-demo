@@ -1,0 +1,229 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import Steps from "../../components/Steps.astro";
+import PriceCards from "../../components/PriceCards.astro";
+import Faq from "../../components/Faq.astro";
+import Gallery from "../../components/Gallery.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+import hdEveniment from "../../assets/img/hd-foto-eveniment.jpg";
+import pNuntaCamp from "../../assets/img/p-nunta-camp.jpg";
+
+const tipuri = [
+  {
+    title: "Nuntă",
+    text: "De la pregătiri până după tort. Doi fotografi peste 120 de invitați, ca nimeni să nu fie singur în două locuri deodată.",
+  },
+  {
+    title: "Botez",
+    text: "Slujbă, restaurant și un colț de portrete de familie. Lucrăm discret în biserică, fără bliț în timpul slujbei.",
+  },
+  {
+    title: "Cununie civilă",
+    text: "Pachet scurt, de două-trei ore, cu o plimbare de 30 de minute prin apropiere pentru cadrele de cuplu.",
+  },
+  {
+    title: "Aniversări și petreceri",
+    text: "Majorat, aniversări rotunde, petreceri de firmă. Livrăm o selecție rapidă a doua zi, pentru grupul de WhatsApp.",
+  },
+  {
+    title: "Evenimente de firmă",
+    text: "Conferințe, lansări, team building. Primești o selecție de lucru în 48 de ore, cu drept de folosire comercială.",
+  },
+];
+
+const pasi = [
+  {
+    title: "Discuție și dată",
+    text: "Ne spui data, locația și ora de start. Îți confirmăm disponibilitatea în aceeași zi și blocăm data cu un avans de 20%.",
+  },
+  {
+    title: "Lista de cadre",
+    text: "Cu două săptămâni înainte stabilim împreună momentele obligatorii, familia care trebuie prinsă și ordinea zilei.",
+  },
+  {
+    title: "Ziua evenimentului",
+    text: "Ajungem cu o oră mai devreme, verificăm lumina din sală și rămânem până se termină ce ai trecut pe listă.",
+  },
+  {
+    title: "Selecție și livrare",
+    text: "Alegem cadrele, le prelucrăm unitar și le urcăm într-o galerie privată. 21 de zile lucrătoare, scris în contract.",
+  },
+];
+
+const pachete = [
+  {
+    name: "Cununie civilă",
+    meta: "3 ore · un fotograf",
+    price: "1.400 lei",
+    includes: [
+      "Trei ore de acoperire",
+      "Plimbare de 30 de minute pentru cadre de cuplu",
+      "Aproximativ 150 de fotografii alese",
+      "Livrare în 14 zile lucrătoare",
+    ],
+  },
+  {
+    name: "Nuntă completă",
+    meta: "Zi întreagă · doi fotografi",
+    price: "de la 5.800 lei",
+    featured: true,
+    includes: [
+      "Doi fotografi, de la pregătiri până după tort",
+      "Aproximativ 600 de fotografii alese",
+      "Ședință de pregătire cu lista de cadre",
+      "Galerie online privată, cu link pentru invitați",
+      "Livrare în 21 de zile lucrătoare",
+    ],
+  },
+  {
+    name: "Botez",
+    meta: "5 ore · un fotograf",
+    price: "2.400 lei",
+    includes: [
+      "Slujbă și petrecere",
+      "Portrete de familie într-un colț amenajat",
+      "Aproximativ 300 de fotografii alese",
+      "Livrare în 21 de zile lucrătoare",
+    ],
+  },
+];
+
+const faq = [
+  {
+    q: "Cu cât timp înainte trebuie rezervată o dată?",
+    a: "Pentru nunți în sezon, între mai și septembrie, cel mai bine cu 8–12 luni înainte. Restul anului găsim date și cu două luni înainte. Data se blochează doar cu contract și avans.",
+  },
+  {
+    q: "Faceți și ședința „ziua de după”?",
+    a: "Da, e opțională și costă 900 de lei. Durează în jur de trei ore, o programăm de obicei la câteva zile după nuntă, într-un loc pe care îl alegeți voi.",
+  },
+  {
+    q: "Cum arată galeria pe care o primim?",
+    a: "Un link privat, protejat cu parolă, valabil un an. De acolo descărcați fotografiile la rezoluție mare, iar invitații pot descărca varianta pentru social.",
+  },
+  {
+    q: "Ce se întâmplă dacă fotograful se îmbolnăvește?",
+    a: "Lucrăm cu o rețea de colegi cu același stil și cu aceleași setări de prelucrare. E scris în contract: dacă apare ceva, trimitem înlocuitor de nivel echivalent, fără cost în plus.",
+  },
+  {
+    q: "Includeți și albumul tipărit?",
+    a: "Nu în pachetul de bază. Lucrăm cu o tipografie din București și îți facem ofertă separată, în funcție de format și număr de pagini. Un album de 30 × 30 cm cu 40 de pagini pornește de la 1.100 de lei.",
+  },
+];
+---
+
+<Layout
+  title="Fotograf de nuntă și evenimente București | Cadru 35"
+  description="Fotografie documentară de nuntă, botez și evenimente de firmă în București. Doi fotografi la nunțile mari, galerie online privată, livrare în 21 de zile."
+>
+  <PageHero
+    eyebrow="Serviciul 02"
+    title="Foto de eveniment"
+    text="Fotografiem documentar: ce se întâmplă, nu ce regizăm noi. Puține poziții cerute, multe momente prinse din mers."
+    image={hdEveniment}
+    alt="Ceremonie de nuntă în aer liber, invitați așezați, soare de după-amiază"
+  />
+
+  <!-- Tipuri -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Ce acoperim"
+        title="Evenimentele pe care le fotografiem"
+        class="mb-14"
+      />
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          tipuri.map((t, i) => (
+            <article
+              class="rounded-xl border border-line bg-cream p-8"
+              data-reveal
+              style={`--reveal-delay:${i * 70}ms`}
+            >
+              <h3 class="h-sub">{t.title}</h3>
+              <p class="mt-4 text-[0.96rem] leading-relaxed text-muted">
+                {t.text}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Cum lucrăm -->
+  <section class="section-tight bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Cum lucrăm"
+        title="Patru pași, de la mesaj la galerie"
+        text="Nu improvizăm în ziua evenimentului. Cea mai mare parte din treabă se face înainte, pe hârtie."
+        class="mb-14"
+      />
+      <Steps steps={pasi} />
+    </div>
+  </section>
+
+  <!-- Imagine lată + citat -->
+  <section class="relative">
+    <Image
+      src={pNuntaCamp}
+      alt="Miri mergând printr-un câmp la apus, în contra-lumină"
+      widths={[720, 1200, 1800]}
+      sizes="100vw"
+      class="h-[46vh] min-h-[320px] w-full object-cover md:h-[58vh]"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-ink/45"></div>
+    <div class="absolute inset-0 flex items-center">
+      <div class="wrap-narrow text-center">
+        <p class="font-display text-[1.5rem] leading-snug text-white md:text-[2.1rem]">
+          „Cea mai bună fotografie de la nuntă e aproape mereu una pe care nimeni
+          nu a cerut-o.”
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead eyebrow="Portofoliu" title="Cadre de la evenimente" class="mb-12" />
+      <Gallery filters={false} only="eveniment" />
+    </div>
+  </section>
+
+  <!-- Pachete -->
+  <section class="section bg-cream-deep/40">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Pachete"
+        title="Cât costă acoperirea unui eveniment"
+        text="Prețurile includ TVA și se referă la București. Deplasarea în afara orașului se tarifează cu 2 lei/km."
+        class="mb-14"
+      />
+      <PriceCards packs={pachete} />
+    </div>
+  </section>
+
+  <!-- Întrebări -->
+  <section class="section">
+    <div class="wrap">
+      <SectionHead
+        eyebrow="Întrebări frecvente"
+        title="Ce ne întreabă mirii cel mai des"
+        class="mb-12"
+      />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Verifică dacă avem data ta liberă"
+    text="Trimite-ne data și locația. Îți răspundem în aceeași zi cu disponibilitatea și un preț ferm."
+  />
+</Layout>

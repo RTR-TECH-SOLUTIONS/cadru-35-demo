@@ -1,0 +1,72 @@
+---
+import { url } from "../lib/url";
+import Logo from "./Logo.astro";
+import { site, services } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="on-dark bg-ink text-white">
+  <div class="wrap grid gap-12 py-16 md:grid-cols-3 md:py-20">
+    <div>
+      <Logo tone="light" />
+      <p class="mt-6 max-w-xs text-[0.95rem] leading-relaxed text-white/65">
+        {site.tagline} Studio foto și echipă de foto-video pentru evenimente, în {
+          site.city
+        }.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="eyebrow">Contact</h2>
+      <ul class="mt-6 space-y-3 text-[0.98rem] text-white/80">
+        <li>
+          <a href={site.phoneHref} class="transition-colors hover:text-accent"
+            >{site.phone}</a
+          >
+        </li>
+        <li>
+          <a
+            href={`mailto:${site.email}`}
+            class="transition-colors hover:text-accent">{site.email}</a
+          >
+        </li>
+        <li class="text-white/60">{site.address}</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="eyebrow">Link-uri utile</h2>
+      <ul class="mt-6 space-y-3 text-[0.98rem] text-white/80">
+        {
+          services.map((s) => (
+            <li>
+              <a href={url(s.href)} class="transition-colors hover:text-accent">
+                {s.title}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={url("/portofoliu")} class="transition-colors hover:text-accent"
+            >Portofoliu</a
+          >
+        </li>
+        <li>
+          <a href={url("/despre-noi")} class="transition-colors hover:text-accent"
+            >Despre noi</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div
+      class="hairline flex flex-col gap-3 py-7 text-[0.85rem] text-white/45 md:flex-row md:items-center md:justify-between"
+    >
+      <p>© {year} {site.name}. Toate drepturile rezervate.</p>
+      {/* TODO(real): Termeni, Politica de confidențialitate, Politica de cookies + credit RTR */}
+      <p>{site.city} · foto & video de eveniment din {site.since}</p>
+    </div>
+  </div>
+</footer>

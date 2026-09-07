@@ -1,0 +1,210 @@
+---
+import { Image } from "astro:assets";
+import { portfolio, categories, type Category } from "../data/portfolio";
+
+interface Props {
+  /** afișează barele de filtre */
+  filters?: boolean;
+  /** limitează la o singură categorie */
+  only?: Category;
+  /** numărul maxim de imagini */
+  limit?: number;
+}
+
+const { filters = true, only, limit } = Astro.props;
+
+let shots = only ? portfolio.filter((s) => s.category === only) : portfolio;
+if (limit) shots = shots.slice(0, limit);
+---
+
+<div class="gallery">
+  {
+    filters && (
+      <div
+        class="mb-10 flex flex-wrap items-center justify-center gap-2"
+        role="group"
+        aria-label="Filtrează portofoliul"
+      >
+        {categories.map((c) => (
+          <button
+            type="button"
+            class="filter-btn rounded-full border border-line px-5 py-2.5 text-[0.88rem] transition-colors duration-200 hover:border-ink aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-white"
+            data-filter={c.key}
+            aria-pressed={c.key === "toate" ? "true" : "false"}
+          >
+            {c.label}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <ul class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+    {
+      shots.map((shot, i) => (
+        <li data-category={shot.category} data-reveal style={`--reveal-delay:${(i % 4) * 70}ms`}>
+          <button
+            type="button"
+            class="group relative block w-full overflow-hidden rounded-lg bg-ink"
+            data-lightbox
+            data-src={shot.src.src}
+            data-caption={shot.caption}
+            data-alt={shot.alt}
+          >
+            <Image
+              src={shot.src}
+              alt={shot.alt}
+              widths={[320, 640, 900]}
+              sizes="(min-width:1024px) 22vw, (min-width:768px) 30vw, 46vw"
+              class="aspect-[4/5] w-full object-cover transition-[transform,opacity] duration-500 ease-out group-hover:scale-[1.04] group-hover:opacity-90"
+              loading={i < 4 ? "eager" : "lazy"}
+            />
+            <span class="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-ink/85 to-transparent px-4 pb-3 pt-10 text-left text-[0.78rem] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+              {shot.caption}
+            </span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="empty-note mt-10 hidden text-center text-muted">
+    Nu avem încă lucrări publicate în categoria asta.
+  </p>
+</div>
+
+<!-- Lightbox -->
+<div
+  id="lightbox"
+  class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/[0.97] p-4 backdrop-blur-md"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Imagine mărită"
+>
+  <button
+    type="button"
+    id="lb-close"
+    class="absolute right-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:text-accent"
+  >
+    <span class="sr-only">Închide</span>
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button
+    type="button"
+    id="lb-prev"
+    class="absolute left-3 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:text-accent md:left-8"
+  >
+    <span class="sr-only">Imaginea anterioară</span>
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </button>
+
+  <button
+    type="button"
+    id="lb-next"
+    class="absolute right-3 top-1/2 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:text-accent md:right-8"
+  >
+    <span class="sr-only">Imaginea următoare</span>
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </button>
+
+  <figure class="max-h-full w-full max-w-5xl text-center">
+    <img id="lb-img" src="" alt="" class="mx-auto max-h-[78vh] w-auto rounded-lg object-contain" />
+    <figcaption id="lb-caption" class="mt-4 text-[0.9rem] text-white/70"></figcaption>
+  </figure>
+</div>
+
+<script>
+  // --- Filtre -------------------------------------------------
+  const galleries = document.querySelectorAll<HTMLElement>(".gallery");
+
+  galleries.forEach((gallery) => {
+    const buttons = gallery.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const items = gallery.querySelectorAll<HTMLLIElement>("li[data-category]");
+    const emptyNote = gallery.querySelector<HTMLElement>(".empty-note");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+        buttons.forEach((b) =>
+          b.setAttribute("aria-pressed", String(b === btn)),
+        );
+
+        let visible = 0;
+        items.forEach((item) => {
+          const show = filter === "toate" || item.dataset.category === filter;
+          item.hidden = !show;
+          if (show) visible++;
+        });
+        emptyNote?.classList.toggle("hidden", visible > 0);
+      });
+    });
+  });
+
+  // --- Lightbox ------------------------------------------------
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lb-img") as HTMLImageElement | null;
+  const lbCaption = document.getElementById("lb-caption");
+  const triggers = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-lightbox]"),
+  );
+  let current = 0;
+  let lastFocused: HTMLElement | null = null;
+
+  const visibleTriggers = () =>
+    triggers.filter((t) => !(t.closest("li")?.hidden ?? false));
+
+  function show(index: number) {
+    const list = visibleTriggers();
+    if (!list.length || !lbImg) return;
+    current = (index + list.length) % list.length;
+    const trigger = list[current];
+    lbImg.src = trigger.dataset.src ?? "";
+    lbImg.alt = trigger.dataset.alt ?? "";
+    if (lbCaption) lbCaption.textContent = trigger.dataset.caption ?? "";
+  }
+
+  function open(trigger: HTMLButtonElement) {
+    if (!lb) return;
+    lastFocused = trigger;
+    show(visibleTriggers().indexOf(trigger));
+    lb.classList.remove("hidden");
+    lb.classList.add("flex");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lb-close")?.focus();
+  }
+
+  function close() {
+    if (!lb) return;
+    lb.classList.add("hidden");
+    lb.classList.remove("flex");
+    document.body.style.overflow = "";
+    lastFocused?.focus();
+  }
+
+  triggers.forEach((t) => t.addEventListener("click", () => open(t)));
+  document.getElementById("lb-close")?.addEventListener("click", close);
+  document
+    .getElementById("lb-prev")
+    ?.addEventListener("click", () => show(current - 1));
+  document
+    .getElementById("lb-next")
+    ?.addEventListener("click", () => show(current + 1));
+
+  lb?.addEventListener("click", (e) => {
+    if (e.target === lb) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lb || lb.classList.contains("hidden")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+</script>

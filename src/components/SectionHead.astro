@@ -1,0 +1,38 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  /** ultimul cuvânt primește sublinierea roz, ca în referință */
+  underlineLast?: boolean;
+  text?: string;
+  align?: "left" | "center";
+  tone?: "light" | "dark";
+  class?: string;
+}
+const {
+  eyebrow,
+  title,
+  underlineLast = true,
+  text,
+  align = "center",
+  class: className = "",
+} = Astro.props;
+
+const words = title.split(" ");
+const last = underlineLast ? words.pop() : null;
+const head = words.join(" ");
+---
+
+<div
+  class:list={[
+    align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl",
+    className,
+  ]}
+  data-reveal
+>
+  {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+  <h2 class="h-section">
+    {head}{last && <> <span class="underline-accent">{last}</span></>}
+  </h2>
+  {text && <p class="lead mt-6">{text}</p>}
+</div>

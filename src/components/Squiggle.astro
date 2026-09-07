@@ -1,0 +1,54 @@
+---
+/** Accente desenate de mână, ca în referință (decorative) */
+interface Props {
+  type?: "loop" | "ticks" | "arc";
+  class?: string;
+  color?: string;
+}
+const { type = "loop", class: className = "", color = "currentColor" } =
+  Astro.props;
+---
+
+{
+  type === "loop" && (
+    <svg class={className} viewBox="0 0 120 90" fill="none" aria-hidden="true">
+      <path
+        d="M2 88c14-26 27-44 41-52 12-7 24-4 25 7 1 9-8 15-15 12-8-3-8-15 2-24C68 20 92 10 118 4"
+        stroke={color}
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  )
+}
+{
+  type === "ticks" && (
+    <svg class={className} viewBox="0 0 90 60" fill="none" aria-hidden="true">
+      <path
+        d="M4 56 18 6M28 52 38 14M52 50 58 20M74 46 86 18"
+        stroke={color}
+        stroke-width="2.4"
+        stroke-linecap="round"
+      />
+    </svg>
+  )
+}
+{
+  type === "arc" && (
+    <svg class={className} viewBox="0 0 140 60" fill="none" aria-hidden="true">
+      <path
+        d="M4 54C22 18 56 2 96 6c16 2 30 8 40 18"
+        stroke={color}
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <path
+        d="M128 12 136 24l-14 3"
+        stroke={color}
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
+}

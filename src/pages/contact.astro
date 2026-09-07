@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm.astro";
+import Squiggle from "../components/Squiggle.astro";
+import { site } from "../data/site";
+
+import spatiu2 from "../assets/img/spatiu-studio-2.jpg";
+---
+
+<Layout
+  title="Contact — Cadru 35, studio foto-video București"
+  description="Scrie-ne data evenimentului sau intervalul dorit în studio. Răspundem în aceeași zi lucrătoare, cu disponibilitate și preț ferm."
+>
+  <!-- Hero -->
+  <section
+    class="on-dark relative overflow-hidden bg-ink text-white"
+    style="padding-top: var(--header-h)"
+  >
+    <Squiggle
+      type="loop"
+      class="pointer-events-none absolute -right-4 bottom-0 h-24 w-32 text-white/20 md:h-32 md:w-44"
+    />
+    <div class="wrap-narrow py-16 text-center md:py-20">
+      <p class="eyebrow" data-reveal>Contact</p>
+      <h1 class="h-display mt-5" data-reveal style="--reveal-delay:60ms">
+        Spune-ne data și îți zicem dacă suntem <span class="underline-accent"
+          >liberi</span
+        >
+      </h1>
+      <p class="lead mx-auto mt-7 max-w-2xl" data-reveal style="--reveal-delay:110ms">
+        Răspundem în aceeași zi lucrătoare, cu disponibilitatea și un preț ferm.
+        Fără formulare care se pierd.
+      </p>
+    </div>
+  </section>
+
+  <!-- Formular + date -->
+  <section class="section">
+    <div class="wrap grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+      <div data-reveal>
+        <h2 class="h-sub">Scrie-ne câteva rânduri</h2>
+        <p class="mt-3 text-[0.96rem] text-muted">
+          Completează și îți deschidem conversația pe WhatsApp cu mesajul deja
+          scris. Poți să îl modifici înainte să îl trimiți.
+        </p>
+        <div class="mt-9">
+          <ContactForm />
+        </div>
+      </div>
+
+      <aside class="lg:pt-2" data-reveal style="--reveal-delay:120ms">
+        <div class="rounded-xl border border-line bg-cream-deep/40 p-8">
+          <h2 class="eyebrow">Date de contact</h2>
+          <ul class="mt-6 space-y-4 text-[1.02rem]">
+            <li>
+              <a
+                href={site.phoneHref}
+                class="font-display text-[1.6rem] leading-none transition-colors hover:text-accent"
+                >{site.phone}</a
+              >
+            </li>
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                class="transition-colors hover:text-accent">{site.email}</a
+              >
+            </li>
+            <li class="text-muted">{site.address}</li>
+          </ul>
+
+          <h2 class="eyebrow mt-10">Program</h2>
+          <dl class="mt-5 space-y-2.5 text-[0.95rem]">
+            {
+              site.schedule.map(([zi, ore]) => (
+                <div class="flex justify-between gap-4 border-b border-line pb-2.5">
+                  <dt class="text-muted">{zi}</dt>
+                  <dd>{ore}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <a
+            href={`https://wa.me/${site.whatsapp}`}
+            target="_blank"
+            rel="noopener"
+            class="btn btn-ghost-dark mt-9 w-full justify-center"
+          >
+            Scrie direct pe WhatsApp
+          </a>
+        </div>
+
+        <div class="mt-6 overflow-hidden rounded-xl">
+          <Image
+            src={spatiu2}
+            alt="Colț de studio cu role de hârtie colorată și un scaun"
+            widths={[420, 760]}
+            sizes="(min-width:1024px) 32vw, 92vw"
+            class="aspect-[4/3] w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        {/* TODO(real): hartă Google Maps embed cu adresa reală a studioului */}
+      </aside>
+    </div>
+  </section>
+</Layout>

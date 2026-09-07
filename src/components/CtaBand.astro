@@ -1,0 +1,42 @@
+---
+import { url } from "../lib/url";
+import Squiggle from "./Squiggle.astro";
+interface Props {
+  title?: string;
+  text?: string;
+  cta?: string;
+  href?: string;
+}
+const {
+  title = "Un cadru bun se pregătește din timp.",
+  text = "Spune-ne data și tipul evenimentului. Îți răspundem cu disponibilitatea și un preț ferm în aceeași zi.",
+  cta = "Contactează-ne",
+  href = "/contact",
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-accent">
+  <Squiggle
+    type="loop"
+    class="pointer-events-none absolute -left-6 bottom-0 h-24 w-32 text-white/35 md:h-32 md:w-44"
+  />
+  <Squiggle
+    type="ticks"
+    class="pointer-events-none absolute right-6 top-8 h-14 w-20 text-white/35 md:h-20 md:w-28"
+  />
+  <div class="wrap-narrow py-20 text-center md:py-24" data-reveal>
+    <h2 class="h-section text-white">{title}</h2>
+    <p class="mx-auto mt-6 max-w-xl text-[1.05rem] leading-relaxed text-white/85">
+      {text}
+    </p>
+    <a
+      href={url(href)}
+      class="btn mt-9 border-white bg-white text-ink hover:bg-ink hover:border-ink hover:text-white"
+    >
+      {cta}
+      <svg viewBox="0 0 20 20" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M3 10h13M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </div>
+</section>
