@@ -1,14 +1,16 @@
-// TODO(real): datele reale ale clientului (nume, telefon, email, adresă, program)
+// TODO(real): datele reale ale clientului (nume, telefon, email, adresă, program).
+// Până atunci scrie „Placeholder" peste tot, ca nimeni să nu ia de bun
+// un nume, un om sau o adresă pe care le-am inventat noi.
 export const site = {
-  name: "Cadru 35",
-  nameLines: ["CADRU", "35"],
-  tagline: "35 de cadre. Alea care rămân.",
+  name: "Placeholder",
+  nameLines: ["PLACEHOLDER"],
+  tagline: "Placeholder pentru sloganul brandului.",
   city: "București",
-  address: "Str. Fabrica de Glucoză 21, sector 2, București",
-  phone: "+40 721 000 000",
-  phoneHref: "tel:+40721000000",
-  whatsapp: "40721000000",
-  email: "contact@cadru35.ro",
+  address: "Adresă placeholder, București",
+  phone: "+40 700 000 000",
+  phoneHref: "tel:+40700000000",
+  whatsapp: "40700000000",
+  email: "contact@placeholder.ro",
   schedule: [
     ["Luni – Vineri", "10:00 – 19:00"],
     ["Sâmbătă", "doar cu programare"],
@@ -64,19 +66,19 @@ export const testimonials = [
   {
     quote:
       "Ne-au cerut lista cu momentele importante cu două săptămâni înainte. Nu s-a pierdut nimic din ziua noastră, nici discursul fratelui meu, nici plecarea de acasă.",
-    author: "Andreea și Vlad M.",
-    context: "nuntă, septembrie 2025",
+    author: "Placeholder",
+    context: "placeholder — nuntă",
   },
   {
     quote:
       "Aveam nevoie de 40 de portrete pentru echipă într-o singură zi. Au venit cu un plan pe ore și am terminat cu 20 de minute mai devreme.",
-    author: "Ruxandra P.",
-    context: "portrete de echipă, firmă de arhitectură",
+    author: "Placeholder",
+    context: "placeholder — portrete de echipă",
   },
   {
     quote:
       "Teaserul de un minut l-am primit a doua zi și l-am pus pe Instagram cât era lumea încă în poveste. Filmul mare a venit în trei săptămâni, exact cum au zis.",
-    author: "Ioana D.",
-    context: "video nuntă",
+    author: "Placeholder",
+    context: "placeholder — video nuntă",
   },
 ];

@@ -1,4 +1,4 @@
-# Cadru 35 — demo de prezentare (studio foto + foto/video de eveniment)
+# Demo de prezentare — studio foto + foto/video de eveniment
 
 **Live:** https://rtr-tech-solutions.github.io/cadru-35-demo/
 **Repo:** https://github.com/RTR-TECH-SOLUTIONS/cadru-35-demo
@@ -9,8 +9,13 @@ Se publică singur: orice push pe `main` declanșează workflow-ul din
 Demo pentru clientul care a cerut „ceva asemănător cu socialcarbonara.ro", plus pagini
 separate pentru **foto studio**, **foto de eveniment** și **video de eveniment**.
 
-Brandul `Cadru 35` e **inventat**, ca placeholder. Se schimbă dintr-un singur loc:
-`src/data/site.ts`.
+**Toate numele proprii din site sunt literalmente „Placeholder".** Numele brandului,
+oamenii din echipă, autorii testimonialelor, emailul, adresa. Nimic inventat care să poată
+fi luat drept real. Se schimbă dintr-un singur loc: `src/data/site.ts` (plus numele
+oamenilor, în `src/pages/despre-noi.astro`).
+
+Repo-ul și URL-ul au rămas `cadru-35-demo`, ca linkul trimis deja să funcționeze în
+continuare.
 
 ## Cum îl pornești
 
@@ -177,15 +182,16 @@ public/video/hero.webm             același clip, VP9 (330 KB)
 
 | Loc | Ce e mock | Ce se face la proiectul real |
 |---|---|---|
-| `data/site.ts` | nume brand, telefon `+40 721 000 000`, email, adresă, program | datele reale ale clientului |
-| `data/site.ts` | cele 3 testimoniale | recenzii reale, cu acordul clienților |
+| `data/site.ts` | nume brand „Placeholder", telefon `+40 700 000 000`, email, adresă | datele reale ale clientului |
+| `data/site.ts` | cele 3 testimoniale, semnate „Placeholder" | recenzii reale, cu acordul clienților |
 | `data/portfolio.ts` + `assets/img` | toate imaginile sunt generate, brandless | fotografiile clientului |
 | `components/ContactForm.astro` | trimiterea merge pe WhatsApp | Resend (email) sau Supabase + notificare |
 | `pages/contact.astro` | fără hartă | Google Maps embed cu adresa reală |
-| `pages/despre-noi.astro` | echipa (Andrei / Cristina / Robert) | numele reale + portrete făcute în studio |
+| `pages/despre-noi.astro` | echipa, toți trei „Placeholder" | numele reale + portrete făcute în studio |
 | `pages/servicii/video-eveniment.astro` | galeria video e din cadre statice | embed-uri Vimeo/YouTube cu filmele reale |
 | `components/Footer.astro` | fără pagini legale | Termeni, Confidențialitate, Cookies + banner GDPR + credit RTR |
 | toate paginile | prețurile din pachete sunt inventate, plauzibile | tarifele reale ale clientului |
+| `index.astro`, `despre-noi.astro` | „De ce «Placeholder»?” — povestea numelui e un loc gol | povestea numelui real |
 
 **Prețurile din pachete** (750 lei ședință, 5.800 lei nuntă etc.) sunt puse ca să arate
 structura paginii. Trebuie confirmate cu clientul înainte de orice publicare.
